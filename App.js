@@ -7,6 +7,7 @@ import { AppLoading } from 'expo';
 import Ionicons from "react-native-vector-icons/Ionicons"
 import Fontisto from 'react-native-vector-icons/Fontisto'
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import Entypo from "react-native-vector-icons/Entypo";
 import LoadingScreen from "./screens/LoadingScreen"
 import LoginScreen from "./screens/LoginScreen"
 import HomeScreen from "./screens/HomeScreen"
@@ -28,13 +29,13 @@ const AppTabNavigator = createBottomTabNavigator(
         Reports: {
             screen: ReportScreen,
             navigationOptions: {
-                tabBarIcon: ({ tintColor }) => <FontAwesome name="history" size={30} color={tintColor} />
+                tabBarIcon: ({ tintColor }) => <Entypo name="text-document" size={30} color={tintColor} />
             }
         },
         Doctors: {
             screen: DoctorScreen,
             navigationOptions: {
-             tabBarIcon: ({ tintColor }) => <Fontisto name="world" size={30} color={tintColor} />
+             tabBarIcon: ({ tintColor }) => <Fontisto name="doctor" size={30} color={tintColor} />
             }
         },
         Profile: {
