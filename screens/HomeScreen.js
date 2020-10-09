@@ -15,14 +15,16 @@ import {
 
 const { height, width } = Dimensions.get('screen')  
 import Firebase from '../firebase'
-
 export default class HomeScreen extends Component {
 
   render() {
    
     return (
    <View style={styles.container}>
-       <Text>Home</Text>
+       <Text>Home{'\n'}dknlsend
+       Home{'\n'}dknlsend
+       
+       </Text>
    </View>
     )  
   }
