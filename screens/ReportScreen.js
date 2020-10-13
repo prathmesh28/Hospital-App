@@ -22,6 +22,8 @@ export default class ReportScreen extends Component {
    
     return (
    <View style={styles.container}>
+              <StatusBar hidden/>
+
        <Text>ReportScreen</Text>
    </View>
     )  

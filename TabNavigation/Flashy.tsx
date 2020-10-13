@@ -5,52 +5,50 @@ import AnimatedTabBar, {
   FlashyTabBarItemConfig,
 } from '@gorhom/animated-tabbar';
 import HomeSVG from './svg/HomeSVG';
-import LikeSVG from './svg/LikeSVG';
+import ReportSVG from './svg/ReportSVG';
 import SearchSVG from './svg/SearchSVG';
 import ProfileSVG from './svg/ProfileSVG';
-import { MainTabsParams } from './types';
 import HomeScreen from "../screens/HomeScreen"
 import ReportScreen from "../screens/ReportScreen"
 import DoctorScreen from "../screens/DoctorScreen"
 import ProfileScreen from "../screens/ProfileScreen"
-import Doctor from "../assets/doctor.svg"
-const Tab = createBottomTabNavigator<MainTabsParams>();
+const Tab = createBottomTabNavigator();
 
-const tabs: TabsConfig<FlashyTabBarItemConfig, MainTabsParams> = {
+const tabs: TabsConfig<FlashyTabBarItemConfig> = {
   Home: {
     labelStyle: {
-      color: '#5B37B7',
+      color: '#fff',
     },
     icon: {
       component: HomeSVG,
-      color: 'rgba(91,55,183,0.5)',
+      color: 'black',
     },
   },
-  Likes: {
+  Report: {
     labelStyle: {
-      color: '#C9379D',
+      color: '#fff',
     },
     icon: {
-      component: LikeSVG,
-      color: 'rgba(201,55,157,0.5)',
+      component: ReportSVG,
+      color: 'black',
     },
   },
   Search: {
     labelStyle: {
-      color: '#E6A919',
+      color: '#fff',
     },
     icon: {
       component: SearchSVG,
-      color: 'rgba(230,169,25,0.5)',
+      color: 'black',
     },
   },
   Profile: {
     labelStyle: {
-      color: '#1194AA',
+      color: '#fff',
     },
     icon: {
       component: ProfileSVG,
-      color: 'rgba(17,148,170,0.5)',
+      color: 'black',
     },
   },
 };
@@ -58,22 +56,36 @@ const tabs: TabsConfig<FlashyTabBarItemConfig, MainTabsParams> = {
 const FlashyScreen = () => {
   return (
     <Tab.Navigator
+    tabBarOptions={{
+      style: {
+        backgroundColor: '#7ec0ee',
+        borderRadius:50,
+        marginBottom:5,
+        marginHorizontal:10
+      },
+    }}
       tabBar={props => (
-        <AnimatedTabBar preset="flashy" tabs={tabs} {...props} />
+        <AnimatedTabBar 
+        preset="flashy" 
+        tabs={tabs} 
+        iconSize={25}
+        itemOuterSpace={9}
+        itemInnerSpace={9}
+        {...props} />
       )}
     >
       <Tab.Screen
         name="Home"
         initialParams={{
           backgroundColor: tabs.Home.labelStyle.color,
-          nextScreen: 'Likes',
+          nextScreen: 'Report',
         }}
         component={HomeScreen}
       />
       <Tab.Screen
-        name="Likes"
+        name="Report"
         initialParams={{
-          backgroundColor: tabs.Likes.labelStyle.color,
+          backgroundColor: tabs.Report.labelStyle.color,
           nextScreen: 'Search',
         }}
         component={ReportScreen}

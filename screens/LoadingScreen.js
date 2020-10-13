@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, ActivityIndicator, StyleSheet } from "react-native";
+import { View, Text, ActivityIndicator,StatusBar, StyleSheet } from "react-native";
 import Firebase from '../firebase';
 export default class LoadingScreen extends React.Component {
     componentDidMount() {
@@ -11,6 +11,8 @@ export default class LoadingScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
+                        <StatusBar hidden /> 
+
                 <Text>Loading</Text>
                 <ActivityIndicator size="large"></ActivityIndicator>
             </View>

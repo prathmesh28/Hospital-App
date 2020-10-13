@@ -12,7 +12,7 @@ export default class ProfileScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                                <StatusBar translucent={true} />
+         <StatusBar hidden/>
 
                 <Text>Profile </Text>
                 <TouchableOpacity style={{ marginTop: 32 }} onPress={this.signOutUser}>
