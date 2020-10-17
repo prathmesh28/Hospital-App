@@ -9,18 +9,24 @@ import WelcomeScreen from './screens/WelcomeScreen'
 import { AppLoading } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import * as Font from 'expo-font';
+import UserReport from './screens/UserReport'
 const AuthStack = createStackNavigator({
     Intro:WelcomeScreen,
     Login: LoginScreen,
 }) 
 
+// const UserStack = createStackNavigator({
+//   UReport:UserReport
+
+// })
 const Container = createAppContainer(
 
     createSwitchNavigator(
         {
             Loading: LoadingScreen,
             Auth: AuthStack,
-            App: Appstack
+            App: Appstack,
+            Report: UserReport
             
         },
         {
