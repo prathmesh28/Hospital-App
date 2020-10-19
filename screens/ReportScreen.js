@@ -42,7 +42,8 @@ export default class ReportScreen extends Component {
 
 
                 {/* </Button> */}
-                <TouchableOpacity style={{padding:0,margin:0,alignSelf:"center",marginHorizontal:0,marginBottom:10,borderTopWidth:1,borderBottomWidth:1,borderColor:"black",width:width*0.85,height:40 }} onPress={() => this.props.navigation.navigate("Report")}>
+                <TouchableOpacity style={{padding:0,margin:0,alignSelf:"center",marginHorizontal:0,marginBottom:10,borderTopWidth:1,borderBottomWidth:1,borderColor:"black",width:width*0.85,height:40 }} 
+                onPress={() => this.props.navigation.navigate("Report")}>
                      <Text style={{fontWeight:"bold",textAlign:"center",marginTop:6}}>View Reports</Text> 
                 </TouchableOpacity>
                 </View>  

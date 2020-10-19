@@ -23,7 +23,7 @@ const DATA = [
     title: 'First Item',
     date:'12/10/1999' ,
     available:'mon-sat',
-    timeing:'10am-6pm',
+    timing:'10am-6pm',
     Image:{uri: 'https://picsum.photos/id/237/800/800'},
     
     
@@ -33,7 +33,7 @@ const DATA = [
     title: 'Second Item',
     date:'12/10/1999',
     available:'mon-sat',
-    timeing:'10am-6pm',
+    timing:'10am-6pm',
     Image:{ uri:'https://picsum.photos/seed/picsum/800/800'},
   },
   {
@@ -41,7 +41,7 @@ const DATA = [
     title: 'Third Item',
     date:'12/10/1999',
     available:'mon-sat',
-    timeing:'10am-6pm',
+    timing:'10am-6pm',
     Image:{ uri:'https://picsum.photos/800/800'},
   },
    {
@@ -49,7 +49,7 @@ const DATA = [
     title: 'Third Item',
     date:'12/10/1999',
     available:'mon-sat',
-    timeing:'10am-6pm',
+    timing:'10am-6pm',
     Image:{ uri:'https://picsum.photos/800/800'},
   },
 ];
@@ -76,7 +76,7 @@ export default class DoctorScreen extends Component {
                   {  item.available}
                  </Text>
                  <Text >
-                  {  item.timeing}
+                  {  item.timing}
                  </Text>
                       {/* <Button style={{  marginLeft:60,width:width*0.3,marginTop:10}}
                       // onPress={()=>{}}
@@ -101,7 +101,7 @@ export default class DoctorScreen extends Component {
          <StatusBar hidden/>
        <View> 
        
-      <SafeAreaView style={{alignItems:"center",backgroundColor:"#87CEEB",padding:30}}>
+      <SafeAreaView style={{alignItems:"center",backgroundColor:"#87CEEB",padding:15}}>
       <Text style={{fontWeight:"bold",marginTop:20}}>
                  Doctors
                   </Text></SafeAreaView>

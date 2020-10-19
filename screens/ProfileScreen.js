@@ -25,26 +25,26 @@ export default class ProfileScreen extends React.Component {
             <CardItem  >
               <Body>
               <View >
-              <Text style={{fontWeight:"bold",color:"#87CEEB",fontSize:24}}>Jay Sawant </Text>
+              <Text style={{fontWeight:"bold",color:"black",fontSize:24}}>Jay Sawant </Text>
               <Text  style={{marginTop:15,fontSize:16,color:"#87CEEB"}}>+91 9897909786</Text>
               <Text style={{marginTop:15,fontSize:16,color:"#87CEEB"}}>jaysawant@gmail.com </Text></View>
                 
                 </Body>
             </CardItem >
             </Card>
-            <View style={{padding:5,borderColor:"black",elevation:1,marginTop:height*.02,width:width*0.9}}>
-            <TouchableOpacity style={{margin:0,alignSelf:"center",borderWidth:1,height:height*0.1,borderColor:"black",width:width*0.9 }}>
+            <View style={{padding:5,borderColor:"black",elevation:1,marginTop:height*.02,width:width*0.9,height:height*0.08}}>
+            <TouchableOpacity style={{margin:0,alignSelf:"center",height:height*0.03,borderBottomWidth:1,borderTopWidth:1,borderColor:"black",width:width*0.9 }}>
                      
-                     <Text style={{fontWeight:"bold",textAlign:"center",fontSize:18,color:"#87CEEB",marginTop:0}}>Notifications</Text> 
+                     <Text style={{fontWeight:"bold",fontSize:18,color:"black",marginTop:0}}>Notifications</Text> 
                      
                 </TouchableOpacity>
 
             </View>
   
            
-            <View style={{padding:5,borderColor:"black",elevation:1,marginTop:height*0.02,width:width*0.9}}>
-            <Text style={{fontSize:20,fontWeight:"bold",marginHorizontal:10,borderBottomColor:"black",borderBottomWidth:1,marginTop:10,color:"#87CEEB"}}>About Us</Text>
-            <Text style={{fontSize:18,fontWeight:"bold",marginHorizontal:10,marginTop:10,color:"#87CEEB"}}>Contact</Text>
+            <View style={{padding:5,borderColor:"black",elevation:1,marginTop:height*0.04,width:width*0.9}}>
+            <Text style={{fontSize:20,fontWeight:"bold",marginHorizontal:10,borderBottomColor:"black",borderBottomWidth:1,marginTop:10,color:"black"}}>About Us</Text>
+            {/* <Text style={{fontSize:18,fontWeight:"bold",marginHorizontal:10,marginTop:10,color:"#87CEEB"}}>Contact</Text> */}
           <Text style={{fontSize:16,fontWeight:"bold",marginHorizontal:10,marginTop:10,color:"#87CEEB"}}>Vision Hospital</Text>
             <Text style={{fontSize:14,fontWeight:"bold",marginHorizontal:10,marginTop:10,color:"#87CEEB"}}>mapusa,Goa</Text>
 
