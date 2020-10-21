@@ -11,7 +11,8 @@ import {
   TouchableOpacity,
   StyleSheet,
   FlatList,
-  View
+  View,
+  ImageBackground
 } from "react-native"  
 import { Container, Header, Content, Card, CardItem, Body, Text } from 'native-base';
 const { height, width } = Dimensions.get('screen')  
@@ -49,7 +50,10 @@ export default class HomeScreen extends Component {
   render() {
     return (
    <View style={styles.container}>
-      <StatusBar hidden /> 
+      <StatusBar hidden />
+      {/* background not working  */}
+      <ImageBackground  source={'../assets/i.png'} style={{flex:1,resizeMode:"cover",}}> 
+
       <View>
         <View style={{
           //backgroundColor:'#7ec0ee',
@@ -67,6 +71,7 @@ export default class HomeScreen extends Component {
       />
         </View>
       </View>
+      </ImageBackground>
    </View>
     )  
   }

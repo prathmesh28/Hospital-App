@@ -10,12 +10,13 @@ import {
   TouchableOpacity,
   StyleSheet,
   View,
-  FlatList,Image
+  FlatList,Image,ImageBackground
 } from "react-native"  
 import { Container, Header, Content, Card, CardItem, Body, Text,Left,Button} from 'native-base';
 
 const { height, width } = Dimensions.get('screen')  
 import Firebase from '../firebase'
+import { style } from "d3";
 var img=require('../assets/favicon.png');
 const DATA = [
   {
@@ -53,31 +54,32 @@ const DATA = [
     Image:{ uri:'https://picsum.photos/800/800'},
   },
 ];
+const image=0;
 export default class DoctorScreen extends Component {
   renderItem = ({item}) => {
     
     return( 
 
-      <Card style={{padding:5,width:width*.9,alignSelf:"center",height:height*.26}}>
+      <Card style={{padding:5,width:width*.8,alignSelf:"center",height:height*.22}}>
             <CardItem >
               <Body>
               <CardItem cardBody>
              
-                 <Image source={item.Image} style={{  marginTop:0,marginVertical:90, height: height*0.12, width: width*0.22,borderRadius: 40,resizeMode:"contain"}}/>
-                 <View style={{ width:width*.6,alignItems:"center",marginBottom:40}}> 
+                 <Image source={item.Image} style={{  marginTop:0,marginVertical:90, height: height*0.08, width: width*0.22,borderRadius: 40,resizeMode:"contain"}}/>
+                  <View style={{ width:width*.4,alignItems:"center",marginBottom:40}}> 
 
-                 <Text >
-                  {item.title}
+                    <Text >
+                      {item.title}
+                    </Text>
+                    <Text >
+                      {item.date}
+                    </Text>
+                    <Text >
+                    {item.available}
+                    </Text>
+                    <Text>
+                    {item.timing}
                   </Text>
-                  <Text >
-                  {  item.date}
-                 </Text>
-                 <Text >
-                  {  item.available}
-                 </Text>
-                 <Text >
-                  {  item.timing}
-                 </Text>
                       {/* <Button style={{  marginLeft:60,width:width*0.3,marginTop:10}}
                       // onPress={()=>{}}
                          color="#ffff"
@@ -97,22 +99,26 @@ export default class DoctorScreen extends Component {
   render() {
    
     return (
-   <View style={styles.container}>
-         <StatusBar hidden/>
-       <View> 
-       
-      <SafeAreaView style={{alignItems:"center",backgroundColor:"#87CEEB",padding:15}}>
-      <Text style={{fontWeight:"bold",marginTop:20}}>
-                 Doctors
-                  </Text></SafeAreaView>
+            <View style={styles.container}>
+            {/* /remove this background if not working properly  */}
+              <ImageBackground  source={'../assets/i.png'} style={{flex:1,resizeMode:"cover",}}> 
+                      <View style={{alignItems:"center",backgroundColor:"#87CEEB",textAlign:"center"}}>
+                      <Text style={{fontWeight:"bold",marginTop:20,}}>
+                         Doctors
+                      </Text>
+                      </View>
+                  
        {/*</View> style={{alignItems:"center"}} */}
-       <FlatList
-        data={DATA}
-        renderItem={this.renderItem}
-        keyExtractor={item => item.id}
-      />
-       </View>
-   </View>
+             
+                <FlatList
+                  data={DATA}
+                  renderItem={this.renderItem}
+                  keyExtractor={item => item.id}
+                />
+                 </ImageBackground> 
+              </View>
+              
+           // </View>
     )  
   }
 }
@@ -120,8 +126,8 @@ export default class DoctorScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    
-    
+  
+
   
   },
 

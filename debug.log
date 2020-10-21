@@ -1,3 +1,9 @@
 [1012/103126.181:ERROR:settings.cc(430)] Settings version is not 5
 [1012/104126.719:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
 [1017/161037.820:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1019/164633.048:ERROR:file_io.cc(90)] ReadExactly: expected 36, observed 0
+[1021/123527.669:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1021/125519.911:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[1021/125519.911:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[1021/125520.374:ERROR:exception_snapshot_win.cc(99)] thread ID 12324 not found in process
+[1021/125520.374:ERROR:exception_snapshot_win.cc(99)] thread ID 5648 not found in process

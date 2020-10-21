@@ -48,21 +48,22 @@ export default class Login extends Component {
      
       
      
-   <View style={styles.container}>
+     <View style={styles.container}>
       
-      <StatusBar hidden/>
-      <ImageBackground source={require('../assets/unnamed.jpg')} style={{...styles.image,top:0,transform: [{ rotate: '180deg' }]}}>
-      </ImageBackground>
-      <ImageBackground source={require('../assets/unnamed.jpg')} style={{...styles.image,bottom:-30}}>
-      </ImageBackground>
-      <View>
+        <StatusBar hidden/>
+        <ImageBackground source={require('../assets/unnamed.jpg')} style={{...styles.image,top:0,transform: [{ rotate: '180deg' }]}}>
+        </ImageBackground>
+        <ImageBackground source={require('../assets/unnamed.jpg')} style={{...styles.image,bottom:-30}}>
+        </ImageBackground>
         <View>
-          <Text style={{ fontWeight: 'bold',fontSize:40,top:250,left:30,color:'#2E86C1' }}>LOGIN</Text>
+            <View>
+                <Text style={{ fontWeight: 'bold',fontSize:40,top:250,left:30,color:'#2E86C1' }}>LOGIN</Text>
           
-        </View>
+            </View>
 
         <View style={{ fontSize:40,top:300,width:width*0.9,alignSelf:"center" }}>
-        {this.state.errorMessage && (<Text style={styles.error}>{this.state.errorMessage}</Text>)}
+        
+          {this.state.errorMessage && (<Text style={styles.error}>{this.state.errorMessage}</Text>)}
           <Item rounded style={{margin:10}}>
             <Icon active name='mail'  style={{color:'#21618C' }} />
             <Input
