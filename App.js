@@ -9,25 +9,45 @@ import WelcomeScreen from './screens/WelcomeScreen'
 import { AppLoading } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import * as Font from 'expo-font';
+import UserReport from './screens/UserReport'
+import Notification from "./screens/Notifications";
+
 const AuthStack = createStackNavigator({
     Intro:WelcomeScreen,
     Login: LoginScreen,
 }) 
 
+// const UserStack = createStackNavigator({
+//   UReport:UserReport
+
+// })
 const Container = createAppContainer(
 
     createSwitchNavigator(
         {
             Loading: LoadingScreen,
             Auth: AuthStack,
-            App: Appstack
+            App: Appstack,
+            Report: UserReport
             
         },
         {
             initialRouteName: "Loading"
         }
     )
-) 
+ ) ;
+//     const AppNavigator = createStackNavigator(  
+  
+//     createSwitchNavigator(
+//       {   
+//       Notifications:Notification  
+//   },
+//   {
+//       initialRouteName: "ProfileScreen"
+//   }
+//     )
+  
+// );   
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -49,6 +69,9 @@ class App extends React.Component {
           }
           return <Container/>
     }
+    //   render(){
+    //       return <AppNavigator />;  
+    // }
   }
   
   export default App

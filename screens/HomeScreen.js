@@ -50,7 +50,10 @@ export default class HomeScreen extends Component {
   render() {
     return (
    <View style={styles.container}>
-      <StatusBar hidden /> 
+      <StatusBar hidden />
+      {/* background not working  */}
+      <ImageBackground  source={'../assets/i.png'} style={{flex:1,resizeMode:"cover",}}> 
+
       <View>
         {/* <ImageBackground source={Bgimg} width={width}> */}
 
@@ -113,6 +116,7 @@ export default class HomeScreen extends Component {
       />
         </View>
       </View>
+      </ImageBackground>
    </View>
     )  
   }
