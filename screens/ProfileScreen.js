@@ -1,10 +1,10 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, StatusBar,Dimensions, ImageBackground } from "react-native";
 import Firebase from '../firebase';
-import { Container, Header, Content, Card, CardItem, Body, Left,Button, Row,onPressLearnMore} from 'native-base';
+import { Container, Header, Content, Card, CardItem, Body, Left,Button, Row} from 'native-base';
 const { height, width } = Dimensions.get('screen')  
 import Constants from 'expo-constants'
-
+import { withNavigation } from "react-navigation";
 
 
 export default class ProfileScreen extends React.Component {
@@ -16,7 +16,7 @@ export default class ProfileScreen extends React.Component {
         return (
            
             <View style={styles.container}>
-                <ImageBackground source={require('../assets/i.png')} style={{resizeMode:"stretch"}}> 
+                {/* <ImageBackground source={require('../assets/i.png')} style={{resizeMode:"stretch"}}>  */}
                 <StatusBar hidden/>
 
                 <View style={{alignItems:"center",width:width,height:height*0.06,backgroundColor:"#87CEEB",padding:10,marginTop:0}}>
@@ -38,8 +38,14 @@ export default class ProfileScreen extends React.Component {
                 </Card> */}
                 <View style={{padding:5,borderColor:"black",elevation:1,marginTop:height*.02,alignSelf:"center",width:width*0.9,height:height*0.1}}>
                 
-                            <TouchableOpacity style={{margin:0,alignSelf:"center",height:height*0.05,borderBottomWidth:1,borderColor:"black",width:width*0.9 }}
-                            onPress={() => this.props.navigation.navigate("Notifications")}>
+
+                            <TouchableOpacity 
+                                style={{margin:0,alignSelf:"center",height:height*0.05,borderBottomWidth:1,borderColor:"black",width:width*0.9 }}
+                                 onPress={() =>this.props.navigation.navigate('Notification')}
+
+                                
+                                >
+
                             <Text style={{fontWeight:"bold",fontSize:18,color:"black",marginTop:0,marginHorizontal:10,marginTop:10}}>Notifications</Text> 
                             </TouchableOpacity>
 
@@ -71,7 +77,7 @@ export default class ProfileScreen extends React.Component {
                
             
             {/* <Text>Profile </Text> */}
-            </ImageBackground> 
+            {/* </ImageBackground>  */}
             </View>
 
             

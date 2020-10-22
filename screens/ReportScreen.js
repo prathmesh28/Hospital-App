@@ -24,7 +24,7 @@ export default class ReportScreen extends Component {
    
     return (
               <View style={styles.container}>
-               <ImageBackground source={require('../assets/i.png')} style={{resizeMode:"stretch",height:height}} >
+               {/* <ImageBackground source={require('../assets/i.png')} style={{resizeMode:"stretch",height:height}} > */}
                   <StatusBar hidden/>
                  
               
@@ -46,11 +46,13 @@ export default class ReportScreen extends Component {
 
                 {/* </Button> */}
                 <TouchableOpacity style={{padding:0,margin:0,alignSelf:"center",marginHorizontal:0,marginBottom:10,borderWidth:1,borderColor:"black",width:width*0.5,height:40 }} 
-                      onPress={() => this.props.navigation.navigate("Report")}>
+                      onPress={() =>this.props.navigation.navigate('Reports')}
+
+                      >
                      <Text style={{fontWeight:"bold",textAlign:"center",marginTop:6}}>View Reports</Text> 
                 </TouchableOpacity>
                 </View>  
-   </ImageBackground>
+   {/* </ImageBackground> */}
    </View>
     )  
   }
