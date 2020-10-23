@@ -9,9 +9,7 @@ import WelcomeScreen from './screens/WelcomeScreen'
 import { AppLoading } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import * as Font from 'expo-font';
-//import UserReport from './screens/UserReport'
-import Notification from "./screens/Notification";
-
+import TabScreen from "./TabBar/App"
 const AuthStack = createStackNavigator({
     Intro:WelcomeScreen,
     Login: LoginScreen,
@@ -23,7 +21,8 @@ const Container = createAppContainer(
         {
             Loading: LoadingScreen,
             Auth: AuthStack,
-            App: Appstack,
+         //   App: Appstack,
+            App:TabScreen
             
         },
         {

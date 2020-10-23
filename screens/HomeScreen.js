@@ -52,7 +52,7 @@ export default class HomeScreen extends Component {
    <View style={styles.container}>
       <StatusBar hidden />
       {/* background not working  */}
-      <ImageBackground  source={'../assets/i.png'} style={{flex:1,resizeMode:"cover",}}> 
+      {/* <ImageBackground  source={'../assets/i.png'} style={{flex:1,resizeMode:"cover",}}>  */}
 
       <View>
         {/* <ImageBackground source={Bgimg} width={width}> */}
@@ -116,7 +116,7 @@ export default class HomeScreen extends Component {
       />
         </View>
       </View>
-      </ImageBackground>
+      {/* </ImageBackground> */}
    </View>
     )  
   }
@@ -125,7 +125,7 @@ export default class HomeScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'#fff'
+    backgroundColor:'#87ceeb'
   },
  
  
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     fontSize:17
   },
   linkcontainer: {
-    fontSize:15,
+   // fontSize:15,
     backgroundColor: "transparent",
   },
   linkimage: {

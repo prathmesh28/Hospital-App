@@ -5,10 +5,16 @@ import FlashyScreen from './Flashy'
 import Notification from "../screens/Notification";
 import Reports from "../screens/Reports"
 const Stack = createStackNavigator();
-
+const appTheme = {
+	colors: {
+		primary: 'rgb(255, 255, 255)',
+		card: 'rgb(255, 255, 255)',
+		background: 'rgb(255, 255, 255)'
+	}
+};
 export default function App() {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={appTheme}>
       <Stack.Navigator  screenOptions={{
         headerShown: false
       }} initialRouteName={'App'}>
