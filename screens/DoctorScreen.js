@@ -13,6 +13,7 @@ import {
   FlatList,Image,ImageBackground
 } from "react-native"  
 import { Container, Header, Content, Card, CardItem, Body, Text,Left,Button} from 'native-base';
+import MainSVG from '../TabBar/Main'
 
 const { height, width } = Dimensions.get('screen')  
 import Firebase from '../firebase'
@@ -61,9 +62,7 @@ export default class DoctorScreen extends Component {
     
     return( 
 
-      <Card style={{padding:5,width:width*.85,alignSelf:"center",
-            //  height:height*.22
-              }}>
+      <Card style={{padding:5,width:width*.85,alignSelf:"center"}}>
             <CardItem >
               <Body>
               <CardItem >
@@ -107,6 +106,8 @@ export default class DoctorScreen extends Component {
    
     return (
       <View style={styles.container}>
+        <StatusBar backgroundColor={'#87CEEB'} />
+      <MainSVG width={width} height={150}></MainSVG>
         <View style={{alignItems:"center",width:width*0.5,elevation:7,
               backgroundColor:"#87CEEB",textAlign:"center",alignSelf:"center",
               borderRadius:10,justifyContent:"center",alignContent:"center",alignItems:"center",
@@ -130,7 +131,7 @@ export default class DoctorScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'#87ceeb'
+    backgroundColor:'#fff'
 
   
   },

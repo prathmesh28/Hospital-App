@@ -31,7 +31,7 @@ const TabBarCurve = ({width, height, activeIndex=0, activeIcon="", translateX}) 
     return (
         <Animated.View style={[styles.curve, {transform: [{translateX}]}]}>
             <Svg width={width} height={height}>
-                <Path fill="#87ceeb" d={`M 0 0 C 0,0 10,0 10,10 C 10,10 ${(width-10)/2},${(height-10) * 1.75} ${(width-10)},10 C ${width-10},10 ${width-10},0 ${width},0`} />
+                <Path fill="#fff" d={`M 0 0 C 0,0 10,0 10,10 C 10,10 ${(width-10)/2},${(height-10) * 1.75} ${(width-10)},10 C ${width-10},10 ${width-10},0 ${width},0`} />
             </Svg>
 
             <ActiveIcon width={width} height={height} activeIndex={activeIndex} translateX={translateX} icon={activeIcon} />
@@ -77,7 +77,8 @@ const styles = StyleSheet.create({
         width,
         height: TabHeight,
         flexDirection: "row",
-        backgroundColor: "white",
+        backgroundColor:"#87CEEB",
+       // backgroundColor: "white",
         justifyContent: "center",
         alignItems: "center"
     },
@@ -97,7 +98,8 @@ const styles = StyleSheet.create({
         overflow: "hidden",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "white"
+        backgroundColor:"#87CEEB"
+      //  backgroundColor: "white"
     }
 })
  

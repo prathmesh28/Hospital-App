@@ -1,22 +1,16 @@
 import React, { Component } from "react"  
-import Constants from 'expo-constants'
 import {
-  SafeAreaView,
   Dimensions,
   StatusBar,
-  ActivityIndicator,
-  AsyncStorage,
-  TouchableOpacity,
   StyleSheet,
   FlatList,
   View,
-  ImageBackground
 } from "react-native"  
-import { Container, Header, Content, Card, CardItem, Body, Text } from 'native-base';
+import { Card, CardItem, Body, Text } from 'native-base';
 const { height, width } = Dimensions.get('screen')  
-import Firebase from '../firebase'
+// import Firebase from '../firebase'
 import RNUrlPreview from 'react-native-url-preview';
-// import Bgimg from '../assets/Bgimg.svg'
+import MainSVG from '../TabBar/Main'
 const DATA = [
   {
     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -50,29 +44,25 @@ export default class HomeScreen extends Component {
   render() {
     return (
    <View style={styles.container}>
-      <StatusBar hidden />
-      {/* background not working  */}
-      {/* <ImageBackground  source={'../assets/i.png'} style={{flex:1,resizeMode:"cover",}}>  */}
-
+      <StatusBar backgroundColor={'#87CEEB'} />
+      
       <View>
-        {/* <ImageBackground source={Bgimg} width={width}> */}
-
-        
         <View style={{
-          
-          //backgroundColor:'#7ec0ee',
-          width:width,height:height*0.2,borderBottomWidth:1,borderBottomColor:'grey',
-          justifyContent:"center",marginLeft:20}}>
-        <Text style={{fontSize:20}}>
-          Hello, {'\n'}<Text style={{fontSize:30,fontWeight:"bold"}}>Prathmesh!</Text>
-        </Text>
-        <Text style={{fontSize:17,bottom:0,alignContent:"space-between",color:'#a9a9a9'}}>
-          How're you today?
-        </Text>
+          width:width,
+          height:height*0.3
+          }}>
+            <MainSVG width={width} height={height*0.15}></MainSVG>
+          <Text style={{fontSize:20,marginLeft:20}}>
+            Hello, {'\n'}
+            <Text style={{fontSize:30,fontWeight:"bold"}}>Prathmesh!</Text>
+          </Text>
+          <Text style={{fontSize:17,bottom:0,alignContent:"space-between",color:'#a9a9a9',marginLeft:20}}>
+            How're you today?
+          </Text>
         </View>
-        {/* </ImageBackground> */}
+        
         <View style={{width:width*0.9,alignSelf:"center",padding:10}}>
-        <Card style={{padding:0,borderRadius:20,elevation:4,borderColor:'#7ec0ee4d'}}>
+          <Card style={{padding:0,borderRadius:20,elevation:4,borderColor:'#7ec0ee4d'}}>
             <CardItem style={{padding:0,borderRadius:20, elevation:0,backgroundColor:'#7ec0ee66',borderColor:'#7ec0ee4d',borderWidth:1}}>
               <Body>
                 <Text style={{fontSize:20,fontWeight:"900",alignSelf:'center'}}>
@@ -116,7 +106,6 @@ export default class HomeScreen extends Component {
       />
         </View>
       </View>
-      {/* </ImageBackground> */}
    </View>
     )  
   }
@@ -125,7 +114,7 @@ export default class HomeScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'#87ceeb'
+    backgroundColor:'#fff'
   },
  
  

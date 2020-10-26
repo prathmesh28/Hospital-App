@@ -55,7 +55,7 @@ const TabScreen = () => {
       <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
      
       <SafeAreaView edges={["left", "bottom", "right"]} style={{position: "relative", width}}>
-      <View  style={{  backgroundColor: "#87ceeb",   width, height: "100%"}} >
+      <View  style={{  backgroundColor: "#fff",   width, height: "100%"}} >
       
       {(() => {
                 switch (activeIndex) {
@@ -97,7 +97,8 @@ const styles = StyleSheet.create({
   //  height: "20%",
     marginBottom:0,
     bottom:0,
-    backgroundColor:'#87ceeb',
+    backgroundColor:"#87CEEB",
+   // backgroundColor:'#fff',
     //backgroundColor: "#ff0034",
     position: "absolute",
   }

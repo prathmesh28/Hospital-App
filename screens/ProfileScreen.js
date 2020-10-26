@@ -5,6 +5,7 @@ import { Container, Header, Content, Card, CardItem, Body, Left,Button, Row} fro
 const { height, width } = Dimensions.get('screen')  
 import Constants from 'expo-constants'
 import { withNavigation } from "react-navigation";
+import MainSVG from '../TabBar/Main'
 
 
 export default class ProfileScreen extends React.Component {
@@ -16,21 +17,19 @@ export default class ProfileScreen extends React.Component {
         return (
            
             <View style={styles.container}>
-                {/* <ImageBackground source={require('../assets/i.png')} style={{resizeMode:"stretch"}}>  */}
-                <StatusBar hidden/>
+                <StatusBar backgroundColor={'#87CEEB'} />
+      <MainSVG width={width} height={150}></MainSVG>
 
-                <View style={{alignItems:"center",width:width,height:height*0.06,backgroundColor:"#87CEEB",padding:10,marginTop:0}}>
-                        <Text style={{fontWeight:"bold"}}>  User Profile</Text>
+                <View style={{alignItems:"center",width:width}}>
+                        <Text style={{fontWeight:"bold",fontSize:20}}>  User Profile</Text>
                 </View>
 
         
-                {/* <Card style={{padding:5,width:width*.9,alignSelf:"center",height:height*.16,marginTop:25}}>
-                <CardItem  >
-                <Body> */}
-                <View style={{padding:5,borderColor:"black",elevation:1,marginTop:height*.06,alignSelf:"center",width:width*0.9,height:height*0.2}}>
+               
+                <View style={{padding:5,borderColor:"black",elevation:1,alignSelf:"center",width:width*0.9,height:height*0.2}}>
                     <Text style={{marginHorizontal:10,fontWeight:"bold",color:"black",fontSize:24}}>Jay Sawant </Text>
-                    <Text  style={{marginHorizontal:10,marginTop:15,fontSize:16,color:"black"}}>+91 9897909786</Text>
-                    <Text style={{marginHorizontal:10,marginTop:15,fontSize:16,color:"black"}}>jaysawant@gmail.com </Text>
+                    <Text  style={{marginHorizontal:10,marginTop:15,fontSize:16,color:"black"}}>+91 9897909786{'\n'}
+                    jaysawant@gmail.com </Text>
                 </View>
                 
                 {/* </Body>
@@ -106,6 +105,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: "center",
-        backgroundColor:"#87ceeb"
+        backgroundColor:"#fff"
     }
 });

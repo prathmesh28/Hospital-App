@@ -17,6 +17,7 @@ import {
 
 const { height, width } = Dimensions.get('screen')  
 import Firebase from '../firebase'
+import MainSVG from '../TabBar/Main'
 
 export default class ReportScreen extends Component {
 
@@ -24,13 +25,15 @@ export default class ReportScreen extends Component {
    
     return (
               <View style={styles.container}>
-               {/* <ImageBackground source={require('../assets/i.png')} style={{resizeMode:"stretch",height:height}} > */}
-                  <StatusBar hidden/>
+               <StatusBar backgroundColor={'#87CEEB'} />
+               <MainSVG width={width} height={150}></MainSVG>
                  
               
 
-                  <Text style={{backgroundColor:"#87CEEB",width:width*1,textAlign:"center",padding:30,fontWeight:"bold"}}>ReportScreen</Text>
-                  <View style={{padding:0,margin:0,borderColor:"black",elevation:3,width:width*0.9,height:height*.30,marginTop:20,alignSelf:"center"}}>
+               <Text style={{fontSize:20,fontWeight:"bold"}}>User Report</Text>
+                  <View style={{borderColor:"black",elevation:3,
+                    width:width*0.9,height:height*.30
+                    }}>
                   </View>
         
                 <View style={{padding:10,width:width*0.9,marginTop:80}}>
@@ -52,7 +55,6 @@ export default class ReportScreen extends Component {
                      <Text style={{fontWeight:"bold",textAlign:"center",marginTop:6}}>View Reports</Text> 
                 </TouchableOpacity>
                 </View>  
-   {/* </ImageBackground> */}
    </View>
     )  
   }
@@ -62,7 +64,8 @@ export default class ReportScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    // alignItems:"center",
+    backgroundColor:"#fff",
+     alignItems:"center",
     // height:height,
     flex: 1,
   
