@@ -4,25 +4,39 @@ import { createStackNavigator } from "react-navigation-stack"
 
 import LoadingScreen from "./screens/LoadingScreen"
 import LoginScreen from "./screens/LoginScreen"
-import Appstack from './TabNavigation/App'
 import WelcomeScreen from './screens/WelcomeScreen'
 import { AppLoading } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import * as Font from 'expo-font';
 import TabScreen from "./TabBar/App"
+import Report from "./screens/Reports"
+import Notification from "./screens/Notification"
+import Appointment from "./screens/Appointment"
 const AuthStack = createStackNavigator({
     Intro:WelcomeScreen,
     Login: LoginScreen,
 }) 
-
+const TabStack = createStackNavigator({
+  Apptab:TabScreen,
+  Report:Report,
+  Notification:Notification,
+  Appointment:Appointment
+},
+{
+  header: null,
+  headerMode: 'none'
+}); 
 const Container = createAppContainer(
 
     createSwitchNavigator(
         {
+          
             Loading: LoadingScreen,
             Auth: AuthStack,
-         //   App: Appstack,
-            App:TabScreen
+            App:TabStack
+            // App:TabScreen,
+            // Report:Report
+
             
         },
         {

@@ -26,8 +26,7 @@ const DATA = [
   },
 ];
 export default class HomeScreen extends Component {
-
-
+ 
   renderItem = ({item}) => {
     return( 
       <Card style={{padding:10,width:width*0.9}}>

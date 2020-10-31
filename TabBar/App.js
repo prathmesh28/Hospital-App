@@ -27,11 +27,10 @@ const {width, height} = Dimensions.get("window");
 import {SafeAreaView, SafeAreaProvider, initialWindowMetrics} from "react-native-safe-area-context";
 
 const tabs = [
-  {icon: "grid"},
-  {icon: "list"},
-  {icon: "slack"},
-  {icon: "layers"},
-  // {icon: "smile"}
+  {icon: "hospital"},
+  {icon: "file-alt"},
+  {icon: "medicinebox"},
+  {icon: "user"}
 ]
 
 const TabScreen = () => {
