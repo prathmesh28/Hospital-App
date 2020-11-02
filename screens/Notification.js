@@ -21,7 +21,7 @@ export default class Notification extends Component {
    
     return (
             <View style={styles.container}>
-                <Text>Notification</Text>
+                <Text style={{fontSize:30}}>Notification</Text>
             </View>
                   
     
@@ -32,7 +32,8 @@ export default class Notification extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  
+    alignContent:"center"
+    
 
   
   },

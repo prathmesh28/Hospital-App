@@ -1,14 +1,19 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, StatusBar,Dimensions, ImageBackground } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, StatusBar,Dimensions, ImageBackground,Image } from "react-native";
 import Firebase from '../firebase';
 import { Container, Header, Content, Card, CardItem, Body, Left,Button, Row} from 'native-base';
 const { height, width } = Dimensions.get('screen')  
 import Constants from 'expo-constants'
 import { withNavigation } from "react-navigation";
 import MainSVG from '../TabBar/Main'
+import NotificationSvg from "../assets/NotificationSvg"
+import RightArrowSvg from "../assets/RigthArrowSvg"
+import ProfileUserSvg from "../assets/ProfileUserSvg"
+import InformationSvg from "../assets/InformationSvg";
+import ProfileSvg from "../assets/LogoutSvg"
+import LogoutSvg from "../assets/LogoutSvg";
 
-
-export default class ProfileScreen extends React.Component {
+class ProfileScreen extends React.Component {
 
     signOutUser = () => {
         Firebase.auth().signOut();
@@ -18,65 +23,92 @@ export default class ProfileScreen extends React.Component {
            
             <View style={styles.container}>
                 <StatusBar backgroundColor={'#87CEEB'} />
-      <MainSVG width={width} height={150}></MainSVG>
+                    <MainSVG width={width} height={150}></MainSVG>
 
-                <View style={{alignItems:"center",width:width}}>
-                        <Text style={{fontWeight:"bold",fontSize:20}}>  User Profile</Text>
+                <View style={{alignItems:"center",width:width,marginTop:-15}}>
+                    <ProfileUserSvg />
+                        {/* <Text style={{fontWeight:"bold",fontSize:20}}>  User Profile</Text> */}
                 </View>
 
         
                
-                <View style={{padding:5,borderColor:"black",elevation:1,alignSelf:"center",width:width*0.9,height:height*0.2}}>
+                <View style={{padding:5,alignSelf:"center",width:width*0.9,height:height*0.2, marginTop:height*0.07}}>
                     <Text style={{marginHorizontal:10,fontWeight:"bold",color:"black",fontSize:24}}>Jay Sawant </Text>
-                    <Text  style={{marginHorizontal:10,marginTop:15,fontSize:16,color:"black"}}>+91 9897909786{'\n'}
+                    <Text  style={{marginHorizontal:10,marginTop:15,fontSize:16,color:"black"}}>+91 9897909786{'\n'}{'\n'}
                     jaysawant@gmail.com </Text>
                 </View>
                 
-                {/* </Body>
-                </CardItem >
-                </Card> */}
-                <View style={{padding:5,borderColor:"black",elevation:1,marginTop:height*.02,alignSelf:"center",width:width*0.9,height:height*0.1}}>
+             
+                
+                <View style={{padding:3,borderColor:"#87ceeb",marginTop:height*-0.035,borderWidth:1,borderRadius:19,alignSelf:"center",width:width*0.9,height:height*0.05}}>
                 
 
                             <TouchableOpacity 
-                                style={{margin:0,alignSelf:"center",height:height*0.05,borderBottomWidth:1,borderColor:"black",width:width*0.9 }}
+                                style={{margin:0,alignSelf:"center",height:height*0.06,width:width*0.9 }}
                                  onPress={() =>this.props.navigation.navigate('Notification')}
 
                                 
                                 >
-
-                            <Text style={{fontWeight:"bold",fontSize:18,color:"black",marginTop:0,marginHorizontal:10,marginTop:10}}>Notifications</Text> 
-                            </TouchableOpacity>
+                             
+                             <NotificationSvg ></NotificationSvg>                              
+                            <Text style={{fontWeight:"bold",fontSize:22,color:"black",marginTop:-24,marginHorizontal:50}}>Notifications</Text> 
+                            
+                            <RightArrowSvg />
+                            
+                          </TouchableOpacity>
 
                 </View>
+                
   
            
-                <View style={{padding:5,borderColor:"black",elevation:1,marginTop:height*0.04,height:height*0.15,alignSelf:"center",width:width*0.9}}>
+                <View style={{
                 
-                    <Text style={{fontSize:20,fontWeight:"bold",marginHorizontal:10,borderBottomColor:"black",borderBottomWidth:1,marginTop:10,color:"black"}}>About Us</Text>
-                    {/* <Text style={{fontSize:18,fontWeight:"bold",marginHorizontal:10,marginTop:10,color:"#87CEEB"}}>Contact</Text> */}
-                    <Text style={{fontSize:16,fontWeight:"bold",marginHorizontal:10,marginTop:10,color:"#87CEEB"}}>Vision Hospital</Text>
-                    <Text style={{fontSize:14,fontWeight:"bold",marginHorizontal:10,marginTop:10,color:"#87CEEB"}}>mapusa,Goa</Text>
+                alignSelf:"flex-start",
+                    marginTop:height*0.04,
+               
+                 marginHorizontal:30,
+                 
+                    }}>
+                   
+                   <View style={{elevation:1,borderColor:"black",width:width*0.85,height:height*0.18,padding:10,borderRadius:8}}>
+                    <View style={{display:'flex',flexDirection:'row'}}>
+                   <InformationSvg/>  
+                    <Text style={{fontSize:22,fontWeight:"bold",
+                       
+                        color:"black"}}>{'\t'}
+                            
+                        About Us {'\n'}
+                        
 
+                        </Text>
+                    </View>
+                    
+                <Text style={{fontSize:16,fontWeight:"bold"}}>{'\t'} {'\t'}{'\t'}Vision Hospital{'\n'}{'\n'}
+                    <Text style={{fontSize:16}}>{'\t'}{'\t'}{'\t'}mapusa,Goa</Text></Text>
+
+                </View>
                 </View>
             
            
-                <View style={{padding:0,marginTop:height*0.02,borderColor:"black",elevation:3,alignSelf:"center",width:width*0.9}}>
-                        {/* <Text style={{fontWeight:"bold",textAlign:"center",marginTop:6}}></Text>  */}
+                <View style={{padding:0,marginTop:height*0.02,borderColor:"black",elevation:3,alignSelf:"center",width:width*0.4,borderRadius:14}}>
+                      
           
-                      <TouchableOpacity style={{padding:0,alignSelf:"center",marginHorizontal:0,borderColor:"black",width:width*0.9,height:50 }} onPress={this.signOutUser}>
-                         <Text style={{fontWeight:"bold",textAlign:"center",marginTop:18,color:"#87CEEB"}}>Logout</Text> 
+                      <TouchableOpacity style={{padding:0,alignSelf:"center",display:"flex",flexDirection:"row",marginHorizontal:0,borderColor:"black",width:width*0.4,height:50 }} onPress={this.signOutUser}>
+                         
+                         <Text style={{fontWeight:"bold",alignSelf:"center",marginTop:10,marginHorizontal:45,color:"black"}}>Logout</Text> 
+                         <View style={{marginTop:18,
+                           // marginHorizontal:80
+                            }}>
+                         <LogoutSvg/>
+                         </View>
                       </TouchableOpacity>
+                      
                 
                 </View>
-           {/* </Body>
-            </CardItem >
-              
-            </Card> */}
+           
                
             
-            {/* <Text>Profile </Text> */}
-            {/* </ImageBackground>  */}
+    
             </View>
 
             
@@ -86,25 +118,22 @@ export default class ProfileScreen extends React.Component {
         );
         
     }
-//     render(){
-//         return <AppContainer />;  
-//  }
+
 }
 
-// const AppNavigator = createStackNavigator(  
-//     {  
-          
-//         notifications: Notification
-//     },  
-//     {  
-//         initialRouteName: "Loading"  
-//     }  
-// );
-// const AppContainer = createAppContainer(AppNavigator);  
+
+export default withNavigation(ProfileScreen);
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: "center",
+       
         backgroundColor:"#fff"
-    }
+    },
+    buttonImageIconStyle: {
+        padding: 10,
+        margin: 5,
+        height: 25,
+        width: 25,
+        resizeMode: 'stretch',
+      }
 });

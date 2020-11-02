@@ -14,12 +14,12 @@ import {
   View,
   ImageBackground
 } from "react-native"  
-
+import { withNavigation } from 'react-navigation';
 const { height, width } = Dimensions.get('screen')  
 import Firebase from '../firebase'
 import MainSVG from '../TabBar/Main'
 
-export default class ReportScreen extends Component {
+class ReportScreen extends Component {
 
   render() {
    
@@ -44,12 +44,12 @@ export default class ReportScreen extends Component {
                 }
               //  console.log('dfghjlnb')
                 
-                > */}
+                >
 
 
-                {/* </Button> */}
+                </Button> */}
                 <TouchableOpacity style={{padding:0,margin:0,alignSelf:"center",marginHorizontal:0,marginBottom:10,borderWidth:1,borderColor:"black",width:width*0.5,height:40 }} 
-                      onPress={() =>this.props.navigation.navigate('Reports')}
+                      onPress={() =>this.props.navigation.navigate('Report')}
 
                       >
                      <Text style={{fontWeight:"bold",textAlign:"center",marginTop:6}}>View Reports</Text> 
@@ -61,7 +61,7 @@ export default class ReportScreen extends Component {
 
   
 }
-
+export default withNavigation(ReportScreen);
 const styles = StyleSheet.create({
   container: {
     backgroundColor:"#fff",

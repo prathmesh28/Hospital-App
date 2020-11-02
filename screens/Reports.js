@@ -13,8 +13,9 @@ import {
   FlatList,Image,ImageBackground,
   Text
 } from "react-native"  
+import { withNavigation } from 'react-navigation';
 
-export default class Reports extends Component {
+class Reports extends Component {
 
 
   render() {
@@ -28,6 +29,7 @@ export default class Reports extends Component {
     )  
   }
 }
+export default withNavigation(Reports);
 
 const styles = StyleSheet.create({
   container: {

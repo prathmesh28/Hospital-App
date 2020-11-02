@@ -1,6 +1,7 @@
 import React, { Component, useRef } from 'react';
 import { View, Animated, StyleSheet, Dimensions, TouchableOpacity, Easing } from 'react-native';
-import FeatherIcon from "react-native-vector-icons/Feather";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import {Svg, Path} from "react-native-svg"
 
 
@@ -22,7 +23,11 @@ const ActiveIcon = ({icon, width, activeIndex:i, translateX}) => {
 
     return (
         <Animated.View style={[styles.activeIcon, {width: width * 0.6, height: width * 0.6, transform: [{translateY}], opacity}]}>
-            <FeatherIcon name={icon} color="black" size={25} />
+            {
+                icon!=='medicinebox'?<FontAwesome5 name={icon} color="black" size={25} />:<AntDesign name={icon} color="black" size={25} />
+            }
+
+
         </Animated.View>
     );
 }
@@ -56,7 +61,9 @@ const TabBar = ({tabs=[], activeIndex=0, onPressTab, AnimationValue}) => {
                 return (
                     <TouchableOpacity style={{width: TabWidth, height: TabHeight}} key={i} onPress={() => {onPressTab(i); Animated.timing(AnimationValue.current, {duration: 500 * Math.max(1, Math.abs(activeIndex-i)/2), toValue: TabWidth * i, easing: Easing.out(Easing.exp), useNativeDriver: true}).start(); return true}}>
                         <Animated.View style={[styles.tabBar, {width: TabWidth, height: TabHeight, opacity}]}>
-                            <FeatherIcon  name={icon} color="grey" size={24} />
+                        {
+                icon!=='medicinebox'?<FontAwesome5 name={icon} color="grey" size={24} />:<AntDesign name={icon} color="grey" size={24} />
+            }
                         </Animated.View>
                     </TouchableOpacity>
                 );
