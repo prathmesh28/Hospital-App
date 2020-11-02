@@ -11,7 +11,7 @@ import * as Font from 'expo-font';
 import TabScreen from "./TabBar/App"
 import Report from "./screens/Reports"
 import Notification from "./screens/Notification"
-import Appointment from "./screens/Appointment"
+//import Appointment from "./screens/Appointment"
 const AuthStack = createStackNavigator({
     Intro:WelcomeScreen,
     Login: LoginScreen,
@@ -20,7 +20,7 @@ const TabStack = createStackNavigator({
   Apptab:TabScreen,
   Report:Report,
   Notification:Notification,
-  Appointment:Appointment
+//  Appointment:Appointment
 },
 {
   header: null,
