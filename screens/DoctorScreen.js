@@ -22,6 +22,8 @@ import { withNavigation } from "react-navigation";
 import GraduationSvg from "../assets/GraduationSvg"
 import SpecialistSvg from "../assets/MedicalSpecialistSvg"
 import SuitcaseSvg from "../assets/SuitcaseSvg"
+import DoctordpSvg from "../assets/DoctordpSvg"
+import DoctorFemaleSvg from "../assets/DoctorFemaleSvg";
 
 var img=require('../assets/favicon.png');
 const DATA = [
@@ -31,7 +33,7 @@ const DATA = [
     qualification:'MBBS' ,
     spicialist:'Pedistrician',
     place:'Vision Hospital',
-    Image:{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTrRLHrOm2OfJZ3gJOAiPFPu7HAHB4BDm9Yeg&usqp=CAU/830/860'},
+    
     
     
   },
@@ -41,7 +43,7 @@ const DATA = [
     qualification:'BDS',
     spicialist:'Neurologist',
     place:'Vision Hospital',
-    Image:{ uri:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRUti4AhgYODkP_A1_21C3xGy6Nk61YbBzEEQ&usqp=CAU'},
+    
   },
   {
     id: '58694a0f-3da1-471f-bd96-145571e29d72',
@@ -49,17 +51,9 @@ const DATA = [
     qualification:'BYNS',
     spicialist:'Heart Surgeon',
     place:'Vision Hospital',
-    Image:{ uri:'https://randomletterstotheworld.files.wordpress.com/2013/07/infection-doctor.jpg'},
+    
    }
-  ,
-  //  {
-  //   id: '58694a0f-3da1-471f-bd96-445571e29d72',
-  //   title: 'Third Item',
-  //   qualification:'12/10/1999',
-  //   spicialist:'mon-sat',
-  //   place:'10am-6pm',
-  //   Image:{ uri:'https://picsum.photos/800/800'},
-  // },
+  
 ];
 const image=0;
  class DoctorScreen extends Component {
@@ -75,7 +69,7 @@ const image=0;
               <Body>
               <CardItem>
              
-                 <Image source={item.Image} style={{  
+                 <Image source={item.grnder===male?<DoctordpSvg/>:<DoctorFemaleSvg/>} style={{  
                         marginTop:-40,marginHorizontal:-20, 
                         height: height*0.08, width: width*0.22,
                         borderRadius: 40,resizeMode:"contain",alignSelf:'center'
@@ -113,19 +107,7 @@ const image=0;
                       
                       
                       <View style={{width:width*0.85,}}>
-                 {/* <Button style={{
-                 //marginHorizontal:-10,marginBottom:-30
-                }}
-                               onPress={()=>this.props.navigation.navigate("Appointment")}
-                               color="#ffff"
-                               backgroundColor="#87CEEB">
-
-                             <Text style={{textAlign:"center"
-                              
-                               }} >
-                                Appointment
-                             </Text>
-                       </Button> */}
+                 
                         <TouchableOpacity style={{width:width*0.80,borderWidth:1,borderColor:"#87ceeb",height:35,marginHorizontal:-82,borderRadius:10,marginBottom:-25,backgroundColor:"#6DD5FA"}} 
                             onPress={()=>this.props.navigation.navigate("Appointment")}>
 
