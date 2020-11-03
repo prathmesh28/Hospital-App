@@ -162,14 +162,12 @@ const image=0;
 
       <MainSVG width={width} height={150}></MainSVG>
       
-        <View style={{alignItems:"center",width:width*0.5,elevation:7,
-              backgroundColor:"#87CEEB",textAlign:"center",alignSelf:"center",
-              borderRadius:10,justifyContent:"center",alignContent:"center",alignItems:"center",
-              height:30,margin:5}}>
+        <View style={styles.TopStyles}>
           <Text style={{fontWeight:"bold",fontSize:18}}>
-            Book Appointment
+            
+            Doctors
           </Text>
-        </View>
+        </View> 
                   
              
                 <FlatList
@@ -191,5 +189,10 @@ const styles = StyleSheet.create({
 
   
   },
+  TopStyles:{alignItems:"center", width:width*0.5,  elevation:7,
+  backgroundColor:"#87CEEB",textAlign:"center",alignSelf:"center",
+  borderRadius:10,justifyContent:"center",alignContent:"center",alignItems:"center",
+  height:30,margin:5}
+
 
 })  

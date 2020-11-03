@@ -48,7 +48,7 @@ class ReportScreen extends Component {
 
 
                 </Button> */}
-                <TouchableOpacity style={{padding:0,margin:0,alignSelf:"center",marginHorizontal:0,marginBottom:10,borderWidth:1,borderColor:"black",width:width*0.5,height:40 }} 
+                <TouchableOpacity style={styles.ViewReportStyles} 
                       onPress={() =>this.props.navigation.navigate('Report')}
 
                       >
@@ -70,5 +70,15 @@ const styles = StyleSheet.create({
     flex: 1,
   
   },
-
+  ViewReportStyles:{
+    padding:0,
+     margin:0,
+     alignSelf:"center",
+     marginHorizontal:0,
+     marginBottom:10,
+     borderWidth:1,
+     borderColor:"black",
+     width:width*0.5,
+     height:40 
+    }
 })  
