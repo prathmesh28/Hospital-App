@@ -12,6 +12,7 @@ import ProfileUserSvg from "../assets/ProfileUserSvg"
 import InformationSvg from "../assets/InformationSvg";
 import ProfileSvg from "../assets/LogoutSvg"
 import LogoutSvg from "../assets/LogoutSvg";
+import { style } from "d3";
 
 class ProfileScreen extends React.Component {
 
@@ -32,7 +33,7 @@ class ProfileScreen extends React.Component {
 
         
                
-                <View style={{padding:5,alignSelf:"center",width:width*0.9,height:height*0.2, marginTop:height*0.07}}>
+                <View style={styles.UserdetailStyle}>
                     <Text style={{marginHorizontal:10,fontWeight:"bold",color:"black",fontSize:24}}>Jay Sawant </Text>
                     <Text  style={{marginHorizontal:10,marginTop:15,fontSize:16,color:"black"}}>+91 9897909786{'\n'}{'\n'}
                     jaysawant@gmail.com </Text>
@@ -70,7 +71,7 @@ class ProfileScreen extends React.Component {
                  
                     }}>
                    
-                   <View style={{elevation:1,borderColor:"black",width:width*0.85,height:height*0.18,padding:10,borderRadius:8}}>
+                   <View style={styles.AboutUsStyle}>
                     <View style={{display:'flex',flexDirection:'row'}}>
                    <InformationSvg/>  
                     <Text style={{fontSize:22,fontWeight:"bold",
@@ -90,13 +91,13 @@ class ProfileScreen extends React.Component {
                 </View>
             
            
-                <View style={{padding:0,marginTop:height*0.02,borderColor:"black",elevation:3,alignSelf:"center",width:width*0.4,borderRadius:14}}>
+                <View style={styles.LogoutStyles}>
                       
           
-                      <TouchableOpacity style={{padding:0,alignSelf:"center",display:"flex",flexDirection:"row",marginHorizontal:0,borderColor:"black",width:width*0.4,height:50 }} onPress={this.signOutUser}>
+                      <TouchableOpacity style={{alignSelf:"center",display:"flex",flexDirection:"row",width:width*0.4,height:50 }} onPress={this.signOutUser}>
                          
-                         <Text style={{fontWeight:"bold",alignSelf:"center",marginTop:10,marginHorizontal:45,color:"black"}}>Logout</Text> 
-                         <View style={{marginTop:18,
+                         <Text style={{fontWeight:"bold",alignSelf:"center",marginTop:5,marginHorizontal:35,color:"black"}}>Logout</Text> 
+                         <View style={{marginTop:14,
                            // marginHorizontal:80
                             }}>
                          <LogoutSvg/>
@@ -129,11 +130,34 @@ const styles = StyleSheet.create({
        
         backgroundColor:"#fff"
     },
-    buttonImageIconStyle: {
-        padding: 10,
-        margin: 5,
-        height: 25,
-        width: 25,
-        resizeMode: 'stretch',
-      }
+    UserdetailStyle: {
+        padding:5,
+        alignSelf:"center",
+        width:width*0.9,
+        height:height*0.2,
+         marginTop:height*0.07
+    },
+
+    AboutUsStyle:{
+        borderColor:"black",
+        width:width*0.85,
+        height:height*0.18,
+        padding:15,
+        borderRadius:8,
+        borderWidth:1
+    },
+    LogoutStyles: {
+        marginTop:height*0.02,
+        borderColor:"black",
+        alignSelf:"center",
+        width:width*0.4,
+        borderRadius:14,
+        borderWidth:1
+    }
+    
+    
+    
+    
+
+
 });

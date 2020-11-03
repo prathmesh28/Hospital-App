@@ -19,6 +19,9 @@ const { height, width } = Dimensions.get('screen')
 import Firebase from '../firebase'
 import { Container, Header, Content, Input, Item,Icon } from 'native-base';
 import { image } from "d3"
+import {LoginSvgOne} from '../assets/SubtlePrismSvg'
+import {LoginSvgTwo} from '../assets/SubtlePrismSvg'
+
 export default class Login extends Component {
   static navigationOptions = {
     headerShown: false
@@ -50,11 +53,28 @@ export default class Login extends Component {
      
      <View style={styles.container}>
       
-        <StatusBar hidden/>
-        <ImageBackground source={require('../assets/unnamed.jpg')} style={{...styles.image,top:0,transform: [{ rotate: '180deg' }]}}>
+      <StatusBar backgroundColor={'#2e86c1'} />
+      <View 
+          style={{
+             backgroundColor:'#2e86c1',
+          height:70}}
+          >
+      </View>
+      {/* <View style={{position:"absolute"}}>
+      <LoginSvgTwo width={width} color={'#87ceeb'}  height={390}  marginTop={40}/>
+
+      </View>  */}
+      <View style={{marginTop:0 }}>
+      <LoginSvgOne width={width} color={'#2e86c1'} height={94}/>
+
+      </View>
+      {/* <LoginSvgTwo/> */}
+       
+        {/* <ImageBackground source={require('../assets/unnamed.jpg')} style={{...styles.image,top:0,transform: [{ rotate: '180deg' }]}}>
         </ImageBackground>
         <ImageBackground source={require('../assets/unnamed.jpg')} style={{...styles.image,bottom:-30}}>
-        </ImageBackground>
+        </ImageBackground> */}
+
         <View>
             <View>
                 <Text style={{ fontWeight: 'bold',fontSize:40,top:250,left:30,color:'#2E86C1' }}>LOGIN</Text>
