@@ -26,7 +26,11 @@ const DATA = [
   },
 ];
 export default class HomeScreen extends Component {
- 
+
+componentDidMount(){
+  // let user = this.props.navigation.getParam(user, defaultValue)
+  // console.log(user)
+}
   renderItem = ({item}) => {
     return( 
       <Card style={{padding:10,width:width*0.9}}>
@@ -46,18 +50,25 @@ export default class HomeScreen extends Component {
       <StatusBar backgroundColor={'#87CEEB'} />
       
       <View>
+        <View style={{position:'absolute'}}>
+          <View style={{backgroundColor:'#87CEEB',height:height*0.14}} ></View>
+          <View style={{backgroundColor:'#87CEEB',height:20}}>
+            <MainSVG width={width} height={height*0.15}></MainSVG>
+          </View>
+        </View>
+
         <View style={{
           width:width,
-          height:height*0.3
+          height:height*0.25,
+          justifyContent:"center"
           }}>
-            <MainSVG width={width} height={height*0.15}></MainSVG>
-          <Text style={{fontSize:20,marginLeft:20}}>
-            Hello, {'\n'}
-            <Text style={{fontSize:30,fontWeight:"bold"}}>Prathmesh!</Text>
-          </Text>
-          <Text style={{fontSize:17,bottom:0,alignContent:"space-between",color:'#a9a9a9',marginLeft:20}}>
-            How're you today?
-          </Text>
+                <Text style={{fontSize:20,marginLeft:20}}>
+                  Hello, {'\n'}
+                  <Text style={{fontSize:30,fontWeight:"bold"}}>Prathmesh!</Text>
+                </Text>
+                <Text style={{fontSize:17,bottom:0,alignContent:"space-between",color:'#000',marginLeft:20}}>
+                  How're you today?
+                </Text>
         </View>
         
         <View style={{width:width*0.9,alignSelf:"center",padding:10}}>
