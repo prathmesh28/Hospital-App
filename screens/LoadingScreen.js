@@ -24,7 +24,6 @@ export default class LoadingScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                        <StatusBar hidden /> 
 
                 <Text>Loading</Text>
                 <ActivityIndicator size="large"></ActivityIndicator>

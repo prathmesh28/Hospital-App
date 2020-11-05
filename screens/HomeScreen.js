@@ -6,11 +6,14 @@ import {
   FlatList,
   View,
 } from "react-native"  
-import { Card, CardItem, Body, Text } from 'native-base';
+import { Card, CardItem, Body, Text, DatePicker } from 'native-base';
 const { height, width } = Dimensions.get('screen')  
 // import Firebase from '../firebase'
+import _ from 'lodash'
 import RNUrlPreview from 'react-native-url-preview';
 import MainSVG from '../TabBar/Main'
+import TimeAgo from 'react-native-timeago';
+
 const DATA = [
   {
     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -27,9 +30,26 @@ const DATA = [
 ];
 export default class HomeScreen extends Component {
 
+  state={
+    data:[],
+    Name:'',
+    NextDate:null,
+    remark:''
+  }
 componentDidMount(){
-  // let user = this.props.navigation.getParam(user, defaultValue)
-  // console.log(user)
+  //  console.log(this.props.data.data)
+   const data = this.props.data.data
+   //this.setState({data})
+  //   _.map( data, (e) => {
+  //    // console.log(e)
+  //   this.state.data.push(e)
+  // })
+  this.setState({Name:data.Name})
+  this.setState({NextDate:data.NextDate})
+  this.setState({remark:data.remark})
+
+
+
 }
   renderItem = ({item}) => {
     return( 
@@ -45,11 +65,18 @@ componentDidMount(){
   )
 }
   render() {
+    const data = this.state.data
+    console.log(this.state.data)
+    const name = this.state.Name
+    const NextDate = this.state.NextDate
+    const remark = this.state.remark
+
     return (
    <View style={styles.container}>
       <StatusBar backgroundColor={'#87CEEB'} />
       
       <View>
+        
         <View style={{position:'absolute'}}>
           <View style={{backgroundColor:'#87CEEB',height:height*0.14}} ></View>
           <View style={{backgroundColor:'#87CEEB',height:20}}>
@@ -62,9 +89,11 @@ componentDidMount(){
           height:height*0.25,
           justifyContent:"center"
           }}>
-                <Text style={{fontSize:20,marginLeft:20}}>
+          <Text style={{fontSize:20,marginLeft:20}}>
                   Hello, {'\n'}
-                  <Text style={{fontSize:30,fontWeight:"bold"}}>Prathmesh!</Text>
+        <Text style={{fontSize:30,fontWeight:"bold"}}>
+          {name}
+          </Text>
                 </Text>
                 <Text style={{fontSize:17,bottom:0,alignContent:"space-between",color:'#000',marginLeft:20}}>
                   How're you today?
@@ -72,17 +101,70 @@ componentDidMount(){
         </View>
         
         <View style={{width:width*0.9,alignSelf:"center",padding:10}}>
-          <Card style={{padding:0,borderRadius:20,elevation:4,borderColor:'#7ec0ee4d'}}>
-            <CardItem style={{padding:0,borderRadius:20, elevation:0,backgroundColor:'#7ec0ee66',borderColor:'#7ec0ee4d',borderWidth:1}}>
+          <Card 
+              style={{
+                padding:0,
+                borderRadius:20,
+                // borderColor:'#7ec0ee4d',
+                // shadowColor: "#000",
+                // shadowOffset: {
+                //   width: 0,
+                //   height: 1,
+                // },
+                // shadowOpacity: 0.22,
+                // shadowRadius: 2.22,
+                borderWidth:0,
+                elevation: 0,
+                }}>
+            <CardItem style={{padding:0,borderRadius:20, 
+            backgroundColor:'#87CEEB66',
+            //  backgroundColor:'#7ec0ee66',
+            //  borderColor:'#7ec0ee4d',
+              borderWidth:0}}>
               <Body>
+            {
+              NextDate?
+              <>
                 <Text style={{fontSize:20,fontWeight:"900",alignSelf:'center'}}>
-                   Your next appointment is on
+                   Your next appointment is 
+
                 </Text>
                 <Text style={{fontSize:20,fontWeight:"bold",alignSelf:'center'}}>
-                  13 October 2020
+                <TimeAgo time={NextDate} />
+                
                 </Text>
+                
+                
+              </>
+              :<Text style={{fontSize:20,fontWeight:"900",alignSelf:'center'}}>
+                  No upcoming appointments.
+              </Text>
+
+            }
+                
               </Body>
             </CardItem>
+            {NextDate&&
+            <CardItem style={{padding:0,borderRadius:20, borderWidth:0 }}>
+              <Body>
+              <View style={{backgroundColor:'#fff',alignSelf:"flex-start",
+                  //width:width*0.6,
+                  borderRadius:10,
+                  padding:10
+                  }}>
+                  <Text style={{fontSize:18,fontWeight:"bold",alignSelf:'center'}}>
+                  Date:&nbsp;
+                  {NextDate.toString().substr(8, 2)}
+                  {NextDate.toString().substr(4, 4)}
+                  {NextDate.toString().substr(0, 4)}&nbsp;
+                  {NextDate.toString().substr(11, 5)}
+                  {'\n'}
+                  Remarks:&nbsp;{remark}
+                  </Text>
+                </View>
+
+              </Body>
+            </CardItem>}
           </Card>
         </View>
         <View style={{width:width*0.9,alignSelf:"center",padding:10}}>

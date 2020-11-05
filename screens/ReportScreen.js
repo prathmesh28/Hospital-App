@@ -25,7 +25,7 @@ class ReportScreen extends Component {
    
     return (
               <View style={styles.container}>
-               <StatusBar backgroundColor={'#87CEEB'} />
+      <StatusBar backgroundColor={'#87CEEB'} />
                <MainSVG width={width} height={150}></MainSVG>
                  
               

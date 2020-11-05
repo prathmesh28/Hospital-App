@@ -1,12 +1,4 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {
   Dimensions,
   StyleSheet,
@@ -14,9 +6,10 @@ import {
   View,
   Text,
   StatusBar,
+  ActivityIndicator,
   Animated
 } from 'react-native';
-
+import Firebase from '../firebase'
 import TabBar from './TabBar';
 import HomeScreen from '../screens/HomeScreen'
 import ReportScreen from'../screens/ReportScreen'
@@ -39,14 +32,32 @@ const TabScreen = () => {
   const AnimationValue = useRef(new Animated.Value(0));
 
   function setCurrentIndex(i){
-    console.log(i)
+    // console.log(i)
     setActiveIndex(i);
   }
-  function ThisScreen() {
-   
-    
-    
+  
+
+
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const firedata = () => {
+    const { uid } = Firebase.auth().currentUser
+
+    Firebase.database().ref('/Users/'+uid)
+      .on("value", async(snapshot) => {   
+       
+      await setData(snapshot.val())
+      setLoading(false)  
+    })
+
   }
+
+
+  useEffect(()=>{
+    firedata()
+  },[])
+
 
 
   return (
@@ -56,10 +67,12 @@ const TabScreen = () => {
       <SafeAreaView edges={["left", "bottom", "right"]} style={{position: "relative", width}}>
       <View  style={{  backgroundColor: "#fff",   width, height: "100%"}} >
       
-      {(() => {
+      {loading===true?<View style={styles.containerapp}><Text>Loading</Text>
+                    <ActivityIndicator size="large"></ActivityIndicator>
+                </View>:(() => {
                 switch (activeIndex) {
                   case 0:
-                    return <HomeScreen/>
+                    return <HomeScreen data={data} />
                   case 1:
                     return <ReportScreen/>
                   case 2:
@@ -67,7 +80,7 @@ const TabScreen = () => {
                   case 3:
                     return <ProfileScreen/>
                   default:
-                    return console.log('default')
+                    return <HomeScreen/>
                   }
 
 
@@ -100,7 +113,12 @@ const styles = StyleSheet.create({
    // backgroundColor:'#fff',
     //backgroundColor: "#ff0034",
     position: "absolute",
-  }
+  },
+  containerapp: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+}
 });
 
 export default TabScreen;

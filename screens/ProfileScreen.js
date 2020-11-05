@@ -23,7 +23,7 @@ class ProfileScreen extends React.Component {
         return (
            
             <View style={styles.container}>
-                <StatusBar backgroundColor={'#87CEEB'} />
+      <StatusBar backgroundColor={'#87CEEB'} />
                     <MainSVG width={width} height={150}></MainSVG>
 
                 <View style={{alignItems:"center",width:width,marginTop:-15}}>
