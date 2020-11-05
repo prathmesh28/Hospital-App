@@ -41,7 +41,7 @@ class ProfileScreen extends React.Component {
                 
              
                 
-                <View style={{padding:3,borderColor:"#87ceeb",marginTop:height*-0.035,borderWidth:1,borderRadius:19,alignSelf:"center",width:width*0.9,height:height*0.05}}>
+                <View style={{padding:3,borderColor:"#87ceeb",marginTop:height*0.035,borderWidth:1,borderRadius:19,alignSelf:"center",width:width*0.9,height:height*0.05}}>
                 
 
                             <TouchableOpacity 
@@ -73,7 +73,7 @@ class ProfileScreen extends React.Component {
                    
                    <View style={styles.AboutUsStyle}>
                     <View style={{display:'flex',flexDirection:'row'}}>
-                   <InformationSvg/>  
+                   <InformationSvg marginTop={70}/>  
                     <Text style={{fontSize:22,fontWeight:"bold",
                        
                         color:"black"}}>{'\t'}
@@ -133,9 +133,15 @@ const styles = StyleSheet.create({
     UserdetailStyle: {
         padding:5,
         alignSelf:"center",
-        width:width*0.9,
-        height:height*0.2,
-         marginTop:height*0.07
+        width:width*0.7,
+        height:height*0.17,
+         marginTop:height*0.01,
+        //  elevation:1,
+        //   borderWidth:2,
+         borderColor:"#87ceeb",
+        //  borderRadius:6,
+         alignItems:"center",
+         borderBottomWidth:1
     },
 
     AboutUsStyle:{
@@ -144,7 +150,7 @@ const styles = StyleSheet.create({
         height:height*0.18,
         padding:15,
         borderRadius:8,
-        borderWidth:1
+        borderWidth:1,
     },
     LogoutStyles: {
         marginTop:height*0.02,
