@@ -28,7 +28,7 @@ export default class WelcomeScreen extends Component {
    
     return (
    <View style={styles.container}>
-        <StatusBar backgroundColor={'#87ceeb'} />
+      <StatusBar backgroundColor={'#87CEEB'} />
 
        <View style={{bottom:150,right:0,position:'absolute', display:'flex'}}>
        <TouchableOpacity style={{ display:'flex',alignItems:'flex-end', flexDirection: "row",}} onPress={() => this.props.navigation.navigate('Login')}>

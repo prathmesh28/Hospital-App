@@ -85,7 +85,7 @@ export default class Login extends Component {
 
       <View style={styles.container}>
 
-        <StatusBar backgroundColor={'#2e86c1'} />
+<StatusBar backgroundColor={'#87CEEB'} />
         <View
           style={{
             backgroundColor: '#2e86c1',

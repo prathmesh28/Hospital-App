@@ -13,6 +13,7 @@ import _ from 'lodash'
 import RNUrlPreview from 'react-native-url-preview';
 import MainSVG from '../TabBar/Main'
 import TimeAgo from 'react-native-timeago';
+import { withSafeAreaInsets } from "react-native-safe-area-context";
 
 const DATA = [
   {
@@ -37,20 +38,14 @@ export default class HomeScreen extends Component {
     remark:''
   }
 componentDidMount(){
-  //  console.log(this.props.data.data)
    const data = this.props.data.data
-   //this.setState({data})
-  //   _.map( data, (e) => {
-  //    // console.log(e)
-  //   this.state.data.push(e)
-  // })
+
+ 
   this.setState({Name:data.Name})
   this.setState({NextDate:data.NextDate})
   this.setState({remark:data.remark})
-
-
-
 }
+
   renderItem = ({item}) => {
     return( 
       <Card style={{padding:10,width:width*0.9}}>
@@ -66,7 +61,7 @@ componentDidMount(){
 }
   render() {
     const data = this.state.data
-    console.log(this.state.data)
+   // console.log(this.state.data)
     const name = this.state.Name
     const NextDate = this.state.NextDate
     const remark = this.state.remark
@@ -76,6 +71,7 @@ componentDidMount(){
       <StatusBar backgroundColor={'#87CEEB'} />
       
       <View>
+       
         
         <View style={{position:'absolute'}}>
           <View style={{backgroundColor:'#87CEEB',height:height*0.14}} ></View>
@@ -148,19 +144,51 @@ componentDidMount(){
             <CardItem style={{padding:0,borderRadius:20, borderWidth:0 }}>
               <Body>
               <View style={{backgroundColor:'#fff',alignSelf:"flex-start",
-                  //width:width*0.6,
+                  width:width*0.6,
                   borderRadius:10,
-                  padding:10
+                  padding:10,
+                 
                   }}>
-                  <Text style={{fontSize:18,fontWeight:"bold",alignSelf:'center'}}>
-                  Date:&nbsp;
+                  
+                      <View style={{flexDirection:"row"}}>
+                      <Text style={{fontSize:18,fontWeight:"bold",width:width*0.25}}>
+                        Date:
+                      </Text>
+                     
+                      <Text style={{fontSize:18,fontWeight:"bold",width:width*0.5}}>
+                       &nbsp;
+                          {NextDate.toString().substr(8, 2)}
+                          {NextDate.toString().substr(4, 4)}
+                          {NextDate.toString().substr(0, 4)}&nbsp;
+                          {NextDate.toString().substr(11, 5)}
+                          {'\n'}
+                          </Text>
+                      </View>
+                      <View style={{flexDirection:"row"}}>
+                      <Text style={{fontSize:18,fontWeight:"bold",width:width*0.25}}>
+                      Remarks:
+                      </Text>
+                     
+                      <Text style={{fontSize:18,fontWeight:"bold",width:width*0.4}}>
+                          &nbsp;{remark}
+                          </Text>
+                      </View>
+                   
+                  
+                 {/* <Text style={{alignSelf:"fl"}}>
+                  &nbsp;
                   {NextDate.toString().substr(8, 2)}
                   {NextDate.toString().substr(4, 4)}
                   {NextDate.toString().substr(0, 4)}&nbsp;
                   {NextDate.toString().substr(11, 5)}
                   {'\n'}
-                  Remarks:&nbsp;{remark}
                   </Text>
+                 
+
+                  <Text>
+                    Remarks:&nbsp;{remark}
+
+                  </Text> */}
                 </View>
 
               </Body>
@@ -206,7 +234,7 @@ componentDidMount(){
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'#fff'
+    backgroundColor:'#87CEEB40'
   },
  
  

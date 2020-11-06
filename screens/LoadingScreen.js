@@ -1,6 +1,8 @@
 import React from "react";
-import { View, Text, ActivityIndicator,StatusBar, StyleSheet } from "react-native";
+import { View, Text, ActivityIndicator,StatusBar,Dimensions, StyleSheet } from "react-native";
 import Firebase from '../firebase';
+const {width, height} = Dimensions.get("window");
+
 export default class LoadingScreen extends React.Component {
 
     componentDidMount() {
@@ -24,8 +26,12 @@ export default class LoadingScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-
-                <Text>Loading</Text>
+      <StatusBar backgroundColor={'#87CEEB'} />
+                
+                    <Text>Loading App...{'\n'}
+                        </Text>
+                        <Text style={{textAlign:"center"}}>
+                      If app is not loading please check your internet connection or restart the app.</Text>
                 <ActivityIndicator size="large"></ActivityIndicator>
             </View>
         );
@@ -35,7 +41,9 @@ export default class LoadingScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        width:width*0.8,
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        alignSelf:"center"
     }
 });

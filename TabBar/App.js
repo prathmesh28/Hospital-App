@@ -48,6 +48,7 @@ const TabScreen = () => {
       .on("value", async(snapshot) => {   
        
       await setData(snapshot.val())
+    //  console.log()
       setLoading(false)  
     })
 
@@ -62,25 +63,33 @@ const TabScreen = () => {
 
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-      <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
+      <StatusBar backgroundColor={'#87CEEB'} />
      
       <SafeAreaView edges={["left", "bottom", "right"]} style={{position: "relative", width}}>
-      <View  style={{  backgroundColor: "#fff",   width, height: "100%"}} >
+      <View  style={{  
+      //  backgroundColor: "#fff",   
+        width, height: "100%"}} >
       
-      {loading===true?<View style={styles.containerapp}><Text>Loading</Text>
-                    <ActivityIndicator size="large"></ActivityIndicator>
+      {loading===true?<View style={styles.containerapp}>
+                        <Text>Loading App...{'\n'}
+                        </Text>
+                        <Text style={{textAlign:"center"}}>
+                      If app is not loading please check your internet connection or restart the app.</Text>
+                    <ActivityIndicator size="large">
+                      
+                    </ActivityIndicator>
                 </View>:(() => {
                 switch (activeIndex) {
                   case 0:
                     return <HomeScreen data={data} />
                   case 1:
-                    return <ReportScreen/>
+                    return <ReportScreen data={data} />
                   case 2:
-                    return <DoctorScreen/>
+                    return <DoctorScreen  />
                   case 3:
-                    return <ProfileScreen/>
+                    return <ProfileScreen data={data} />
                   default:
-                    return <HomeScreen/>
+                    return <HomeScreen data={data} />
                   }
 
 
@@ -110,14 +119,16 @@ const styles = StyleSheet.create({
     marginBottom:0,
     bottom:0,
     backgroundColor:"#87CEEB",
-   // backgroundColor:'#fff',
+  //  backgroundColor:'#000',
     //backgroundColor: "#ff0034",
     position: "absolute",
   },
   containerapp: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    alignSelf:"center",
+    width:width*0.8
 }
 });
 
