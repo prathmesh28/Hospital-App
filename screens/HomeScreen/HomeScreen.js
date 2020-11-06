@@ -6,14 +6,12 @@ import {
   FlatList,
   View,
 } from "react-native"  
-import { Card, CardItem, Body, Text, DatePicker } from 'native-base';
+import { Card, CardItem, Body, Text } from 'native-base';
 const { height, width } = Dimensions.get('screen')  
-// import Firebase from '../firebase'
 import _ from 'lodash'
 import RNUrlPreview from 'react-native-url-preview';
-import MainSVG from '../TabBar/Main'
+import MainSVG from '../../TabBar/Main'
 import TimeAgo from 'react-native-timeago';
-import { withSafeAreaInsets } from "react-native-safe-area-context";
 
 const DATA = [
   {

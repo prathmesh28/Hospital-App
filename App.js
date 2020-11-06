@@ -3,14 +3,14 @@ import { createAppContainer, createSwitchNavigator } from "react-navigation"
 import { createStackNavigator } from "react-navigation-stack"
 
 import LoadingScreen from "./screens/LoadingScreen"
-import LoginScreen from "./screens/LoginScreen"
-import WelcomeScreen from './screens/WelcomeScreen'
+import LoginScreen from "./screens/LoginScreen/LoginScreen"
+import WelcomeScreen from './screens/WelcomeScreen/WelcomeScreen'
 import { AppLoading } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import * as Font from 'expo-font';
 import TabScreen from "./TabBar/App"
-import Report from "./screens/Reports"
-import Notification from "./screens/Notification"
+import Report from "./screens/ReportScreen/screens/Reports"
+import Notification from "./screens/ProfileScreen/screens/Notification"
 //import Appointment from "./screens/Appointment"
 const AuthStack = createStackNavigator({
     Intro:WelcomeScreen,

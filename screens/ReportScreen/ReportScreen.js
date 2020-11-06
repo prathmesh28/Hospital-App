@@ -16,8 +16,7 @@ import {
 } from "react-native"  
 import { withNavigation } from 'react-navigation';
 const { height, width } = Dimensions.get('screen')  
-import Firebase from '../firebase'
-import MainSVG from '../TabBar/Main'
+import MainSVG from '../../TabBar/Main'
 
 class ReportScreen extends Component {
 

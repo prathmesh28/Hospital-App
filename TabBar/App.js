@@ -11,10 +11,10 @@ import {
 } from 'react-native';
 import Firebase from '../firebase'
 import TabBar from './TabBar';
-import HomeScreen from '../screens/HomeScreen'
-import ReportScreen from'../screens/ReportScreen'
-import DoctorScreen from '../screens/DoctorScreen'
-import ProfileScreen from '../screens/ProfileScreen'
+import HomeScreen from '../screens/HomeScreen/HomeScreen'
+import ReportScreen from'../screens/ReportScreen/ReportScreen'
+import DoctorScreen from '../screens/DoctorScreen/DoctorScreen'
+import ProfileScreen from '../screens/ProfileScreen/ProfileScreen'
 const {width, height} = Dimensions.get("window");
 
 import {SafeAreaView, SafeAreaProvider, initialWindowMetrics} from "react-native-safe-area-context";
@@ -87,11 +87,10 @@ const TabScreen = () => {
                   case 2:
                     return <DoctorScreen  />
                   case 3:
-                    return <ProfileScreen data={data} />
+                    return <ProfileScreen data={data}/>
                   default:
                     return <HomeScreen data={data} />
                   }
-
 
 
 

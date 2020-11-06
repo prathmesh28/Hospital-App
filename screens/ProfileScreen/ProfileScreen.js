@@ -1,26 +1,54 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, StatusBar,Dimensions, ImageBackground,Image } from "react-native";
-import Firebase from '../firebase';
+import Firebase from '../../firebase';
 import { Container, Header, Content, Card, CardItem, Body, Left,Button, Row} from 'native-base';
 const { height, width } = Dimensions.get('screen')  
-import Constants from 'expo-constants'
 import { withNavigation } from "react-navigation";
-import MainSVG from '../TabBar/Main'
-import NotificationSvg from "../assets/NotificationSvg"
-import RightArrowSvg from "../assets/RigthArrowSvg"
-import ProfileUserSvg from "../assets/ProfileUserSvg"
-import InformationSvg from "../assets/InformationSvg";
-import ProfileSvg from "../assets/LogoutSvg"
-import LogoutSvg from "../assets/LogoutSvg";
-import { style } from "d3";
+import MainSVG from '../../TabBar/Main'
+import NotificationSvg from "../../assets/NotificationSvg"
+import RightArrowSvg from "../../assets/RigthArrowSvg"
+import ProfileUserSvg from "../../assets/ProfileUserSvg"
+import InformationSvg from "../../assets/InformationSvg";
+import ProfileSvg from "../../assets/LogoutSvg"
+import LogoutSvg from "../../assets/LogoutSvg";
+import ProfileNameSvg from "../../assets/ProfilenameSvg";
+
 
 class ProfileScreen extends React.Component {
 
+    state={
+        data:[],
+        Name:'',
+        PhoneNo:'',
+        Email:''
+      }
+      componentDidMount(){
+  //  console.log(this.props.data.data)
+   const data = this.props.data.data
+   //this.setState({data})
+  //   _.map( data, (e) => {
+  //    // console.log(e)
+  //   this.state.data.push(e)
+  // })
+  this.setState({Name:data.Name})
+  this.setState({Email:data.Email})
+  this.setState({PhoneNo:data.Phone})
+
+
+      }
+    
     signOutUser = () => {
         Firebase.auth().signOut();
     };
     render() {
+        const data = this.state.data
+   // console.log(this.state.data.data)
+    const name = this.state.Name
+    const Email = this.state.Email
+    const PhoneNo = this.state.PhoneNo
+
         return (
+            
            
             <View style={styles.container}>
       <StatusBar backgroundColor={'#87CEEB'} />
@@ -34,9 +62,12 @@ class ProfileScreen extends React.Component {
         
                
                 <View style={styles.UserdetailStyle}>
-                    <Text style={{marginHorizontal:10,fontWeight:"bold",color:"black",fontSize:24}}>Jay Sawant </Text>
-                    <Text  style={{marginHorizontal:10,marginTop:15,fontSize:16,color:"black"}}>+91 9897909786{'\n'}{'\n'}
-                    jaysawant@gmail.com </Text>
+                    <View style={{flex:1,flexDirection:"row"}}>
+                    <ProfileNameSvg />
+                    <Text style={{marginHorizontal:10,fontWeight:"bold",color:"black",fontSize:24,marginTop:-6}}>{name} </Text>
+                    </View>
+        <Text  style={{marginHorizontal:10,marginTop:15,fontSize:16,color:"black"}}>46878{'\n'}{'\n'}
+                    {Email}</Text>
                 </View>
                 
              
@@ -133,14 +164,13 @@ const styles = StyleSheet.create({
     UserdetailStyle: {
         padding:5,
         alignSelf:"center",
-        width:width*0.7,
+        width:width*0.9,
         height:height*0.17,
          marginTop:height*0.01,
         //  elevation:1,
         //   borderWidth:2,
          borderColor:"#87ceeb",
         //  borderRadius:6,
-         alignItems:"center",
          borderBottomWidth:1
     },
 
