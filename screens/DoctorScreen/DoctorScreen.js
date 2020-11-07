@@ -136,34 +136,34 @@ componentDidMount(){
   }
 
 
+
   render() {
     const data=this.state.data
     return (
       <View style={styles.container}>
-      <StatusBar backgroundColor={'#87CEEB'} />
-
-<View style={{height:height*0.14}}>
+        <StatusBar backgroundColor={'#87CEEB'} />
+        <View style={{height:height*0.14,
+            display:"flex",
+            }}>
           <View style={{backgroundColor:'#87CEEB',height:40}}>
             <MainSVG width={width} height={150}></MainSVG>
-
-            
           </View>
-
-        <View>
+          
+          <View>
             <Text style={{fontSize:25,marginLeft:20,color:'#171717',fontWeight:'400'}}>
-
-            Doctors
+              Doctors
             </Text>
-        </View>
+          </View>
         </View>
 
-      <View style={{height:height*0.75,marginBottom:60}}>
-        <FlatList
-       
-          data={data}
-          renderItem={this.renderItem}
-          keyExtractor={item => item.id}
-        /></View>
+        <View style={{flex: 1, paddingBottom:60 }}>
+          <FlatList
+           
+            data={data}
+            renderItem={this.renderItem}
+            keyExtractor={item => item.id}
+          />
+        </View>
       </View>
     )
   }
@@ -174,14 +174,15 @@ export default withNavigation(DoctorScreen);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    //flexDirection:"row",
     backgroundColor:'#87CEEB33'
 
 
   },
-  doctors: {
-   
-    height:height*0.6
-  }
+  // doctors: {
+  //   bottom:60,
+  // //  height:height*0.8
+  // }
 
 
 })  

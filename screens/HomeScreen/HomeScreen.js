@@ -5,6 +5,7 @@ import {
   StyleSheet,
   FlatList,
   View,
+  Image
 } from "react-native"  
 import { Card, CardItem, Body, Text } from 'native-base';
 const { height, width } = Dimensions.get('screen')  
@@ -72,7 +73,7 @@ componentDidMount(){
        
         
         <View style={{position:'absolute'}}>
-          <View style={{backgroundColor:'#87CEEB',height:height*0.10}} ></View>
+          <View style={{backgroundColor:'#87CEEB',height:height*0.14}} ></View>
           <View style={{backgroundColor:'#87CEEB',height:20}}>
             <MainSVG width={width} height={height*0.15}></MainSVG>
           </View>
@@ -80,21 +81,32 @@ componentDidMount(){
 
         <View style={{
           width:width,
-          height:height*0.20,
-          justifyContent:"center",
+          height:height*0.23,
+        //  
+        display:'flex',
+        justifyContent:"space-between",
+       flexDirection:"row",
+          alignItems:"center"
           }}>
-          <Text style={{fontSize:20,marginLeft:20,color:'#171717'}}>
-                  Hello, {'\n'}
-        <Text style={{fontSize:30,fontWeight:"bold",color:'#171717'}}>
-          {name}
-          </Text>
+            <View style={{
+               left:20
+                }}>
+              <Text style={{fontSize:20,color:'#171717'}}>
+                      Hello, {'\n'}
+                <Text style={{fontSize:30,fontWeight:"bold",color:'#171717'}}>
+                  {name}
                 </Text>
-                <Text style={{fontSize:17,bottom:0,alignContent:"space-between",color:'#000',marginLeft:20,color:'#171717'}}>
-                  How're you today?
-                </Text>
+              </Text>
+              <Text style={{fontSize:17,bottom:0,alignContent:"space-between",color:'#000',color:'#171717'}}>
+                How're you today?
+              </Text>
+              </View>
+              <Image source={require('../../assets/hiclipart.com.png')} style={{height:70,width:70,right:20}} />
+              
+
         </View>
-        
-        <View style={{width:width*0.9,alignSelf:"center",padding:10,top:10}}>
+
+        <View style={{width:width*0.9,alignSelf:"center",padding:10,top:20}}>
           <Card 
               style={{
                 padding:0,
@@ -208,7 +220,8 @@ componentDidMount(){
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'#87CEEB33'
+    backgroundColor:'#d3edf8'
+    
   },
  
  

@@ -1,6 +1,4 @@
 import React, { Component } from "react"  
-import Constants from 'expo-constants'
-
 import {
     Text,
   SafeAreaView,
@@ -12,48 +10,63 @@ import {
   StyleSheet,
   Button,
   View,
+  Image,
   ImageBackground
 } from "react-native"  
 import { withNavigation } from 'react-navigation';
-const { height, width } = Dimensions.get('screen')  
 import MainSVG from '../../TabBar/Main'
+import Paediatric from './component/Paediatric'
+import Pregnancy from './component/Pregnancy'
+import Other from './component/Other'
+
+const { height, width } = Dimensions.get('screen')  
 
 class ReportScreen extends Component {
 
+  state={
+    data:null,
+    Disease:""
+  }
+  componentDidMount(){
+    // console.log(this.props.data.data.Disease)
+    this.setState({data:this.props.data.data})
+    this.setState({Disease:this.props.data.data.Disease})
+  }
   render() {
+
+
+    //for patient type categeries
+    let renderData
+    if (this.state.Disease === 'Paediatric'){
+      renderData= <Paediatric />
+    }
+    else if (this.state.Disease === 'Pregnancy'){
+      renderData= <Pregnancy />
+    }
+    else{
+      renderData= <Other data={this.state.data} />
+    }
    
     return (
-              <View style={styles.container}>
-      <StatusBar backgroundColor={'#87CEEB'} />
-               <MainSVG width={width} height={150}></MainSVG>
-                 
-              
+      <View style={styles.container}>
+        <StatusBar backgroundColor={'#87CEEB'} />
 
-               <Text style={{fontSize:20,fontWeight:"bold"}}>User Report</Text>
-                  <View style={{borderColor:"black",elevation:3,
-                    width:width*0.9,height:height*.30
-                    }}>
-                  </View>
+        <View style={{ backgroundColor: '#87CEEB', height: 50 }}>
+            <MainSVG width={width} height={170}></MainSVG>
+        </View>
         
-                <View style={{padding:10,width:width*0.9,marginTop:80}}>
-
-                {/* <Button style={{backgroundColor:"#87CEEB"}} 
-                title ="View Reports" 
-                onPress={() =>this.props.navigation.navigate('Report')
-                }
-              //  console.log('dfghjlnb')
-                
-                >
+        <Text style={{fontSize:20,fontWeight:"bold",left:20}}>User Report</Text>
 
 
-                </Button> */}
-                <TouchableOpacity style={styles.ViewReportStyles} 
-                      onPress={() =>this.props.navigation.navigate('Report')}
+        <View style={{top:100}}>
+            {renderData}
+        </View>  
 
-                      >
-                     <Text style={{fontWeight:"bold",textAlign:"center",marginTop:6}}>View Reports</Text> 
-                </TouchableOpacity>
-                </View>  
+      {/* <TouchableOpacity style={styles.ViewReportStyles} 
+                  onPress={() =>this.props.navigation.navigate('Report')}
+                  >
+                  <Text style={{fontWeight:"bold",textAlign:"center",marginTop:6}}>View Reports</Text> 
+                </TouchableOpacity> */}
    </View>
     )  
   }
@@ -63,9 +76,7 @@ class ReportScreen extends Component {
 export default withNavigation(ReportScreen);
 const styles = StyleSheet.create({
   container: {
-    backgroundColor:"#fff",
-     alignItems:"center",
-    // height:height,
+    backgroundColor:"#d3edf8",
     flex: 1,
   
   },

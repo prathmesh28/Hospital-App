@@ -62,7 +62,7 @@ const TabBar = ({tabs=[], activeIndex=0, onPressTab, AnimationValue}) => {
                     <TouchableOpacity style={{width: TabWidth, height: TabHeight}} key={i} onPress={() => {onPressTab(i); Animated.timing(AnimationValue.current, {duration: 500 * Math.max(1, Math.abs(activeIndex-i)/2), toValue: TabWidth * i, easing: Easing.out(Easing.exp), useNativeDriver: true}).start(); return true}}>
                         <Animated.View style={[styles.tabBar, {width: TabWidth, height: TabHeight, opacity}]}>
                         {
-                icon!=='medicinebox'?<FontAwesome5 name={icon} color="grey" size={24} />:<AntDesign name={icon} color="grey" size={24} />
+                icon!=='medicinebox'?<FontAwesome5 name={icon} color='#d3edf8' size={24} />:<AntDesign name={icon} color="#d3edf8" size={24} />
             }
                         </Animated.View>
                     </TouchableOpacity>
