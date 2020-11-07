@@ -19,8 +19,8 @@ import {
 const { height, width } = Dimensions.get('screen')
 import Firebase from '../../firebase'
 import { Container, Header, Content, Input, Item, Icon } from 'native-base';
-import { LoginSvgOne } from '../../assets/SubtlePrismSvg'
-import { LoginSvgTwo } from '../../assets/SubtlePrismSvg'
+import { LoginSvgOne } from './assets/SubtlePrismSvg'
+import { LoginSvgTwo } from './assets/SubtlePrismSvg'
 
 export default class Login extends Component {
   state = {
@@ -105,7 +105,6 @@ export default class Login extends Component {
           </View>
 
         )}
-
 
 
         <View>
