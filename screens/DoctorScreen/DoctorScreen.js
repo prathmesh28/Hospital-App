@@ -14,7 +14,7 @@ import {
 } from "react-native"
 import { Container, Header, Content, Card, CardItem, Body, Text, Left, Button } from 'native-base';
 import MainSVG from '../../TabBar/Main'
-
+import _ from 'lodash';
 const { height, width } = Dimensions.get('screen')
 import { withNavigation } from "react-navigation";
 import GraduationSvg from "./assets/GraduationSvg"
@@ -54,7 +54,18 @@ const DATA = [
 
 ];
 class DoctorScreen extends Component {
+  state={
+    data:null
+  }
+componentDidMount(){
+  // this.setState({ data:this.props.data })
 
+  const doctors = _.map( this.props.data, (e) => {
+    return e.data 
+  })
+  console.log(doctors)
+  this.setState({ data:doctors })
+}
 
   renderItem = ({ item }) => {
 
@@ -65,13 +76,13 @@ class DoctorScreen extends Component {
         padding: 5, width: width * .85, alignSelf: "center", borderRadius: 10
       }}>
         <Body>
+         
           <CardItem>
             <View style={{
               display: 'flex', flexDirection: 'row'
             }}>
               <View style={{
                 width: width * 0.2,
-                //display:'flex',flexDirection:'column'
               }}
               >
                 {item.gender === "male" ? <DoctordpSvg width={70} height={70} /> : <DoctorFemaleSvg width={70} height={70} />}
@@ -85,7 +96,7 @@ class DoctorScreen extends Component {
 
                 <Text style={{ fontWeight: "bold", fontSize: 18 }}>
 
-                  {item.title}{'\n'}
+                  {item.name}{'\n'}
                 </Text>
 
                 <View style={{ display: 'flex', flexDirection: 'row' }}>
@@ -98,46 +109,19 @@ class DoctorScreen extends Component {
                 <View style={{ display: 'flex', flexDirection: 'row' }}>
                   <SpecialistSvg />
                   <Text style={{ fontSize: 13, color: "grey" }} >
-                    {'\t'} {item.spicialist}{'\n'}
+                    {'\t'} {item.specialization}{'\n'}
                   </Text>
                 </View>
 
                 <View style={{ display: 'flex', flexDirection: 'row' }}>
                   <SuitcaseSvg />
                   <Text style={{ fontSize: 13, color: "grey" }}>
-                    {'\t'} {item.place}{'\n'}
+                    {'\t'} {item.registered}{'\n'}
                   </Text>
                 </View>
 
               </View>
             </View>
-
-
-
-            {/* <TouchableOpacity style={{
-                          width:width*0.5,
-                          borderWidth:1,
-                          borderColor:"#87ceeb",
-                          height:35,
-                        //  marginHorizontal:-82,
-                          borderRadius:10,
-                         // marginBottom:-25,
-                          backgroundColor:"#6DD5FA"
-                        }} 
-                            onPress={()=>this.props.navigation.navigate("Appointment")}>
-
-                            <Text style={{fontWeight:"bold",textAlign:"center",color:"black",
-                            marginTop:5
-                            }}>Appointment</Text> 
-
-                         </TouchableOpacity> */}
-
-
-
-
-
-
-
 
 
           </CardItem>
@@ -153,26 +137,33 @@ class DoctorScreen extends Component {
 
 
   render() {
-
+    const data=this.state.data
     return (
       <View style={styles.container}>
       <StatusBar backgroundColor={'#87CEEB'} />
 
-        <MainSVG width={width} height={150}></MainSVG>
+<View style={{height:height*0.14}}>
+          <View style={{backgroundColor:'#87CEEB',height:40}}>
+            <MainSVG width={width} height={150}></MainSVG>
 
-        <View style={styles.TopStyles}>
-          <Text style={{ fontWeight: "bold", fontSize: 18 }}>
+            
+          </View>
+
+        <View>
+            <Text style={{fontSize:25,marginLeft:20,color:'#171717',fontWeight:'400'}}>
 
             Doctors
-          </Text>
+            </Text>
+        </View>
         </View>
 
-
+      <View style={{height:height*0.75,marginBottom:60}}>
         <FlatList
-          data={DATA}
+       
+          data={data}
           renderItem={this.renderItem}
           keyExtractor={item => item.id}
-        />
+        /></View>
       </View>
     )
   }
@@ -183,15 +174,13 @@ export default withNavigation(DoctorScreen);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor:'#87CEEB33'
 
 
   },
-  TopStyles: {
-    alignItems: "center", width: width * 0.5, elevation: 7,
-    backgroundColor: "#87CEEB", textAlign: "center", alignSelf: "center",
-    borderRadius: 10, justifyContent: "center", alignContent: "center", alignItems: "center",
-    height: 30, margin: 5
+  doctors: {
+   
+    height:height*0.6
   }
 
 

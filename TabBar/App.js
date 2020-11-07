@@ -39,18 +39,21 @@ const TabScreen = () => {
 
 
   const [data, setData] = useState(null);
+  const [doc, setDoc] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const firedata = () => {
     const { uid } = Firebase.auth().currentUser
 
-    Firebase.database().ref('/Users/'+uid)
+    Firebase.database().ref('/')
       .on("value", async(snapshot) => {   
-       
-      await setData(snapshot.val())
-    //  console.log()
+
+      await setData(snapshot.val().Users[uid])
+      await setDoc(snapshot.val().Doctors)
+
       setLoading(false)  
     })
+  
 
   }
 
@@ -85,7 +88,7 @@ const TabScreen = () => {
                   case 1:
                     return <ReportScreen data={data} />
                   case 2:
-                    return <DoctorScreen  />
+                    return <DoctorScreen data={doc} />
                   case 3:
                     return <ProfileScreen data={data}/>
                   default:
@@ -114,12 +117,9 @@ const TabScreen = () => {
 const styles = StyleSheet.create({
   container: {
     width,
-  //  height: "20%",
     marginBottom:0,
     bottom:0,
     backgroundColor:"#87CEEB",
-  //  backgroundColor:'#000',
-    //backgroundColor: "#ff0034",
     position: "absolute",
   },
   containerapp: {

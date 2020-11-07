@@ -72,7 +72,7 @@ componentDidMount(){
        
         
         <View style={{position:'absolute'}}>
-          <View style={{backgroundColor:'#87CEEB',height:height*0.14}} ></View>
+          <View style={{backgroundColor:'#87CEEB',height:height*0.10}} ></View>
           <View style={{backgroundColor:'#87CEEB',height:20}}>
             <MainSVG width={width} height={height*0.15}></MainSVG>
           </View>
@@ -80,41 +80,31 @@ componentDidMount(){
 
         <View style={{
           width:width,
-          height:height*0.25,
-          justifyContent:"center"
+          height:height*0.20,
+          justifyContent:"center",
           }}>
-          <Text style={{fontSize:20,marginLeft:20}}>
+          <Text style={{fontSize:20,marginLeft:20,color:'#171717'}}>
                   Hello, {'\n'}
-        <Text style={{fontSize:30,fontWeight:"bold"}}>
+        <Text style={{fontSize:30,fontWeight:"bold",color:'#171717'}}>
           {name}
           </Text>
                 </Text>
-                <Text style={{fontSize:17,bottom:0,alignContent:"space-between",color:'#000',marginLeft:20}}>
+                <Text style={{fontSize:17,bottom:0,alignContent:"space-between",color:'#000',marginLeft:20,color:'#171717'}}>
                   How're you today?
                 </Text>
         </View>
         
-        <View style={{width:width*0.9,alignSelf:"center",padding:10}}>
+        <View style={{width:width*0.9,alignSelf:"center",padding:10,top:10}}>
           <Card 
               style={{
                 padding:0,
                 borderRadius:20,
-                // borderColor:'#7ec0ee4d',
-                // shadowColor: "#000",
-                // shadowOffset: {
-                //   width: 0,
-                //   height: 1,
-                // },
-                // shadowOpacity: 0.22,
-                // shadowRadius: 2.22,
-                borderWidth:0,
-                elevation: 0,
+
                 }}>
             <CardItem style={{padding:0,borderRadius:20, 
-            backgroundColor:'#87CEEB66',
-            //  backgroundColor:'#7ec0ee66',
-            //  borderColor:'#7ec0ee4d',
-              borderWidth:0}}>
+            backgroundColor:'#87CEEB66', borderBottomWidth:1,borderRadius:20,
+            borderColor:'#7ec0ee66',
+             }}>
               <Body>
             {
               NextDate?
@@ -139,7 +129,7 @@ componentDidMount(){
               </Body>
             </CardItem>
             {NextDate&&
-            <CardItem style={{padding:0,borderRadius:20, borderWidth:0 }}>
+            <CardItem style={{padding:0,borderRadius:20,borderWidth:0 }}>
               <Body>
               <View style={{backgroundColor:'#fff',alignSelf:"flex-start",
                   width:width*0.6,
@@ -172,21 +162,7 @@ componentDidMount(){
                           </Text>
                       </View>
                    
-                  
-                 {/* <Text style={{alignSelf:"fl"}}>
-                  &nbsp;
-                  {NextDate.toString().substr(8, 2)}
-                  {NextDate.toString().substr(4, 4)}
-                  {NextDate.toString().substr(0, 4)}&nbsp;
-                  {NextDate.toString().substr(11, 5)}
-                  {'\n'}
-                  </Text>
-                 
-
-                  <Text>
-                    Remarks:&nbsp;{remark}
-
-                  </Text> */}
+               
                 </View>
 
               </Body>
@@ -194,7 +170,7 @@ componentDidMount(){
           </Card>
         </View>
         <View style={{width:width*0.9,alignSelf:"center",padding:10}}>
-        <Card style={{padding:0,borderRadius:20,elevation:4,borderColor:'#7ec0ee4d'}}>
+        <Card style={{padding:0,borderRadius:20,elevation:4}}>
             <CardItem 
               style={{padding:0,borderRadius:20, elevation:0,alignContent:"center",
               backgroundColor:'white',borderColor:'#7ec0ee4d',borderWidth:1}}>
@@ -216,13 +192,13 @@ componentDidMount(){
             </CardItem>
           </Card>
         </View>
-        <View style={{alignItems:"center"}}>
+        {/* <View style={{alignItems:"center"}}>
         <FlatList
         data={DATA}
         renderItem={this.renderItem}
         keyExtractor={item => item.id}
       />
-        </View>
+        </View> */}
       </View>
    </View>
     )  
@@ -232,7 +208,7 @@ componentDidMount(){
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'#87CEEB40'
+    backgroundColor:'#87CEEB33'
   },
  
  
