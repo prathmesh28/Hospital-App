@@ -44,7 +44,7 @@ class ReportScreen extends Component {
       renderData= <Pregnancy />
     }
     else{
-      renderData= <Other data={this.state.data} />
+      renderData= <Other data={ this.props.data} />
     }
    
     return (
@@ -52,11 +52,12 @@ class ReportScreen extends Component {
         <StatusBar backgroundColor={'#87CEEB'} />
 
         <View style={{ backgroundColor: '#87CEEB', height: 50 }}>
-            <MainSVG width={width} height={170}></MainSVG>
-        </View>
-        
-        <Text style={{fontSize:20,fontWeight:"bold",left:20}}>User Report</Text>
-
+            
+            <MainSVG width={width} height={150}></MainSVG>
+          </View>
+        <Text style={{fontSize:25,position:"absolute",marginLeft:20,top:20,color:'#171717',fontWeight:'400'}}>
+              User Report
+        </Text>
 
         <View style={{top:100}}>
             {renderData}

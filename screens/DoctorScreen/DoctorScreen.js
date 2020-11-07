@@ -136,34 +136,33 @@ componentDidMount(){
   }
 
 
+  renderHeader = () => {
+    return <View style={{height:100}}>
+
+    </View>
+  };
 
   render() {
     const data=this.state.data
     return (
       <View style={styles.container}>
         <StatusBar backgroundColor={'#87CEEB'} />
-        <View style={{height:height*0.14,
-            display:"flex",
-            }}>
-          <View style={{backgroundColor:'#87CEEB',height:40}}>
-            <MainSVG width={width} height={150}></MainSVG>
-          </View>
-          
-          <View>
-            <Text style={{fontSize:25,marginLeft:20,color:'#171717',fontWeight:'400'}}>
-              Doctors
-            </Text>
-          </View>
-        </View>
 
-        <View style={{flex: 1, paddingBottom:60 }}>
-          <FlatList
-           
-            data={data}
-            renderItem={this.renderItem}
-            keyExtractor={item => item.id}
-          />
-        </View>
+            <SafeAreaView style={{flex: 1,paddingBottom:60,marginTop:30}}>
+              <FlatList
+              
+                data={data}
+                renderItem={this.renderItem}
+                keyExtractor={item => item.id}
+                ListHeaderComponent={this.renderHeader}
+              />
+            </SafeAreaView>
+            <View style={{ backgroundColor: '#87CEEB', height: 50,position:"absolute" }}>
+              <MainSVG width={width} height={150}></MainSVG>
+              <Text style={{fontSize:25,position:"absolute",marginLeft:20,top:20,color:'#171717',fontWeight:'400'}}>
+                  Doctors
+              </Text>
+            </View>
       </View>
     )
   }
@@ -175,7 +174,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     //flexDirection:"row",
-    backgroundColor:'#87CEEB33'
+    backgroundColor:'#d3edf8'
 
 
   },

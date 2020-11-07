@@ -58,11 +58,26 @@ const TabScreen = () => {
   }
 
 
+  // useEffect(()=>{
+  //   firedata()
+  // },[])
+
+
   useEffect(()=>{
-    firedata()
+    let isMounted = true;
+    const { uid } = Firebase.auth().currentUser
+
+    Firebase.database().ref('/')
+      .on("value", async(snapshot) => {   
+
+        if (isMounted) {
+          await setData(snapshot.val().Users[uid])
+          await setDoc(snapshot.val().Doctors)
+          setLoading(false) 
+        }
+    })
+    return () => { isMounted = false }
   },[])
-
-
 
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
