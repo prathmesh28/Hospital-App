@@ -11,9 +11,9 @@ import ProfileUserSvg from "./assets/ProfileUserSvg"
 import InformationSvg from "./assets/InformationSvg";
 import ProfileSvg from "./assets/LogoutSvg"
 import LogoutSvg from "./assets/LogoutSvg";
-import ProfileNameSvg from "./assets/ProfilenameSvg";
-import PhoneNumberSvg from "./assets/PhoneNumberSvg"
-import EmailSvg from "./assets/EmailSvg";
+// import ProfileNameSvg from "./assets/ProfilenameSvg";
+// import PhoneNumberSvg from "./assets/PhoneNumberSvg"
+// import EmailSvg from "./assets/EmailSvg";
 
 
 class ProfileScreen extends React.Component {
@@ -68,19 +68,19 @@ class ProfileScreen extends React.Component {
                 <View style={{ top: 70 }}>
                     <View style={styles.UserdetailStyle}>
                         <View style={{ flex: 1, flexDirection: "row" }}>
-                            <ProfileNameSvg />
+                            {/* <ProfileNameSvg /> */}
                             <Text style={{ marginHorizontal: 12, fontWeight: "bold", color: "black", fontSize: 24, margin: -6 }}>{name} </Text>
                         </View>
 
                         <View style={{ flex: 1, flexDirection: "row", marginTop: -70 }}>
-                            <PhoneNumberSvg />
+                            {/* <PhoneNumberSvg /> */}
                             <Text style={{ marginHorizontal: 10, fontSize: 16, color: "black", marginTop: 5, fontWeight: "bold" }}>{PhoneNo}
                                 {/* {'\n'}{'\n'}
                             {Email} */}
                             </Text>
                         </View>
                         <View style={{ flex: 1, flexDirection: "row", marginTop: -65 }}>
-                            <EmailSvg />
+                            {/* <EmailSvg /> */}
                             <Text style={{ marginHorizontal: 10, marginTop: 15, fontSize: 16, color: "black", marginTop: 2, fontWeight: "bold" }}>{Email}
 
                             </Text>

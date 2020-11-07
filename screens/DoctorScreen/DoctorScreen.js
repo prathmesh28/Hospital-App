@@ -63,7 +63,7 @@ componentDidMount(){
   const doctors = _.map( this.props.data, (e) => {
     return e.data 
   })
-  console.log(doctors)
+  // console.log(doctors)
   this.setState({ data:doctors })
 }
 
