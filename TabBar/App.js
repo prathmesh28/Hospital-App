@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     width,
     marginBottom:0,
     bottom:0,
-    backgroundColor:"#87CEEB",
+    backgroundColor:"#45b3e0",
     position: "absolute",
   },
   containerapp: {
@@ -142,7 +142,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     alignSelf:"center",
-    width:width*0.8
+    width:width*0.8,
+    backgroundColor:'#d3edf8'
 }
 });
 

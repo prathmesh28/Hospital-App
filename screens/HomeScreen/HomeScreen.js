@@ -81,7 +81,7 @@ componentDidMount(){
 
         <View style={{
           width:width,
-          height:height*0.23,
+          height:height*0.21,
         //  
         display:'flex',
         justifyContent:"space-between",
@@ -106,7 +106,7 @@ componentDidMount(){
 
         </View>
 
-        <View style={{width:width*0.9,alignSelf:"center",padding:10,top:20}}>
+        <View style={{width:width*0.9,alignSelf:"center",padding:10,top:40}}>
           <Card 
               style={{
                 padding:0,
@@ -114,7 +114,7 @@ componentDidMount(){
 
                 }}>
             <CardItem style={{padding:0,borderRadius:20, 
-            backgroundColor:'#87CEEB66', borderBottomWidth:1,borderRadius:20,
+            backgroundColor:'#45b3e0', borderBottomWidth:1,borderRadius:20,
             borderColor:'#7ec0ee66',
              }}>
               <Body>
@@ -181,7 +181,7 @@ componentDidMount(){
             </CardItem>}
           </Card>
         </View>
-        <View style={{width:width*0.9,alignSelf:"center",padding:10}}>
+        {/* <View style={{width:width*0.9,alignSelf:"center",padding:10}}>
         <Card style={{padding:0,borderRadius:20,elevation:4}}>
             <CardItem 
               style={{padding:0,borderRadius:20, elevation:0,alignContent:"center",
@@ -203,7 +203,7 @@ componentDidMount(){
               </Body>
             </CardItem>
           </Card>
-        </View>
+        </View> */}
         {/* <View style={{alignItems:"center"}}>
         <FlatList
         data={DATA}
