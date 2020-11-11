@@ -125,7 +125,7 @@ componentDidMount(){
                    Your next appointment is 
 
                 </Text>
-                <Text style={{fontSize:20,fontWeight:"bold",alignSelf:'center'}}>
+                <Text style={{fontSize:22,fontWeight:"bold",alignSelf:'center',color:'#fff'}}>
                 <TimeAgo time={NextDate} />
                 
                 </Text>

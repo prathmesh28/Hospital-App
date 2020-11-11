@@ -20,22 +20,22 @@ import RNUrlPreview from 'react-native-url-preview';
 import _ from 'lodash';
 
 const { height, width } = Dimensions.get('screen')  
-const dataArray = [
-  { title: "First Element", content: "Lorem ipsum dolor sit amet" },
-];
+
 class ReportScreen extends Component {
 
   state = {
-    historyData:[]
+    historyData:null
   }
   async componentDidMount (){
       //  console.log(this.props.data.data.history)
     
-       await _.map( this.props.data.data.history, (e) => {
-         
-        this.state.historyData.push(e)
+       const checkData  = await _.map( this.props.data.data.history, (e) => {
+        
+       return e.sethistory
+     
       })
-    //  console.log(data)
+      checkData.splice(0,1)
+      this.setState({historyData:checkData})
   }
 
   openReport=async(url)=>{
@@ -63,9 +63,9 @@ class ReportScreen extends Component {
         padding: 10,
         justifyContent: "space-between",
         alignItems: "center" ,
-        backgroundColor: "#A9DAD6" }}>
+        backgroundColor: "#87CEEB" }}>
       <Text style={{ fontWeight: "600" }}>
-          {" "}{item.title}
+          {" "}{item.Date.toLocaleString().substr(0, 9)}
         </Text>
         {expanded
           ? <Icon style={{ fontSize: 18 }} name="remove-circle" />
@@ -75,15 +75,44 @@ class ReportScreen extends Component {
   }
   _renderContent(item) {
     return (
-      <Text
-        style={{
-          backgroundColor: "#e3f1f1",
-          padding: 10,
-          fontStyle: "italic",
-        }}
-      >
-        {item.content}
-      </Text>
+      <View style={{padding:10}}>
+
+      
+        <View>
+          <Text >
+            <Text style={{fontWeight:'bold'}}>
+            Remarks: &nbsp;
+            </Text>
+            {item.Remark}
+            </Text>
+
+        </View>
+
+        <View style={{
+          flex: 1,
+          flexDirection: 'row',
+          justifyContent: 'space-evenly',
+          backgroundColor:'#fff',height:'auto'
+        }}>
+
+          <View style={{ height: 50,justifyContent:"center",backgroundColor:'#fff'}}>
+            <Button small style={{backgroundColor:'#45b3e0'}}
+              onPress={()=>{this.openReport(item.reportAvatarURL)}}
+              >
+            <Text>Report</Text>
+
+            </Button>
+          </View>
+          <View style={{height: 50 ,justifyContent:"center", backgroundColor:'#fff'}} >
+          <Button small style={{backgroundColor:'#45b3e0'}}  onPress={()=>{this.openReport(item.PrescriptionAvatarURL)}}>
+            <Text>Prescription</Text>
+            </Button>
+          </View>
+        </View>
+      
+      </View>
+   
+
     );
   }
 
@@ -98,9 +127,9 @@ class ReportScreen extends Component {
     return (
     <View style={styles.container}>
 
-   {console.log(this.state.historyData)}
+   {/* {console.log(this.state.historyData)} */}
 
-        <Card style={{width:width*0.85,alignSelf:"center",borderRadius:20}}>
+        <Card style={{width:width*0.85,alignSelf:"center",borderTopLeftRadius:20,borderTopRightRadius:20}}>
             <CardItem header style={{borderTopStartRadius:20,borderTopEndRadius:20,backgroundColor:'#45b3e0'}}>
               <Title>Checkup Details</Title>
             </CardItem>
@@ -158,18 +187,10 @@ class ReportScreen extends Component {
               </Body> 
               </CardItem>
               <CardItem  
-                // style={{
-                //   borderBottomStartRadius:20,
-                //   borderBottomEndRadius:20,
-                //   backgroundColor:'#87CEEB'}}
                   >
-              {/* <Text>View All </Text> */}
-              {/* <Right>
-                <Icon name="arrow-forward" iconColor={"#000"}/>
-              </Right> */}
-
+            
               <Accordion
-              dataArray={dataArray}
+              dataArray={this.state.historyData}
                 renderHeader={this._renderHeader}
                 renderContent={this._renderContent}
                 headerStyle={{ backgroundColor: "#b7daf8" }}
