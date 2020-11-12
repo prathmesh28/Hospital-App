@@ -132,7 +132,7 @@ componentDidMount(){
                 
                 
               </>
-              :<Text style={{fontSize:20,fontWeight:"900",alignSelf:'center'}}>
+              :<Text style={{fontSize:20,fontWeight:"900",alignSelf:'center',color:'#fff'}}>
                   No upcoming appointments.
               </Text>
 

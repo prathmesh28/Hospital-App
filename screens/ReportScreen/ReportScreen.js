@@ -29,19 +29,19 @@ class ReportScreen extends Component {
   }
   componentDidMount(){
     // console.log(this.props.data.data.Disease)
-    this.setState({data:this.props.data.data})
-    this.setState({Disease:this.props.data.data.Disease})
+    // this.setState({data:this.props.data.data})
+    // this.setState({Disease:this.props.data.data.Disease})
   }
   render() {
 
 
     //for patient type categeries
     let renderData
-    if (this.state.Disease === 'Paediatric'){
-      renderData= <Paediatric />
+    if (this.props.data.data.Disease === 'Paediatric'){
+      renderData= <Paediatric  data={ this.props.data}/>
     }
-    else if (this.state.Disease === 'Pregnancy'){
-      renderData= <Pregnancy />
+    else if (this.props.data.data.Disease === 'Pregnancy'){
+      renderData= <Pregnancy  data={ this.props.data}/>
     }
     else{
       renderData= <Other data={ this.props.data} />
