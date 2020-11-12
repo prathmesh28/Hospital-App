@@ -1,4 +1,4 @@
-import React, { Component } from "react"  
+import React, { Component } from "react"
 import {
   Dimensions,
   StatusBar,
@@ -6,9 +6,10 @@ import {
   FlatList,
   View,
   Image
-} from "react-native"  
+} from "react-native" 
+
 import { Card, CardItem, Body, Text } from 'native-base';
-const { height, width } = Dimensions.get('screen')  
+const { height, width } = Dimensions.get('screen')
 import _ from 'lodash'
 import RNUrlPreview from 'react-native-url-preview';
 import MainSVG from '../../TabBar/Main'
@@ -30,42 +31,43 @@ const DATA = [
 ];
 export default class HomeScreen extends Component {
 
-  state={
-    data:[],
-    Name:'',
-    NextDate:null,
-    remark:''
+  state = {
+    data: [],
+    Name: '',
+    NextDate: null,
+    remark: ''
   }
-componentDidMount(){
-   const data = this.props.data.data
+  componentDidMount() {
+    const data = this.props.data.data
 
- 
-  this.setState({Name:data.Name})
-  this.setState({NextDate:data.NextDate})
-  this.setState({remark:data.remark})
-}
 
-  renderItem = ({item}) => {
-    return( 
-      <Card style={{padding:10,width:width*0.9}}>
-            <CardItem >
-              <Body>
-                <Text>
-                   {item.title}
-                </Text>
-              </Body>
-            </CardItem>
-          </Card>
-  )
-}
+    this.setState({ Name: data.Name })
+    this.setState({ NextDate: data.NextDate })
+    this.setState({ remark: data.remark })
+  }
+
+  renderItem = ({ item }) => {
+    return (
+      <Card style={{ padding: 10, width: width * 0.9 }}>
+        <CardItem >
+          <Body>
+            <Text>
+              {item.title}
+            </Text>
+          </Body>
+        </CardItem>
+      </Card>
+    )
+  }
   render() {
     const data = this.state.data
-   // console.log(this.state.data)
+    // console.log(this.state.data)
     const name = this.state.Name
     const NextDate = this.state.NextDate
     const remark = this.state.remark
 
     return (
+
    <View style={styles.container}>
       <StatusBar backgroundColor={'#87CEEB'} />
       
@@ -76,8 +78,9 @@ componentDidMount(){
           <View style={{backgroundColor:'#87CEEB',height:height*0.14}} ></View>
           <View style={{backgroundColor:'#87CEEB',height:20}}>
             <MainSVG width={width} height={height*0.15}></MainSVG>
+
           </View>
-        </View>
+
 
         <View style={{
           width:width,
@@ -108,9 +111,11 @@ componentDidMount(){
 
         <View style={{width:width*0.9,alignSelf:"center",padding:10,top:40}}>
           <Card 
+
               style={{
-                padding:0,
-                borderRadius:20,
+                padding: 0,
+                borderRadius: 20,
+
 
                 }}>
             <CardItem style={{padding:0,borderRadius:20, 
@@ -134,48 +139,48 @@ componentDidMount(){
               </>
               :<Text style={{fontSize:20,fontWeight:"900",alignSelf:'center',color:'#fff'}}>
                   No upcoming appointments.
+
               </Text>
 
-            }
-                
-              </Body>
-            </CardItem>
-            {NextDate&&
-            <CardItem style={{padding:0,borderRadius:20,borderWidth:0 }}>
-              <Body>
-              <View style={{backgroundColor:'#fff',alignSelf:"flex-start",
-                  width:width*0.6,
-                  borderRadius:10,
-                  padding:10,
-                 
-                  }}>
-                  
-                      <View style={{flexDirection:"row"}}>
-                      <Text style={{fontSize:18,fontWeight:"bold",width:width*0.25}}>
-                        Date:
+                  }
+
+                </Body>
+              </CardItem>
+              {NextDate &&
+                <CardItem style={{ padding: 0, borderRadius: 20, borderWidth: 0 }}>
+                  <Body>
+                    <View style={{
+                      backgroundColor: '#fff', alignSelf: "flex-start",
+                      width: width * 0.6,
+                      borderRadius: 10,
+                      padding: 10,
+
+                    }}>
+
+                      <View style={{ flexDirection: "row" }}>
+                        <Text style={{ fontSize: 18, fontWeight: "bold", width: width * 0.25 }}>
+                          Date:
                       </Text>
-                     
-                      <Text style={{fontSize:18,fontWeight:"bold",width:width*0.5}}>
-                       &nbsp;
+
+                        <Text style={{ fontSize: 18, fontWeight: "bold", width: width * 0.5 }}>
+                          &nbsp;
                           {NextDate.toString().substr(8, 2)}
                           {NextDate.toString().substr(4, 4)}
                           {NextDate.toString().substr(0, 4)}&nbsp;
                           {NextDate.toString().substr(11, 5)}
                           {'\n'}
-                          </Text>
+                        </Text>
                       </View>
-                      <View style={{flexDirection:"row"}}>
-                      <Text style={{fontSize:18,fontWeight:"bold",width:width*0.25}}>
-                      Remarks:
+                      <View style={{ flexDirection: "row" }}>
+                        <Text style={{ fontSize: 18, fontWeight: "bold", width: width * 0.25 }}>
+                          Remarks:
                       </Text>
-                     
-                      <Text style={{fontSize:18,fontWeight:"bold",width:width*0.4}}>
+
+                        <Text style={{ fontSize: 18, fontWeight: "bold", width: width * 0.4 }}>
                           &nbsp;{remark}
-                          </Text>
+                        </Text>
                       </View>
-                   
-               
-                </View>
+
 
               </Body>
             </CardItem>}
@@ -205,45 +210,48 @@ componentDidMount(){
           </Card>
         </View> */}
         {/* <View style={{alignItems:"center"}}>
+
         <FlatList
         data={DATA}
         renderItem={this.renderItem}
         keyExtractor={item => item.id}
       />
         </View> */}
+        </View>
       </View>
-   </View>
-    )  
+    )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+
     backgroundColor:'#d3edf8'
     
+
   },
- 
- 
+
+
   linktitle: {
-  //  textAlign:"center",
+    //  textAlign:"center",
     fontWeight: "bold",
-    fontSize:17
+    fontSize: 17
   },
   linkcontainer: {
-   // fontSize:15,
+    // fontSize:15,
     backgroundColor: "transparent",
   },
   linkimage: {
     display: "none",
   },
   discript: {
-    
-    
-    padding:1
+
+
+    padding: 1
     //dont remove
   },
-  
- 
+
+
 
 })  

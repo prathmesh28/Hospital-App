@@ -54,18 +54,18 @@ const DATA = [
 
 ];
 class DoctorScreen extends Component {
-  state={
-    data:null
+  state = {
+    data: null
   }
-componentDidMount(){
-  // this.setState({ data:this.props.data })
+  componentDidMount() {
+    // this.setState({ data:this.props.data })
 
-  const doctors = _.map( this.props.data, (e) => {
-    return e.data 
-  })
-  // console.log(doctors)
-  this.setState({ data:doctors })
-}
+    const doctors = _.map(this.props.data, (e) => {
+      return e.data
+    })
+    // console.log(doctors)
+    this.setState({ data: doctors })
+  }
 
   renderItem = ({ item }) => {
 
@@ -76,7 +76,7 @@ componentDidMount(){
         padding: 5, width: width * .85, alignSelf: "center", borderRadius: 10
       }}>
         <Body>
-         
+
           <CardItem>
             <View style={{
               display: 'flex', flexDirection: 'row'
@@ -143,11 +143,10 @@ componentDidMount(){
   };
 
   render() {
-    const data=this.state.data
+    const data = this.state.data
     return (
       <View style={styles.container}>
         <StatusBar backgroundColor={'#87CEEB'} />
-
             <SafeAreaView style={{flex: 1,paddingBottom:60,marginTop:30}}>
               <FlatList
               
@@ -163,6 +162,7 @@ componentDidMount(){
                   Doctors
               </Text>
             </View>
+
       </View>
     )
   }
@@ -173,6 +173,7 @@ export default withNavigation(DoctorScreen);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+
     //flexDirection:"row",
     backgroundColor:'#d3edf8'
 
@@ -182,6 +183,7 @@ const styles = StyleSheet.create({
   //   bottom:60,
   // //  height:height*0.8
   // }
+
 
 
 })  
