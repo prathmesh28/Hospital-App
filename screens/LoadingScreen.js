@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
         width:width*0.8,
         justifyContent: "center",
         alignItems: "center",
-        alignSelf:"center"
+        alignSelf:"center",
+        backgroundColor:'#d3edf8'
     }
 });

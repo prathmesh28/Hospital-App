@@ -5,7 +5,9 @@ import {
   StyleSheet,
   FlatList,
   View,
-} from "react-native"
+  Image
+} from "react-native" 
+
 import { Card, CardItem, Body, Text } from 'native-base';
 const { height, width } = Dimensions.get('screen')
 import _ from 'lodash'
@@ -65,64 +67,79 @@ export default class HomeScreen extends Component {
     const remark = this.state.remark
 
     return (
-      <View style={styles.container}>
-        <StatusBar backgroundColor={'#87CEEB'} />
 
-        <View>
+   <View style={styles.container}>
+      <StatusBar backgroundColor={'#87CEEB'} />
+      
+      <View>
+       
+        
+        <View style={{position:'absolute'}}>
+          <View style={{backgroundColor:'#87CEEB',height:height*0.14}} ></View>
+          <View style={{backgroundColor:'#87CEEB',height:20}}>
+            <MainSVG width={width} height={height*0.15}></MainSVG>
 
-
-          <View style={{ position: 'absolute' }}>
-            <View style={{ backgroundColor: '#87CEEB', height: height * 0.10 }} ></View>
-            <View style={{ backgroundColor: '#87CEEB', height: 20 }}>
-              <MainSVG width={width} height={height * 0.15}></MainSVG>
-            </View>
           </View>
 
-          <View style={{
-            width: width,
-            height: height * 0.20,
-            justifyContent: "center",
+
+        <View style={{
+          width:width,
+          height:height*0.21,
+        //  
+        display:'flex',
+        justifyContent:"space-between",
+       flexDirection:"row",
+          alignItems:"center"
           }}>
-            <Text style={{ fontSize: 20, marginLeft: 20, color: '#171717' }}>
-              Hello, {'\n'}
-              <Text style={{ fontSize: 30, fontWeight: "bold", color: '#171717' }}>
-                {name}
-              </Text>
-            </Text>
-            <Text style={{ fontSize: 17, bottom: 0, alignContent: "space-between", color: '#000', marginLeft: 20, color: '#171717' }}>
-              How're you today?
+            <View style={{
+               left:20
+                }}>
+              <Text style={{fontSize:20,color:'#171717'}}>
+                      Hello, {'\n'}
+                <Text style={{fontSize:30,fontWeight:"bold",color:'#171717'}}>
+                  {name}
                 </Text>
-          </View>
+              </Text>
+              <Text style={{fontSize:17,bottom:0,alignContent:"space-between",color:'#000',color:'#171717'}}>
+                How're you today?
+              </Text>
+              </View>
+              <Image source={require('../../assets/hiclipart.com.png')} style={{height:70,width:70,right:20}} />
+              
 
-          <View style={{ width: width * 0.9, alignSelf: "center", padding: 10, top: 10 }}>
-            <Card
+        </View>
+
+        <View style={{width:width*0.9,alignSelf:"center",padding:10,top:40}}>
+          <Card 
+
               style={{
                 padding: 0,
                 borderRadius: 20,
 
-              }}>
-              <CardItem style={{
-                padding: 0, borderRadius: 20,
-                backgroundColor: '#87CEEB66', borderBottomWidth: 1, borderRadius: 20,
-                borderColor: '#7ec0ee66',
-              }}>
-                <Body>
-                  {
-                    NextDate ?
-                      <>
-                        <Text style={{ fontSize: 20, fontWeight: "900", alignSelf: 'center' }}>
-                          Your next appointment is
+
+                }}>
+            <CardItem style={{padding:0,borderRadius:20, 
+            backgroundColor:'#45b3e0', borderBottomWidth:1,borderRadius:20,
+            borderColor:'#7ec0ee66',
+             }}>
+              <Body>
+            {
+              NextDate?
+              <>
+                <Text style={{fontSize:20,fontWeight:"900",alignSelf:'center'}}>
+                   Your next appointment is 
 
                 </Text>
-                        <Text style={{ fontSize: 20, fontWeight: "bold", alignSelf: 'center' }}>
-                          <TimeAgo time={NextDate} />
+                <Text style={{fontSize:22,fontWeight:"bold",alignSelf:'center',color:'#fff'}}>
+                <TimeAgo time={NextDate} />
+                
+                </Text>
+                
+                
+              </>
+              :<Text style={{fontSize:20,fontWeight:"900",alignSelf:'center',color:'#fff'}}>
+                  No upcoming appointments.
 
-                        </Text>
-
-
-                      </>
-                      : <Text style={{ fontSize: 20, fontWeight: "900", alignSelf: 'center' }}>
-                        No upcoming appointments.
               </Text>
 
                   }
@@ -165,38 +182,35 @@ export default class HomeScreen extends Component {
                       </View>
 
 
-                    </View>
+              </Body>
+            </CardItem>}
+          </Card>
+        </View>
+        {/* <View style={{width:width*0.9,alignSelf:"center",padding:10}}>
+        <Card style={{padding:0,borderRadius:20,elevation:4}}>
+            <CardItem 
+              style={{padding:0,borderRadius:20, elevation:0,alignContent:"center",
+              backgroundColor:'white',borderColor:'#7ec0ee4d',borderWidth:1}}>
+              <Body>
+                
+               
+         
+            <RNUrlPreview
+                text={'https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public'} 
+                titleStyle={styles.linktitle}
+                titleNumberOfLines={3}
+              containerStyle={styles.linkcontainer}
+              imageStyle={styles.linkimage}
+              descriptionStyle={styles.discript}
+              descriptionNumberOfLines={4}
+            />
+               
+              </Body>
+            </CardItem>
+          </Card>
+        </View> */}
+        {/* <View style={{alignItems:"center"}}>
 
-                  </Body>
-                </CardItem>}
-            </Card>
-          </View>
-          <View style={{ width: width * 0.9, alignSelf: "center", padding: 10 }}>
-            <Card style={{ padding: 0, borderRadius: 20, elevation: 4 }}>
-              <CardItem
-                style={{
-                  padding: 0, borderRadius: 20, elevation: 0, alignContent: "center",
-                  backgroundColor: 'white', borderColor: '#7ec0ee4d', borderWidth: 1
-                }}>
-                <Body>
-
-
-
-                  <RNUrlPreview
-                    text={'https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public'}
-                    titleStyle={styles.linktitle}
-                    titleNumberOfLines={3}
-                    containerStyle={styles.linkcontainer}
-                    imageStyle={styles.linkimage}
-                    descriptionStyle={styles.discript}
-                    descriptionNumberOfLines={4}
-                  />
-
-                </Body>
-              </CardItem>
-            </Card>
-          </View>
-          {/* <View style={{alignItems:"center"}}>
         <FlatList
         data={DATA}
         renderItem={this.renderItem}
@@ -212,7 +226,10 @@ export default class HomeScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#87CEEB33'
+
+    backgroundColor:'#d3edf8'
+    
+
   },
 
 

@@ -136,34 +136,33 @@ class DoctorScreen extends Component {
   }
 
 
+  renderHeader = () => {
+    return <View style={{height:100}}>
+
+    </View>
+  };
+
   render() {
     const data = this.state.data
     return (
       <View style={styles.container}>
         <StatusBar backgroundColor={'#87CEEB'} />
+            <SafeAreaView style={{flex: 1,paddingBottom:60,marginTop:30}}>
+              <FlatList
+              
+                data={data}
+                renderItem={this.renderItem}
+                keyExtractor={item => item.id}
+                ListHeaderComponent={this.renderHeader}
+              />
+            </SafeAreaView>
+            <View style={{ backgroundColor: '#87CEEB', height: 50,position:"absolute" }}>
+              <MainSVG width={width} height={150}></MainSVG>
+              <Text style={{fontSize:25,position:"absolute",marginLeft:20,top:20,color:'#171717',fontWeight:'400'}}>
+                  Doctors
+              </Text>
+            </View>
 
-        <View style={{ height: height * 0.14 }}>
-          <View style={{ backgroundColor: '#87CEEB', height: 40 }}>
-            <MainSVG width={width} height={150}></MainSVG>
-
-
-          </View>
-
-          <View>
-            <Text style={{ fontSize: 25, marginLeft: 20, color: '#171717', fontWeight: '400' }}>
-
-              Doctors
-            </Text>
-          </View>
-        </View>
-
-        <View style={{ height: height * 0.75, marginBottom: 60 }}>
-          <FlatList
-
-            data={data}
-            renderItem={this.renderItem}
-            keyExtractor={item => item.id}
-          /></View>
       </View>
     )
   }
@@ -174,14 +173,17 @@ export default withNavigation(DoctorScreen);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#87CEEB33'
+
+    //flexDirection:"row",
+    backgroundColor:'#d3edf8'
 
 
   },
-  doctors: {
+  // doctors: {
+  //   bottom:60,
+  // //  height:height*0.8
+  // }
 
-    height: height * 0.6
-  }
 
 
 })  

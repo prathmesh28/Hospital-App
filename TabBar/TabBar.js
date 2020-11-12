@@ -36,7 +36,7 @@ const TabBarCurve = ({width, height, activeIndex=0, activeIcon="", translateX}) 
     return (
         <Animated.View style={[styles.curve, {transform: [{translateX}]}]}>
             <Svg width={width} height={height}>
-                <Path fill="#ffffff" fillOpacity="0.66" d={`M 0 0 C 0,0 10,0 10,10 C 10,10 ${(width-10)/2},${(height-10) * 1.75} ${(width-10)},10 C ${width-10},10 ${width-10},0 ${width},0`} />
+                <Path fill="#ffffff" fillOpacity="0.76" d={`M 0 0 C 0,0 10,0 10,10 C 10,10 ${(width-10)/2},${(height-10) * 1.75} ${(width-10)},10 C ${width-10},10 ${width-10},0 ${width},0`} />
             </Svg>
 
             <ActiveIcon width={width} height={height} activeIndex={activeIndex} translateX={translateX} icon={activeIcon} />
@@ -62,7 +62,7 @@ const TabBar = ({tabs=[], activeIndex=0, onPressTab, AnimationValue}) => {
                     <TouchableOpacity style={{width: TabWidth, height: TabHeight}} key={i} onPress={() => {onPressTab(i); Animated.timing(AnimationValue.current, {duration: 500 * Math.max(1, Math.abs(activeIndex-i)/2), toValue: TabWidth * i, easing: Easing.out(Easing.exp), useNativeDriver: true}).start(); return true}}>
                         <Animated.View style={[styles.tabBar, {width: TabWidth, height: TabHeight, opacity}]}>
                         {
-                icon!=='medicinebox'?<FontAwesome5 name={icon} color="grey" size={24} />:<AntDesign name={icon} color="grey" size={24} />
+                icon!=='medicinebox'?<FontAwesome5 name={icon} color='#d3edf8' size={24} />:<AntDesign name={icon} color="#d3edf8" size={24} />
             }
                         </Animated.View>
                     </TouchableOpacity>

@@ -58,11 +58,26 @@ const TabScreen = () => {
   }
 
 
+  // useEffect(()=>{
+  //   firedata()
+  // },[])
+
+
   useEffect(()=>{
-    firedata()
+    let isMounted = true;
+    const { uid } = Firebase.auth().currentUser
+
+    Firebase.database().ref('/')
+      .on("value", async(snapshot) => {   
+
+        if (isMounted) {
+          await setData(snapshot.val().Users[uid])
+          await setDoc(snapshot.val().Doctors)
+          setLoading(false) 
+        }
+    })
+    return () => { isMounted = false }
   },[])
-
-
 
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
@@ -119,7 +134,7 @@ const styles = StyleSheet.create({
     width,
     marginBottom:0,
     bottom:0,
-    backgroundColor:"#87CEEB",
+    backgroundColor:"#45b3e0",
     position: "absolute",
   },
   containerapp: {
@@ -127,7 +142,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     alignSelf:"center",
-    width:width*0.8
+    width:width*0.8,
+    backgroundColor:'#d3edf8'
 }
 });
 
