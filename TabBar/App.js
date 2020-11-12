@@ -42,25 +42,8 @@ const TabScreen = () => {
   const [doc, setDoc] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const firedata = () => {
-    const { uid } = Firebase.auth().currentUser
+ 
 
-    Firebase.database().ref('/')
-      .on("value", async(snapshot) => {   
-
-      await setData(snapshot.val().Users[uid])
-      await setDoc(snapshot.val().Doctors)
-
-      setLoading(false)  
-    })
-  
-
-  }
-
-
-  // useEffect(()=>{
-  //   firedata()
-  // },[])
 
 
   useEffect(()=>{
@@ -142,7 +125,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     alignSelf:"center",
-    width:width*0.8,
+    width:width,
+    padding:20,
     backgroundColor:'#d3edf8'
 }
 });

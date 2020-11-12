@@ -10,6 +10,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "enableDangerousExperimentalLeanBuilds":true,
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -22,6 +23,7 @@
       "buildNumber": "1.0.0"
     },
     "android": {
+      "useNextNotificationsApi": true,
       "package": "com.cosmic.hospitalApp",
       "versionCode": 1
     },
@@ -29,4 +31,5 @@
       "favicon": "./assets/favicon.png"
     }
   }
+  
 }
