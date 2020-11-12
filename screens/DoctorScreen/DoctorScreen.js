@@ -54,18 +54,18 @@ const DATA = [
 
 ];
 class DoctorScreen extends Component {
-  state={
-    data:null
+  state = {
+    data: null
   }
-componentDidMount(){
-  // this.setState({ data:this.props.data })
+  componentDidMount() {
+    // this.setState({ data:this.props.data })
 
-  const doctors = _.map( this.props.data, (e) => {
-    return e.data 
-  })
-  // console.log(doctors)
-  this.setState({ data:doctors })
-}
+    const doctors = _.map(this.props.data, (e) => {
+      return e.data
+    })
+    // console.log(doctors)
+    this.setState({ data: doctors })
+  }
 
   renderItem = ({ item }) => {
 
@@ -76,7 +76,7 @@ componentDidMount(){
         padding: 5, width: width * .85, alignSelf: "center", borderRadius: 10
       }}>
         <Body>
-         
+
           <CardItem>
             <View style={{
               display: 'flex', flexDirection: 'row'
@@ -137,33 +137,33 @@ componentDidMount(){
 
 
   render() {
-    const data=this.state.data
+    const data = this.state.data
     return (
       <View style={styles.container}>
-      <StatusBar backgroundColor={'#87CEEB'} />
+        <StatusBar backgroundColor={'#87CEEB'} />
 
-<View style={{height:height*0.14}}>
-          <View style={{backgroundColor:'#87CEEB',height:40}}>
+        <View style={{ height: height * 0.14 }}>
+          <View style={{ backgroundColor: '#87CEEB', height: 40 }}>
             <MainSVG width={width} height={150}></MainSVG>
 
-            
+
           </View>
 
-        <View>
-            <Text style={{fontSize:25,marginLeft:20,color:'#171717',fontWeight:'400'}}>
+          <View>
+            <Text style={{ fontSize: 25, marginLeft: 20, color: '#171717', fontWeight: '400' }}>
 
-            Doctors
+              Doctors
             </Text>
-        </View>
+          </View>
         </View>
 
-      <View style={{height:height*0.75,marginBottom:60}}>
-        <FlatList
-       
-          data={data}
-          renderItem={this.renderItem}
-          keyExtractor={item => item.id}
-        /></View>
+        <View style={{ height: height * 0.75, marginBottom: 60 }}>
+          <FlatList
+
+            data={data}
+            renderItem={this.renderItem}
+            keyExtractor={item => item.id}
+          /></View>
       </View>
     )
   }
@@ -174,13 +174,13 @@ export default withNavigation(DoctorScreen);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'#87CEEB33'
+    backgroundColor: '#87CEEB33'
 
 
   },
   doctors: {
-   
-    height:height*0.6
+
+    height: height * 0.6
   }
 
 
