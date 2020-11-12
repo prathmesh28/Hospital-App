@@ -121,14 +121,22 @@ componentDidMount(){
             {
               NextDate?
               <>
-                <Text style={{fontSize:20,fontWeight:"900",alignSelf:'center'}}>
+              {NextDate >= new Date().toISOString()?
+              <>
+              <Text style={{fontSize:20,fontWeight:"900",alignSelf:'center'}}>
                    Your next appointment is 
-
                 </Text>
                 <Text style={{fontSize:22,fontWeight:"bold",alignSelf:'center',color:'#fff'}}>
                 <TimeAgo time={NextDate} />
                 
+                </Text></>:<><Text style={{fontSize:20,fontWeight:"900",alignSelf:'center'}}>
+                   Your last appointment was 
                 </Text>
+                <Text style={{fontSize:22,fontWeight:"bold",alignSelf:'center',color:'#fff'}}>
+                <TimeAgo time={NextDate} />
+                
+                </Text></>}
+                
                 
                 
               </>

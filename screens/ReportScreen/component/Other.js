@@ -65,7 +65,7 @@ class ReportScreen extends Component {
         alignItems: "center" ,
         backgroundColor: "#87CEEB" }}>
       <Text style={{ fontWeight: "600" }}>
-          {" "}{item.Date.toLocaleString().substr(0, 9)}
+          {" "}{item.Date.toLocaleString().substr(0, 10)}
         </Text>
         {expanded
           ? <Icon style={{ fontSize: 18 }} name="remove-circle" />
@@ -117,24 +117,23 @@ class ReportScreen extends Component {
   }
 
 
-
   render() {
-  //  this.props.data.data.history
-  const date = this.props.data.data.history[Object.keys(this.props.data.data.history)[0]].sethistory.Date.toLocaleString().substr(0, 9)
+    if(this.props.data.data.history){
+  const date = this.props.data.data.history[Object.keys(this.props.data.data.history)[0]].sethistory.Date.toLocaleString().substr(0, 10)
   const Remark = this.props.data.data.history[Object.keys(this.props.data.data.history)[0]].sethistory.Remark
   const report = this.props.data.data.history[Object.keys(this.props.data.data.history)[0]].sethistory.reportAvatarURL
   const Prescription = this.props.data.data.history[Object.keys(this.props.data.data.history)[0]].sethistory.PrescriptionAvatarURL
+  
     return (
     <View style={styles.container}>
 
-   {/* {console.log(this.state.historyData)} */}
+   
 
         <Card style={{width:width*0.85,alignSelf:"center",borderTopLeftRadius:20,borderTopRightRadius:20}}>
             <CardItem header style={{borderTopStartRadius:20,borderTopEndRadius:20,backgroundColor:'#45b3e0'}}>
               <Title>Checkup Details</Title>
             </CardItem>
           
-                {this.props.data.data.history?
                 <>
                   <CardItem>
                 
@@ -204,17 +203,31 @@ class ReportScreen extends Component {
 
 
             </CardItem>
-              </>:<CardItem>
-              <Body>
-              <Text>
-                  NO data to display ;)
-              </Text>
-          </Body> </CardItem>}
+              </>
            
             
          </Card>
    </View>
-    )  
+    ) 
+  } else{
+    return (
+          <Card style={{width:width*0.85,alignSelf:"center",borderTopLeftRadius:20,borderTopRightRadius:20}}>
+            <CardItem header style={{borderTopStartRadius:20,borderTopEndRadius:20,backgroundColor:'#45b3e0'}}>
+              <Title>Checkup Details</Title>
+            </CardItem>
+            <CardItem>
+                
+              <Body>
+                <Text style={{fontWeight:'700'}}>
+                    
+                 
+                  No data to display ;)
+                </Text>
+                </Body>
+                </CardItem>
+            </Card>
+    )
+  }
   }
 
   
