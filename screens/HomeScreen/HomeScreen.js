@@ -11,7 +11,6 @@ import {
 import { Card, CardItem, Body, Text, Button } from 'native-base';
 const { height, width } = Dimensions.get('screen')  
 import _ from 'lodash'
-import RNUrlPreview from 'react-native-url-preview';
 import MainSVG from '../../TabBar/Main'
 import TimeAgo from 'react-native-timeago';
 
@@ -34,7 +33,7 @@ export default class HomeScreen extends Component {
     super(props);
     this.notificationListener = React.createRef();
     this.responseListener = React.createRef();
-
+ 
     this.state={
       data:this.props.data.data,
       Name:this.props.data.data.Name,
@@ -266,16 +265,7 @@ registerForPushNotificationsAsync = async() => {
           </Card>
         </View>
        
-        {/* {this.state.notification && 
-        
-          Alert.alert(
-            this.state.notification.request.content.title,
-            this.state.notification.request.content.body,
-           
-            { cancelable: true }
-          )
-        
-        }  */}
+   
 
 
 
@@ -288,15 +278,6 @@ registerForPushNotificationsAsync = async() => {
                 
                
          
-            <RNUrlPreview
-                text={'https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public'} 
-                titleStyle={styles.linktitle}
-                titleNumberOfLines={3}
-              containerStyle={styles.linkcontainer}
-              imageStyle={styles.linkimage}
-              descriptionStyle={styles.discript}
-              descriptionNumberOfLines={4}
-            />
                
               </Body>
             </CardItem>

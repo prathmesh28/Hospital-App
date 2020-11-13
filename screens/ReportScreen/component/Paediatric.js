@@ -16,7 +16,6 @@ import {
 } from "react-native"  
 import { withNavigation } from 'react-navigation';
 import { Container, Header, Content, Card, CardItem, Text, Body,Title,Button,Right,Icon,Accordion } from 'native-base';
-import RNUrlPreview from 'react-native-url-preview';
 import _ from 'lodash';
 
 const { height, width } = Dimensions.get('screen')  

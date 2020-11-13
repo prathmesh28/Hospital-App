@@ -6,11 +6,11 @@
     "orientation": "portrait",
     "icon": "./assets/hiclipart.com.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/hiclipart.com.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "enableDangerousExperimentalLeanBuilds":true,
+    
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -28,8 +28,7 @@
       "versionCode": 1
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/hiclipart.com.png"
     }
   }
-  
 }
