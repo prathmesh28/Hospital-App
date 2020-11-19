@@ -9,7 +9,8 @@ import {
   ActivityIndicator,
   Animated
 } from 'react-native';
-import Firebase from '../firebase'
+import auth from '@react-native-firebase/auth';
+import database from '@react-native-firebase/database';
 import TabBar from './TabBar';
 import HomeScreen from '../screens/HomeScreen/HomeScreen'
 import ReportScreen from'../screens/ReportScreen/ReportScreen'
@@ -43,24 +44,29 @@ const TabScreen = () => {
   const [loading, setLoading] = useState(true);
 
  
+  useEffect(() => {
+
+    const { uid } = auth().currentUser
 
 
-
-  useEffect(()=>{
-    let isMounted = true;
-    const { uid } = Firebase.auth().currentUser
-
-    Firebase.database().ref('/')
-      .on("value", async(snapshot) => {   
-
-        if (isMounted) {
+    const onValueChange = database()
+      .ref('/')
+      .on('value', async(snapshot) => {
+        
           await setData(snapshot.val().Users[uid])
           await setDoc(snapshot.val().Doctors)
           setLoading(false) 
-        }
-    })
-    return () => { isMounted = false }
-  },[])
+      });
+
+    // Stop listening for updates when no longer required
+    return () =>
+      database()
+        .ref('/')
+        .off('value', onValueChange);
+  }, []);
+
+
+
 
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>

@@ -1,18 +1,11 @@
 import React from "react";
-import { View,  StyleSheet, TouchableOpacity, StatusBar, Dimensions, ImageBackground, Image,Text,ScrollView } from "react-native";
-import Firebase from '../../firebase';
-import { Container, Header, Content, Card, CardItem, Body, Left, Button, Row, Right, Fab } from 'native-base';
+import { View,  StyleSheet, TouchableOpacity, StatusBar, Dimensions, ImageBackground, Image,Text,ScrollView,Button } from "react-native";
+// import Firebase from '../../firebase';
+import { Container, Header, Content, Card, CardItem, Body, Left, Row, Right, Fab, Icon } from 'native-base';
 const { height, width } = Dimensions.get('screen')
 import { withNavigation } from "react-navigation";
 import MainSVG from '../../TabBar/Main'
-import NotificationSvg from "./assets/NotificationSvg"
-import RightArrowSvg from "./assets/RigthArrowSvg"
-import ProfileUserSvg from "./assets/ProfileUserSvg"
-import InformationSvg from "./assets/InformationSvg";
-import LogoutSvg from "./assets/LogoutSvg";
-import ProfileNameSvg from "./assets/ProfilenameSvg";
-import PhoneNumberSvg from "./assets/PhoneNumberSvg"
-import EmailSvg from "./assets/EmailSvg";
+import auth from '@react-native-firebase/auth'
 
 import AntDesignIcon from 'react-native-vector-icons/AntDesign'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
@@ -37,7 +30,7 @@ class ProfileScreen extends React.Component {
     }
 
     signOutUser = () => {
-        Firebase.auth().signOut();
+      auth().signOut();
     };
     render() {
         const data = this.state.data
@@ -54,27 +47,15 @@ class ProfileScreen extends React.Component {
 
             <View style={styles.container}>
                 <StatusBar backgroundColor={'#87CEEB'} />
-               
+       
+              
+
+    
 
 <View style={{flex:1,flexDirection:'column'}}>
-<Fab
-            // active={this.state.active}
-            
-           // containerStyle={{ height:30,width:30}}
-            style={{ backgroundColor: '#45b3e0',height:50,width:50 }}
-            position="topRight"
-            onPress={this.signOutUser}
-           >
-            <AntDesignIcon name="logout" />
-           
-          </Fab>
 
-                {/* <View style={{ backgroundColor: '#87CEEB', height: 50, }}>
-              <MainSVG width={width} height={150}></MainSVG>
-              <Text style={{fontSize:25,position:"absolute",marginLeft:20,top:20,color:'#171717',fontWeight:'400'}}>
-              Profile
-              </Text>
-            </View> */}
+
+           
             <View style={{position:'relative'}}>
           <View style={{backgroundColor:'#87CEEB',height:height*0.06}} ></View>
           <View style={{backgroundColor:'#87CEEB',height:20}}>
@@ -88,7 +69,12 @@ class ProfileScreen extends React.Component {
               </Text>
             </View>
 
-               
+            <TouchableOpacity onPress={this.signOutUser}  
+              style={{ backgroundColor: '#45b3e0',height:50,width:50,position:"absolute",top:0,right:0, borderRadius:50,justifyContent:"center",alignItems:"center",margin:10 }}>
+            
+              <AntDesignIcon size={20} name="logout" />
+           
+            </TouchableOpacity>
 
                 <ScrollView style={{ marginTop:100,marginBottom:60 }}>
            <Card style={{width:width*0.9,alignSelf:"center",borderTopLeftRadius:20,borderTopRightRadius:20}}>
@@ -174,14 +160,18 @@ class ProfileScreen extends React.Component {
               <Text style={{color:'#fff',fontWeight:'bold',fontSize:15}}>About Us</Text>
             </CardItem>
             
-            <CardItem  button>
-              <FontistoIcon size={20} name="bed-patient" />
+            {/* <CardItem  button>
+            <FontistoIcon size={20} name="hospital" />
+              <Text> Hospital Name</Text>
+             
+             </CardItem> */}
+
+             <CardItem  button >
+              <FontistoIcon size={20} name="hospital" />
               <Text> Hospital Name</Text>
              
              </CardItem>
-
-             <CardItem bordered button >
-              <FontistoIcon size={20} name="doctor" />
+             <CardItem  button >
               <Text> Hospital Address </Text>
              
              </CardItem>

@@ -1,34 +1,4 @@
 {
-  "expo": {
-    "name": "HospitalApp",
-    "slug": "HospitalApp",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/hiclipart.com.png",
-    "splash": {
-      "image": "./assets/hiclipart.com.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.cosmic.hospitalApp",
-      "buildNumber": "1.0.0"
-    },
-    "android": {
-      "useNextNotificationsApi": true,
-      "package": "com.cosmic.hospitalApp",
-      "versionCode": 1
-    },
-    "web": {
-      "favicon": "./assets/hiclipart.com.png"
-    }
-  }
+  "name": "hospitalapp",
+  "displayName": "hospitalapp"
 }

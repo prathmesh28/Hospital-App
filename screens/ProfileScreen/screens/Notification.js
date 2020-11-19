@@ -1,12 +1,10 @@
 import React, { Component } from "react"
-import Constants from 'expo-constants'
 
 import {
   SafeAreaView,
   Dimensions,
   StatusBar,
   ActivityIndicator,
-  AsyncStorage,
   TouchableOpacity,
   StyleSheet,
   View,

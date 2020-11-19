@@ -1,18 +1,14 @@
 import React from "react"
 import { createAppContainer, createSwitchNavigator } from "react-navigation"
 import { createStackNavigator } from "react-navigation-stack"
-
+import { View, Text, ActivityIndicator,StatusBar,Dimensions, StyleSheet } from "react-native"
 import LoadingScreen from "./screens/LoadingScreen"
 import LoginScreen from "./screens/LoginScreen/LoginScreen"
 import WelcomeScreen from './screens/WelcomeScreen/WelcomeScreen'
-import { AppLoading } from 'expo';
-import { Ionicons } from '@expo/vector-icons';
-import * as Font from 'expo-font';
 import TabScreen from "./TabBar/App"
 import Report from "./screens/ReportScreen/screens/Reports"
 import Notification from "./screens/ProfileScreen/screens/Notification"
 
-//import Appointment from "./screens/Appointment"
 const AuthStack = createStackNavigator({
     Intro:WelcomeScreen,
     Login: LoginScreen,
@@ -46,6 +42,7 @@ const Container = createAppContainer(
     )
  ) ;  
 class App extends React.Component {
+  _isMounted = false;
     constructor(props) {
         super(props);
         this.state = {
@@ -53,16 +50,22 @@ class App extends React.Component {
         };
       }
       async componentDidMount() {
-        await Font.loadAsync({
-          Roboto: require('native-base/Fonts/Roboto.ttf'),
-          Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-          ...Ionicons.font,
-        });
-        this.setState({ isReady: true });
+        this._isMounted = true;
+        // await Font.loadAsync({
+        //   Roboto: require('native-base/Fonts/Roboto.ttf'),
+        //   Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+        //   ...Ionicons.font,
+        // });
+        if (this._isMounted) {
+          this.setState({ isReady: true });
+        }
+      }
+      componentWillUnmount() {
+        this._isMounted = false;
       }
     render() {
         if (!this.state.isReady) {
-            return <AppLoading />;
+            return <View><Text>Loading</Text></View>
           }
           return <Container/>
     }

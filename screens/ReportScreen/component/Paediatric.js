@@ -5,7 +5,6 @@ import {
   Dimensions,
   StatusBar,
   ActivityIndicator,
-  AsyncStorage,
   TouchableOpacity,
   StyleSheet,
   
@@ -34,7 +33,7 @@ class Peadiatric extends Component {
      
       })
       checkData.splice(0,1)
-      this.setState({historyData:checkData})
+     // this.setState({historyData:checkData})
   }
 
   openReport=async(url)=>{

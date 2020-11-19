@@ -1,12 +1,10 @@
 import React, { Component } from "react"
-import Constants from 'expo-constants'
 
 import {
   SafeAreaView,
   Dimensions,
   StatusBar,
   ActivityIndicator,
-  AsyncStorage,
   TouchableOpacity,
   StyleSheet,
   View,
@@ -54,19 +52,24 @@ const DATA = [
 
 ];
 class DoctorScreen extends Component {
+  _isMounted = false;
   state = {
     data: null
   }
   componentDidMount() {
     // this.setState({ data:this.props.data })
-
+    this._isMounted = true;
     const doctors = _.map(this.props.data, (e) => {
       return e.data
     })
     // console.log(doctors)
+    if (this._isMounted) {
     this.setState({ data: doctors })
+    }
   }
-
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
   renderItem = ({ item }) => {
 
 

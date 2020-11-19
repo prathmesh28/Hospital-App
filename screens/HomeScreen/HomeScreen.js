@@ -14,61 +14,29 @@ import _ from 'lodash'
 import MainSVG from '../../TabBar/Main'
 import TimeAgo from 'react-native-timeago';
 
-import Constants from 'expo-constants';
-import * as Notifications from 'expo-notifications';
-import * as Permissions from 'expo-permissions';
-
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: true,
-    shouldSetBadge: false,
-  }),
-});
 
 
 export default class HomeScreen extends Component {
   _isMounted = false;
   constructor(props){
     super(props);
-    this.notificationListener = React.createRef();
-    this.responseListener = React.createRef();
- 
+  
     this.state={
       data:this.props.data.data,
       Name:this.props.data.data.Name,
       NextDate:this.props.data.data.NextDate,
       remark:this.props.data.data.remark,
 
-      expoPushToken:'',
-      notification:false
     }
   }
 
 
 componentDidMount(){
   this._isMounted = true;
-     this.registerForPushNotificationsAsync().then(token =>{ 
-      if (this._isMounted) {
-       this.setState({expoPushToken:token})
-      }
-      })
-
-    this.notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
-      if (this._isMounted) {
-      this.setState({notification})
-      }
-    });
-
-    this.responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-      console.log(response);
-    });
-
 
 }
 async componentDidUpdate(prevProps, prevState){
 if(prevProps.data.data.NextDate!==this.props.data.data.NextDate){
-  await this.schedulePushNotification(this.props.data.data.NextDate,this.props.data.data.remark);
   console.log('date changed')
 }
 if(prevProps.data.data.remark!==this.props.data.data.remark){
@@ -78,46 +46,8 @@ if(prevProps.data.data.remark!==this.props.data.data.remark){
 componentWillUnmount() {
   this._isMounted = false;
 }
-schedulePushNotification = async (date,remark)=> {
-  await Notifications.scheduleNotificationAsync({
-    content: {
-      title: "Appointment",
-      body: "Your next appointment is Scheduled on: " + " " + date.toString().substr(8, 2) + date.toString().substr(4, 4) + date.toString().substr(0, 4) + " " + date.toString().substr(11, 5),
-      data: { data: 'goes here' },
-    },
-    trigger: { seconds: 2 },
-  });
-}
-registerForPushNotificationsAsync = async() => {
-  let token;
-  if (Constants.isDevice) {
-    const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
-    let finalStatus = existingStatus;
-    if (existingStatus !== 'granted') {
-      const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-      finalStatus = status;
-    }
-    if (finalStatus !== 'granted') {
-      alert('Failed to get push token for push notification!');
-      return;
-    }
-    token = (await Notifications.getExpoPushTokenAsync()).data;
-    console.log(token);
-  } else {
-    alert('Must use physical device for Push Notifications');
-  }
 
-  if (Platform.OS === 'android') {
-    Notifications.setNotificationChannelAsync('default', {
-      name: 'default',
-      importance: Notifications.AndroidImportance.MAX,
-      vibrationPattern: [0, 250, 250, 250],
-      lightColor: '#FF231F7C',
-    });
-  }
 
-  return token;
-}
 
   renderItem = ({item}) => {
     return( 

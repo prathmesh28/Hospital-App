@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, ActivityIndicator,StatusBar,Dimensions, StyleSheet } from "react-native";
-import Firebase from '../firebase';
+// import Firebase from '../firebase';
+import auth from '@react-native-firebase/auth';
 const {width, height} = Dimensions.get("window");
 
 export default class LoadingScreen extends React.Component {
@@ -8,12 +9,21 @@ export default class LoadingScreen extends React.Component {
     componentDidMount() {
      
 
-        Firebase.auth().onAuthStateChanged(user => {
+        auth().onAuthStateChanged(user => {
 
-                
+            // console.log(user.phoneNumber)
+            // console.log(user)
                 if(user){
-                    this.props.navigation.navigate("App", { user:'user' })
+                    console.log('user',user)
+                    if(user.phoneNumber){
+                        console.log(user.phoneNumber)
+                        this.props.navigation.navigate("App")
+                    }else{
+                        console.log('login',user.phoneNumber)
+                        this.props.navigation.navigate("Login")
+                    }
                 }else{
+                    console.log('auth',user.phoneNumber)
                     this.props.navigation.navigate("Auth")
                 }
 
@@ -28,9 +38,9 @@ export default class LoadingScreen extends React.Component {
             <View style={styles.container}>
       <StatusBar backgroundColor={'#87CEEB'} />
                 
-                    <Text>Loading App...{'\n'}
+                    <Text>Loading App....{'\n'}
                         </Text>
-                        <Text style={{textAlign:"center"}}>
+                        <Text style={{textAlign:"center"}}>loading page
                       If app is not loading please check your internet connection or restart the app.</Text>
                 <ActivityIndicator size="large"></ActivityIndicator>
             </View>

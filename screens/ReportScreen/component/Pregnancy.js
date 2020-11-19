@@ -6,7 +6,6 @@ import {
   Dimensions,
   StatusBar,
   ActivityIndicator,
-  AsyncStorage,
   TouchableOpacity,
   StyleSheet,
   Button,
