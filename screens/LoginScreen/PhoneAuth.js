@@ -22,7 +22,7 @@ const { height, width } = Dimensions.get('screen')
 
 
 
-const LoginScreen = ({navigation}) => {
+const PhoneAuth = ({navigation}) => {
 
     const [data, setData] = React.useState({
         username: '',
@@ -34,42 +34,19 @@ const LoginScreen = ({navigation}) => {
     });
    
     
-    const [account, setAccount] = useState(false);
-
-    useEffect(() => {   
-      auth().onAuthStateChanged(user => {
-        if(user===null){
-          setAccount(false)
-          
-        }else{
-          if(user.email===null){
-            setAccount(false)
-          }else{
-            setAccount(true)
-          }
-        }
-        
-      })
-      
-    },[])
-
+   
+    const [phone, setPhone] = useState('');
+    const [confirm, setConfirm] = useState(null);
+    const [code, setCode] = useState('');
 
     const textInputChange = (val) => {
-        if( val.trim().length >= 4 ) {
-            setData({
-                ...data,
-                username: val,
-                check_textInputChange: true,
-                isValidUser: true
-            });
-        } else {
-            setData({
-                ...data,
-                username: val,
-                check_textInputChange: false,
-                isValidUser: false
-            });
-        }
+        setPhone(val)
+      //  console.log(val)
+        // if( val.trim().length >= 4 ) {
+            
+        // } else {
+            
+        // }
     }
 
     const handlePasswordChange = (val) => {
@@ -109,51 +86,51 @@ const LoginScreen = ({navigation}) => {
         }
     }
 
-    const loginHandle = async(email, password) => {
+    const loginHandle = async(phone) => {
+        //link with email
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        console.log(phone)
+        const confirmation = await auth().signInWithPhoneNumber('+12345678900');
+        setConfirm(confirmation);
+        // auth().getUserByPhoneNumber(phone)
+        // .then(function(userRecord) {
+        //   console.log(userRecord)
+        // })
+        // .catch(function(error) {
+        //     console.log("Error fetching user data:", error);
+        // });
         // const foundUser = Users.filter( item => {
         //     return userName == item.username && password == item.password;
         // } );
 
       //  this.setState({ loading: true, userAcc:true })
   
-        if ( data.username.length == 0 || data.password.length == 0 ) {
-            Alert.alert('Wrong Input!', 'Email or password field cannot be empty.', [
-                {text: 'Okay'}
-            ]);
-            return;
-        }
+        // if ( data.username.length == 0 || data.password.length == 0 ) {
+        //     Alert.alert('Wrong Input!', 'Email or password field cannot be empty.', [
+        //         {text: 'Okay'}
+        //     ]);
+        //     return;
+        // }
 
        
-    
-       console.log(email,password)
-        await auth()
-          .signInWithEmailAndPassword(email, password)
-          .then(async(emailDone) => {
-              // this.setState({
-              //   loading: false,
-              // })
-            
-          })
-          .catch(error => {
-           
-            if (error.code === 'auth/invalid-email') {
-              Alert.alert('Error!', "That email address is invalid!", [
-                {text: 'Okay'}
-              ])
-            }else{
-              Alert.alert('Error!', "Check email/ Password!", [
-                {text: 'Okay'}
-              ])
-            }
-            
-          return;
-            // if (this._isMounted) {
-            //   this.setState({ errorMessage: error.message, loading: false, 
-            //     userAcc:false
-            //   })
-            // }
-          })
+       
 
         
     }
@@ -161,7 +138,7 @@ const LoginScreen = ({navigation}) => {
       <View style={styles.container}>
           <StatusBar backgroundColor='#2e86c1' barStyle="light-content"/>
         <View style={styles.header}>
-            <Text style={styles.text_header}>Welcome!</Text>
+            <Text style={styles.text_header}>Phone no. authentication!</Text>
         </View>
         <Animatable.View 
             animation="fadeInUpBig"
@@ -176,43 +153,9 @@ const LoginScreen = ({navigation}) => {
         </View>
 
         <View style={styles.footernew}> 
-        {account?
-<View>
-            <Text style={styles.text_footer}>You are already logged in as {auth().currentUser.email}.{'\n'}
-            Click continue to complete phone authentication.{'\n'}</Text>
-            <TouchableOpacity
-                    style={{...styles.signIn,width:width*0.6,alignSelf:"center"}}
-                    onPress={() => navigation.navigate('Phone')}
-                >
-                <LinearGradient
-                    colors={['#87CEEB', '#2e86c1']}
-                    style={styles.signIn}
-                >
-                    <Text style={[styles.textSign, {
-                        color:'#fff'
-                    }]}>Continue</Text>
-                </LinearGradient>
-                </TouchableOpacity>
-
-                <Text style={styles.text_footer}>{'\n'}Want to signin with other account?</Text>
-                <TouchableOpacity
-                    style={{width:width*0.6,alignSelf:"center"}}
-                    onPress={() => auth().signOut()}
-                >
-                <LinearGradient
-                    colors={['#87CEEB', '#2e86c1']}
-                    style={styles.signIn}
-                >
-                    <Text style={[styles.textSign, {
-                        color:'#fff'
-                    }]}>Logout</Text>
-                </LinearGradient>
-                </TouchableOpacity>
-
-</View>
-            :<><Text style={[styles.text_footer, {
+       <Text style={[styles.text_footer, {
              //   color: colors.text
-            }]}>Email</Text>
+            }]}>Phone no.</Text>
             <View style={styles.action}>
                 <FontAwesome 
                     name="user-o"
@@ -220,14 +163,14 @@ const LoginScreen = ({navigation}) => {
                     size={20}
                 />
                 <TextInput 
-                    placeholder="Your Email"
+                    placeholder="Enter phone number"
                     placeholderTextColor="#666666"
                     style={[styles.textInput, {
                       //  color: colors.text
                     }]}
                     autoCapitalize="none"
                     onChangeText={(val) => textInputChange(val)}
-                    onEndEditing={(e)=>handleValidUser(e.nativeEvent.text)}
+               //     onEndEditing={(e)=>handleValidUser(e.nativeEvent.text)}
                 />
                 {data.check_textInputChange ? 
                 <Animatable.View
@@ -243,7 +186,7 @@ const LoginScreen = ({navigation}) => {
             </View>
             { data.isValidUser ? null : 
             <Animatable.View animation="fadeInLeft" duration={500}>
-            <Text style={styles.errorMsg}>Incorrect Email.</Text>
+            <Text style={styles.errorMsg}>Incorrect No.</Text>
             </Animatable.View>
             }
             
@@ -251,7 +194,7 @@ const LoginScreen = ({navigation}) => {
             <Text style={[styles.text_footer, {
               //  color: colors.text,
                 marginTop: 35
-            }]}>Password</Text>
+            }]}>Code</Text>
             <View style={styles.action}>
                 <Feather 
                     name="lock"
@@ -259,19 +202,19 @@ const LoginScreen = ({navigation}) => {
                     size={20}
                 />
                 <TextInput 
-                    placeholder="Your Password"
+                    placeholder="Enter Code"
                     placeholderTextColor="#666666"
-                    secureTextEntry={data.secureTextEntry ? true : false}
+                    //secureTextEntry={data.secureTextEntry ? true : false}
                     style={[styles.textInput, {
                  //       color: colors.text
                     }]}
                     autoCapitalize="none"
-                    onChangeText={(val) => handlePasswordChange(val)}
+               //     onChangeText={(val) => handlePasswordChange(val)}
                 />
-                <TouchableOpacity
+                {/* <TouchableOpacity
                     onPress={updateSecureTextEntry}
-                >
-                    {data.secureTextEntry ? 
+                > */}
+                    {/* {data.secureTextEntry ? 
                     <Feather 
                         name="eye-off"
                         color="grey"
@@ -283,8 +226,8 @@ const LoginScreen = ({navigation}) => {
                         color="grey"
                         size={20}
                     />
-                    }
-                </TouchableOpacity>
+                    } */}
+                {/* </TouchableOpacity> */}
             </View>
             { data.isValidPassword ? null : 
             <Animatable.View animation="fadeInLeft" duration={500}>
@@ -293,13 +236,10 @@ const LoginScreen = ({navigation}) => {
             }
             
 
-            {/* <TouchableOpacity>
-                <Text style={{color: '#2e86c1', marginTop:15}}>Forgot password?</Text>
-            </TouchableOpacity> */}
             <View style={styles.button}>
                 <TouchableOpacity
                     style={styles.signIn}
-                    onPress={() => {loginHandle( data.username, data.password )}}
+                    onPress={() => {loginHandle( phone)}}
                 >
                 <LinearGradient
                     colors={['#87CEEB', '#2e86c1']}
@@ -307,12 +247,19 @@ const LoginScreen = ({navigation}) => {
                 >
                     <Text style={[styles.textSign, {
                         color:'#fff'
-                    }]}>Log In</Text>
+                    }]}>Send code</Text>
                 </LinearGradient>
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                    onPress={() => navigation.navigate('Phone')}
+                    onPress={async() => {
+                        try {
+                            await confirm.confirm('123456');
+
+                          } catch (error) {
+                            console.log('Invalid code.');
+                          }
+                    }}
                     style={[styles.signIn, {
                         borderColor: '#2e86c1',
                         borderWidth: 1,
@@ -321,15 +268,15 @@ const LoginScreen = ({navigation}) => {
                 >
                     <Text style={[styles.textSign, {
                         color: '#2e86c1'
-                    }]}>Forget Password</Text>
+                    }]}>check</Text>
                 </TouchableOpacity>
-            </View></>}
+            </View>
             </View>
         </Animatable.View>
       </View>
     );
 };
-export default LoginScreen
+export default PhoneAuth
 
 const styles = StyleSheet.create({
     container: {

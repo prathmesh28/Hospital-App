@@ -12,18 +12,18 @@ export default class LoadingScreen extends React.Component {
         auth().onAuthStateChanged(user => {
 
             // console.log(user.phoneNumber)
-            // console.log(user)
+           //  console.log(user)
                 if(user){
-                    console.log('user',user)
+                    // console.log('user',user)
                     if(user.phoneNumber){
-                        console.log(user.phoneNumber)
+                   //     console.log(user.phoneNumber)
                         this.props.navigation.navigate("App")
                     }else{
-                        console.log('login',user.phoneNumber)
-                        this.props.navigation.navigate("Login")
+                     //   console.log('login',user.phoneNumber)
+                        this.props.navigation.navigate("Phone")
                     }
                 }else{
-                    console.log('auth',user.phoneNumber)
+                  //  console.log('auth',user.phoneNumber)
                     this.props.navigation.navigate("Auth")
                 }
 

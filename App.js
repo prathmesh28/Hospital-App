@@ -4,6 +4,7 @@ import { createStackNavigator } from "react-navigation-stack"
 import { View, Text, ActivityIndicator,StatusBar,Dimensions, StyleSheet } from "react-native"
 import LoadingScreen from "./screens/LoadingScreen"
 import LoginScreen from "./screens/LoginScreen/LoginScreen"
+import PhoneAuth from "./screens/LoginScreen/PhoneAuth"
 import WelcomeScreen from './screens/WelcomeScreen/WelcomeScreen'
 import TabScreen from "./TabBar/App"
 import Report from "./screens/ReportScreen/screens/Reports"
@@ -12,7 +13,12 @@ import Notification from "./screens/ProfileScreen/screens/Notification"
 const AuthStack = createStackNavigator({
     Intro:WelcomeScreen,
     Login: LoginScreen,
-}) 
+    Phone:PhoneAuth
+  },
+  {
+    header: null,
+    headerMode: 'none'
+}); 
 const TabStack = createStackNavigator({
   Apptab:TabScreen,
   Report:Report,
