@@ -13,10 +13,11 @@ const { height, width } = Dimensions.get('screen')
 import _ from 'lodash'
 import MainSVG from '../../TabBar/Main'
 import TimeAgo from 'react-native-timeago';
+import { withNavigation } from "react-navigation";
 
 
 
-export default class HomeScreen extends Component {
+class HomeScreen extends Component {
   _isMounted = false;
   constructor(props){
     super(props);
@@ -110,7 +111,7 @@ componentWillUnmount() {
 
         </View>
 
-        <View style={{width:width*0.9,alignSelf:"center",padding:10,top:40}}>
+        <View style={{width:width*0.9,alignSelf:"center",padding:10,marginTop:40}}>
           <Card 
               style={{
                 padding:0,
@@ -194,38 +195,24 @@ componentWillUnmount() {
             </CardItem>}
           </Card>
         </View>
+        <Card>
+          <CardItem 
+           
+            >
+              <Button  onPress={()=>this.props.navigation.navigate('History')}>
+              <Text>your pharmacy</Text>
+
+              </Button>
+          </CardItem>
+        </Card>
        
-   
-
-
-
-        {/* <View style={{width:width*0.9,alignSelf:"center",padding:10}}>
-        <Card style={{padding:0,borderRadius:20,elevation:4}}>
-            <CardItem 
-              style={{padding:0,borderRadius:20, elevation:0,alignContent:"center",
-              backgroundColor:'white',borderColor:'#7ec0ee4d',borderWidth:1}}>
-              <Body>
-                
-               
-         
-               
-              </Body>
-            </CardItem>
-          </Card>
-        </View> */}
-        {/* <View style={{alignItems:"center"}}>
-        <FlatList
-        data={DATA}
-        renderItem={this.renderItem}
-        keyExtractor={item => item.id}
-      />
-        </View> */}
-      </View>
+    
+    </View>
    </View>
     )  
   }
 }
-
+export default withNavigation(HomeScreen);
 const styles = StyleSheet.create({
   container: {
     flex: 1,

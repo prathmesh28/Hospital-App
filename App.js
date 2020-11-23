@@ -9,6 +9,8 @@ import WelcomeScreen from './screens/WelcomeScreen/WelcomeScreen'
 import TabScreen from "./TabBar/App"
 import Report from "./screens/ReportScreen/screens/Reports"
 import Notification from "./screens/ProfileScreen/screens/Notification"
+import Details from "./screens/HomeScreen/screens/Details"
+import History from "./screens/HomeScreen/screens/History"
 
 const AuthStack = createStackNavigator({
     Intro:WelcomeScreen,
@@ -21,8 +23,10 @@ const AuthStack = createStackNavigator({
 }); 
 const TabStack = createStackNavigator({
   Apptab:TabScreen,
+  Details:Details,
   Report:Report,
   Notification:Notification,
+  History:History
 //  Appointment:Appointment
 },
 {
@@ -57,11 +61,6 @@ class App extends React.Component {
       }
       async componentDidMount() {
         this._isMounted = true;
-        // await Font.loadAsync({
-        //   Roboto: require('native-base/Fonts/Roboto.ttf'),
-        //   Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-        //   ...Ionicons.font,
-        // });
         if (this._isMounted) {
           this.setState({ isReady: true });
         }

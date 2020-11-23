@@ -39,6 +39,8 @@ const PhoneAuth = ({navigation}) => {
     const [confirm, setConfirm] = useState(null);
     const [code, setCode] = useState('');
 
+    const [user, setUser] = useState();
+
     const textInputChange = (val) => {
         setPhone(val)
       //  console.log(val)
@@ -86,6 +88,14 @@ const PhoneAuth = ({navigation}) => {
         }
     }
 
+
+
+    
+                   
+        
+
+
+
     const loginHandle = async(phone) => {
         //link with email
 
@@ -97,43 +107,43 @@ const PhoneAuth = ({navigation}) => {
 
 
 
-
-
-
-
-
-
-
-
         
-        console.log(phone)
-        const confirmation = await auth().signInWithPhoneNumber('+12345678900');
+         console.log(phone)
+        const confirmation = await auth().signInWithPhoneNumber(phone);
         setConfirm(confirmation);
-        // auth().getUserByPhoneNumber(phone)
-        // .then(function(userRecord) {
-        //   console.log(userRecord)
-        // })
-        // .catch(function(error) {
-        //     console.log("Error fetching user data:", error);
-        // });
-        // const foundUser = Users.filter( item => {
-        //     return userName == item.username && password == item.password;
-        // } );
+        console.log(confirmation.verificationId)
 
-      //  this.setState({ loading: true, userAcc:true })
-  
-        // if ( data.username.length == 0 || data.password.length == 0 ) {
-        //     Alert.alert('Wrong Input!', 'Email or password field cannot be empty.', [
-        //         {text: 'Okay'}
-        //     ]);
-        //     return;
-        // }
+
+
+
+
+
 
        
        
 
         
     }
+     // Handle confirm code button press
+  async function confirmCode(code) {
+    try {
+      const credential = auth.PhoneAuthProvider.credential(
+        confirm.verificationId,
+        code,
+      );
+      console.log(credential)
+      let userData = await auth().currentUser.linkWithCredential(credential);
+      //setUser(userData.user);
+    //  console.log(userData.user)
+      navigation.navigate("App")
+    } catch (error) {
+      if (error.code == 'auth/invalid-verification-code') {
+        console.log('Invalid code.');
+      } else {
+        console.log('Account linking error');
+      }
+    }
+  }
     return (
       <View style={styles.container}>
           <StatusBar backgroundColor='#2e86c1' barStyle="light-content"/>
@@ -191,16 +201,17 @@ const PhoneAuth = ({navigation}) => {
             }
             
 
+          { confirm ?<View>
             <Text style={[styles.text_footer, {
               //  color: colors.text,
-                marginTop: 35
-            }]}>Code</Text>
-            <View style={styles.action}>
-                <Feather 
-                    name="lock"
-               //     color={colors.text}
-                    size={20}
-                />
+                    marginTop: 35
+                }]}>Code</Text>
+                <View style={styles.action}>
+                    <Feather 
+                        name="lock"
+                //     color={colors.text}
+                        size={20}
+                    />
                 <TextInput 
                     placeholder="Enter Code"
                     placeholderTextColor="#666666"
@@ -209,8 +220,14 @@ const PhoneAuth = ({navigation}) => {
                  //       color: colors.text
                     }]}
                     autoCapitalize="none"
-               //     onChangeText={(val) => handlePasswordChange(val)}
+                    onChangeText={(val) => {setCode(val)}}
                 />
+                 </View>
+          </View>: null}
+         
+             
+
+
                 {/* <TouchableOpacity
                     onPress={updateSecureTextEntry}
                 > */}
@@ -228,7 +245,7 @@ const PhoneAuth = ({navigation}) => {
                     />
                     } */}
                 {/* </TouchableOpacity> */}
-            </View>
+          
             { data.isValidPassword ? null : 
             <Animatable.View animation="fadeInLeft" duration={500}>
             <Text style={styles.errorMsg}>Password must be 8 characters long.</Text>
@@ -237,39 +254,37 @@ const PhoneAuth = ({navigation}) => {
             
 
             <View style={styles.button}>
-                <TouchableOpacity
-                    style={styles.signIn}
-                    onPress={() => {loginHandle( phone)}}
-                >
-                <LinearGradient
-                    colors={['#87CEEB', '#2e86c1']}
-                    style={styles.signIn}
-                >
-                    <Text style={[styles.textSign, {
-                        color:'#fff'
-                    }]}>Send code</Text>
-                </LinearGradient>
-                </TouchableOpacity>
+                {confirm?
+                    <TouchableOpacity
+                        onPress={() => {confirmCode(code)}}
+                        style={[styles.signIn, {
+                            borderColor: '#2e86c1',
+                            borderWidth: 1,
+                            marginTop: 15
+                        }]}
+                    >
+                        <Text style={[styles.textSign, {
+                            color: '#2e86c1'
+                        }]}>check</Text>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity
+                        style={styles.signIn}
+                        onPress={() => {loginHandle( phone)}}
+                    >
+                        <LinearGradient
+                            colors={['#87CEEB', '#2e86c1']}
+                            style={styles.signIn}
+                        >
+                            <Text style={[styles.textSign, {
+                                color:'#fff'
+                            }]}>Send code</Text>
+                        </LinearGradient>
+                    </TouchableOpacity>
+                }
+                
 
-                <TouchableOpacity
-                    onPress={async() => {
-                        try {
-                            await confirm.confirm('123456');
-
-                          } catch (error) {
-                            console.log('Invalid code.');
-                          }
-                    }}
-                    style={[styles.signIn, {
-                        borderColor: '#2e86c1',
-                        borderWidth: 1,
-                        marginTop: 15
-                    }]}
-                >
-                    <Text style={[styles.textSign, {
-                        color: '#2e86c1'
-                    }]}>check</Text>
-                </TouchableOpacity>
+                
             </View>
             </View>
         </Animatable.View>

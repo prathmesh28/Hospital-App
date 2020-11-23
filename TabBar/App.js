@@ -21,8 +21,8 @@ const {width, height} = Dimensions.get("window");
 import {SafeAreaView, SafeAreaProvider, initialWindowMetrics} from "react-native-safe-area-context";
 
 const tabs = [
-  {icon: "hospital"},
-  {icon: "file-alt"},
+  {icon: "home"},
+  {icon: "profile"},
   {icon: "medicinebox"},
   {icon: "user"}
 ]
@@ -49,20 +49,21 @@ const TabScreen = () => {
     const { uid } = auth().currentUser
 
 
-    const onValueChange = database()
-      .ref('/')
-      .on('value', async(snapshot) => {
-        
-          await setData(snapshot.val().Users[uid])
-          await setDoc(snapshot.val().Doctors)
+    const onValueChange = database().ref('/Users/'+uid).on('value', async(snapshot) => {
+          await setData(snapshot.val())
           setLoading(false) 
       });
+    const onValueChangeDoc = database().ref('/Doctors/').on('value', async(snapshot) => {
+        await setDoc(snapshot.val())
+        setLoading(false) 
+    });
 
     // Stop listening for updates when no longer required
-    return () =>
-      database()
-        .ref('/')
-        .off('value', onValueChange);
+    return () => {
+      database().ref('/Users/'+uid).off('value', onValueChange)
+      database().ref('/Doctors/').off('value', onValueChangeDoc)
+    }
+
   }, []);
 
 

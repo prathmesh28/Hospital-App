@@ -288,7 +288,7 @@ const LoginScreen = ({navigation}) => {
             </View>
             { data.isValidPassword ? null : 
             <Animatable.View animation="fadeInLeft" duration={500}>
-            <Text style={styles.errorMsg}>Password must be 8 characters long.</Text>
+            <Text style={styles.errorMsg}>Password must be 6 characters long.</Text>
             </Animatable.View>
             }
             
