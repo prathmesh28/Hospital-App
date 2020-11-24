@@ -195,14 +195,17 @@ componentWillUnmount() {
             </CardItem>}
           </Card>
         </View>
-        <Card>
-          <CardItem 
-           
-            >
-              <Button  onPress={()=>this.props.navigation.navigate('History',{data:this.props.data})}>
-              <Text>your pharmacy</Text>
+        
+        <Card style={{width:width*0.85,borderRadius:20,alignSelf:"center",marginTop:20}}>
+        <CardItem header bordered style={{borderRadius:15,backgroundColor:'#45b3e0',height:60}}>
+                <Text style={{color:'black',fontWeight:'bold',fontSize:15}}>PHARMACY</Text>
+              </CardItem>
+              
+          <CardItem bordered button style={{borderRadius:20}}
+                onPress={()=>this.props.navigation.navigate('History',{data:this.props.data})}>
+              <Text>Upload Prescription</Text>
 
-              </Button>
+              
           </CardItem>
         </Card>
        
