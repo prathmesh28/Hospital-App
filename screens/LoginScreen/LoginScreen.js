@@ -126,7 +126,6 @@ const LoginScreen = ({navigation}) => {
 
        
     
-       console.log(email,password)
         await auth()
           .signInWithEmailAndPassword(email, password)
           .then(async(emailDone) => {

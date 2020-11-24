@@ -38,10 +38,10 @@ componentDidMount(){
 }
 async componentDidUpdate(prevProps, prevState){
 if(prevProps.data.data.NextDate!==this.props.data.data.NextDate){
-  console.log('date changed')
+  // console.log('date changed')
 }
 if(prevProps.data.data.remark!==this.props.data.data.remark){
-  console.log('remark changed')
+  // console.log('remark changed')
 }
 }
 componentWillUnmount() {

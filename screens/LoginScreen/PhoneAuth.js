@@ -108,10 +108,10 @@ const PhoneAuth = ({navigation}) => {
 
 
         
-         console.log(phone)
+        //  console.log(phone)
         const confirmation = await auth().signInWithPhoneNumber(phone);
         setConfirm(confirmation);
-        console.log(confirmation.verificationId)
+        // console.log(confirmation.verificationId)
 
 
 

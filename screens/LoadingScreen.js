@@ -14,9 +14,9 @@ export default class LoadingScreen extends React.Component {
             // console.log(user.phoneNumber)
            //  console.log(user)
                 if(user){
-                     console.log('user',user)
+                    //  console.log('user',user)
                     if(user.phoneNumber){
-                        console.log('ph',user.phoneNumber)
+                        // console.log('ph',user.phoneNumber)
                         this.props.navigation.navigate("App")
                     }else{
                      //   console.log('login',user.phoneNumber)

@@ -70,14 +70,14 @@ export default class Details extends React.Component {
     }
       
     ImagePicker.showImagePicker(options, res => {
-      console.log('Response = ', res);
+      // console.log('Response = ', res);
 
       if (res.didCancel) {
-        console.log('User cancelled image picker');
+        // console.log('User cancelled image picker');
       } else if (res.error) {
-        console.log('ImagePicker Error: ', res.error);
+        // console.log('ImagePicker Error: ', res.error);
       } else if (res.customButton) {
-        console.log('User tapped custom button: ', res.customButton);
+        // console.log('User tapped custom button: ', res.customButton);
         alert(res.customButton);
       } else {
         let source = res;
@@ -92,33 +92,42 @@ export default class Details extends React.Component {
 
 
   uploadImage=async()=>{
-    this.setState({loading:true})
+    //this.setState({loading:true})
    
     
     const { uid } = auth().currentUser
-    console.log(uid)
-      let newDate = new Date()
-      let d = newDate.getDate();
-      let m = newDate.getMonth() + 1;
-      let y = newDate.getFullYear();
-      let h = newDate.getHours();
-      let mt = newDate.getMinutes();
-      let s = newDate.getSeconds();
-      let ms = newDate.getMilliseconds();
+
+    let newDate = new Date()
+    let d = newDate.getDate();
+    let m = newDate.getMonth() + 1;
+    let y = newDate.getFullYear();
+    let h = newDate.getHours();
+    let mt = newDate.getMinutes();
+    let s = newDate.getSeconds();
+    let ms = newDate.getMilliseconds();
+    let usernewdate = newDate.toLocaleString()
+
     this.setState({textInfo:'Uploading Image...'})
+
     const reference = storage().ref('photos/'+d+m+y+h+mt+s+ms+uid+this.state.resourcePath.fileName);
     const pathToFile = this.state.resourcePath.uri
     await reference.putFile(pathToFile);
-    console.log('done')
+
     this.setState({textInfo:'Checking...'})
+
     const url = await storage().ref('photos/'+d+m+y+h+mt+s+ms+uid+this.state.resourcePath.fileName).getDownloadURL()
+
     this.setState({textInfo:'Sending data to pharmacy...'})
+
     const data = {
       name:this.state.Name,
       phone:this.state.Phone,
       url:url,
-      code:uid
+      code:uid,
+      date:usernewdate,
+      status:false
     }
+
     await database()
       .ref('Pharmacy/'+d+m+y+h+mt+s+ms+uid)
       .set({
