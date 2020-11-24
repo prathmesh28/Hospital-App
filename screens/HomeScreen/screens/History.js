@@ -18,6 +18,7 @@ import _ from 'lodash'
 import { Card, CardItem, Body, Text, Button } from 'native-base';
 import database from '@react-native-firebase/database';
 import auth from '@react-native-firebase/auth';
+import TimeAgo from 'react-native-timeago';
 
 
 const { height, width } = Dimensions.get('screen')
@@ -71,13 +72,15 @@ class History extends Component {
                 }}
               />
             </View>
-            <View style={{padding:10,width:width*0.45}}>
+            <View style={{padding:10,width:width*0.45,justifyContent:'space-evenly'}}>
              
-              <Text>
-                {item.date}
-              </Text>
+              
               <Text>
                 {item.status?'Your medicines are packed, collect it from pharmacy':'Your medicines are not yet packed'}
+              </Text>
+              <Text >
+                
+                <TimeAgo time={item.date} interval={60000}/>
               </Text>
               
             </View>
