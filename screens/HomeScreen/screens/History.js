@@ -1,98 +1,149 @@
-import React, { Component } from "react"  
+import React, { Component } from "react"
 import {
- 
+
   SafeAreaView,
   Dimensions,
   StatusBar,
   ActivityIndicator,
   TouchableOpacity,
   StyleSheet,
+  FlatList,
 
   View,
   Image,
   ImageBackground
-} from "react-native"  
+} from "react-native"
 import { withNavigation } from 'react-navigation';
+import _ from 'lodash'
 import { Card, CardItem, Body, Text, Button } from 'native-base';
+import database from '@react-native-firebase/database';
 
 
-const { height, width } = Dimensions.get('screen')  
+const { height, width } = Dimensions.get('screen')
 
 class History extends Component {
 
-  state={
-    data:null,
-    Disease:""
+  _isMounted = false;
+  state = {
+    data: null
   }
-  componentDidMount(){
-  }
-  render() {
+  componentDidMount() {
+    this._isMounted = true;
+    database().ref('/Pharmacy/').on('value', async (snapshot) => {
+      const Pharmacy = _.map(snapshot.val(), (e) => {
+        return e.data
+      })
+    //  console.log(Pharmacy)
+      this.setState({data: Pharmacy})
+      //console.log(snapshot.val())
 
+    })
 
-    
    
+    // console.log(Pharmacy)
+    // if (this._isMounted) {
+    //   this.setState({ data: Pharmacy })
+    // }
+  }
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+  renderItem = ({ item }) => {
+
+
+
+
+    return (
+      <Card style={{
+        padding: 5, width: width * .85, alignSelf: "center", borderRadius: 10,
+        //  top: 0,
+        // height:height*0.2
+      }}>
+        <Body>
+          <CardItem>
+            {/*  */}
+            <View style={{ display: 'flex', flexDirection: 'row' }}>
+                <Image
+                  source={{ uri: item.url }}
+                  style={{
+                    height: 150,
+                    width: 150
+                  }}
+                />
+              </View>
+              
+              <View style={{left:0}}>
+              
+            {console.log(item)}
+              <Text>
+                Token No: </Text>
+              
+              <View ><Text>
+                name:{item.name}</Text></View>
+                
+
+                <View >
+                <Text>Ph No. {item.phone}</Text>
+                </View>
+                
+          
+          
+          </View>
+          </CardItem>
+          </Body>
+          
+
+      </Card>
+
+
+    )
+
+  }
+  renderHeader = () => {
+    return <View style={{ height: 100 }}>
+    </View>
+  };
+
+  render() {
+    const data = this.state.data
+    console.log(this.state.data)
     return (
       <View style={styles.container}>
         <StatusBar backgroundColor={'#87CEEB'} />
-        <Button  onPress={()=>this.props.navigation.navigate('Details',{data:this.props.navigation.state.params.data.data})}>
-              <Text>your pharmacy</Text>
+        <View style={{ flex: 1, paddingBottom: 60, marginTop: 30 }}>
+          {/* <Text>qwerty</Text> */}
+          <FlatList
 
-              </Button>
-     
-   </View>
-    )  
+            data={data}
+            renderItem={this.renderItem}
+            keyExtractor={item => item.id}
+            ListHeaderComponent={this.renderHeader}
+          />
+
+        </View>
+        <View style={{ backgroundColor: '#87CEEB', height: 100, width: width, position: 'absolute', bottom: 0 }}>
+          <Button onPress={()=>this.props.navigation.navigate('Details',{data:this.props.navigation.state.params.data.data})}>
+            <Text>your pharmacy</Text>
+
+          </Button>
+        </View>
+
+      </View>
+    )
   }
-
-  
 }
+
+
+
 export default withNavigation(History);
+
 const styles = StyleSheet.create({
   container: {
-    backgroundColor:"#d3edf8",
+    backgroundColor: "#d3edf8",
     flex: 1,
-  
+
   },
 
 })  
 
 
-
-// {
-//   "navigation": {
-//     "actions": {
-//       "dismiss": [Function dismiss], 
-//       "goBack": [Function goBack], 
-//       "navigate": [Function navigate], 
-//       "pop": [Function pop], 
-//       "popToTop": [Function popToTop], 
-//       "push": [Function push], 
-//       "replace": [Function replace], 
-//       "reset": [Function reset], 
-//       "setParams": [Function setParams]
-//     }, 
-//     "addListener": [Function addListener], 
-//     "dangerouslyGetParent": [Function anonymous], 
-//     "dismiss": [Function anonymous], 
-//     "dispatch": [Function anonymous], 
-//     "emit": [Function emit], 
-//     "getChildNavigation": [Function getChildNavigation], 
-//     "getParam": [Function anonymous], 
-//     "getScreenProps": [Function anonymous], 
-//     "goBack": [Function anonymous], 
-//     "isFirstRouteInParent": [Function isFirstRouteInParent], 
-//     "isFocused": [Function isFocused], 
-//     "navigate": [Function anonymous], 
-//     "pop": [Function anonymous], 
-//     "popToTop": [Function anonymous], 
-//     "push": [Function anonymous], 
-//     "replace": [Function anonymous], 
-//     "reset": [Function anonymous], 
-//     "router": undefined, 
-//     "setParams": [Function anonymous], 
-//     "state": {
-//       "key": "id-1606124128349-4", 
-//       "params": [Object], "routeName": "History"
-//     }
-//   }, 
-//   "screenProps": undefined
-// }
