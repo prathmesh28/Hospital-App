@@ -61,24 +61,27 @@ class History extends Component {
       <Card style={styles.itemCard}>
         
             <View  style={styles.cardItemView} >
+              <View style={{padding:10,width:width*0.35}}>
               <Image
                 source={{ uri: item.url }}
                 style={{
-                  height: 100,
-                  width: 100,
+                  height: width*0.25,
+                  width: width*0.25,
                   borderRadius:10
                 }}
               />
-            
-            <View>
-              
+            </View>
+            <View style={{padding:10,width:width*0.45}}>
+             
               <Text>
                 {item.date}
               </Text>
-             
+              <Text>
+                {item.status?'Your medicines are packed, collect it from pharmacy':'Your medicines are not yet packed'}
+              </Text>
               
             </View>
-            </View>
+        </View>
        
       </Card>
 
@@ -159,7 +162,9 @@ const styles = StyleSheet.create({
   cardItemView: {
     display:"flex", 
     flexDirection:'row',
-    justifyContent:'space-evenly'
+    justifyContent:'space-evenly',
+    flexWrap: 'wrap',
+    width: width *.8
   }
 
 })  
