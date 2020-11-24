@@ -34,7 +34,7 @@ class History extends Component {
     return (
       <View style={styles.container}>
         <StatusBar backgroundColor={'#87CEEB'} />
-        <Button  onPress={()=>this.props.navigation.navigate('Details')}>
+        <Button  onPress={()=>this.props.navigation.navigate('Details',{data:this.props.navigation.state.params.data.data})}>
               <Text>your pharmacy</Text>
 
               </Button>
@@ -54,3 +54,45 @@ const styles = StyleSheet.create({
   },
 
 })  
+
+
+
+// {
+//   "navigation": {
+//     "actions": {
+//       "dismiss": [Function dismiss], 
+//       "goBack": [Function goBack], 
+//       "navigate": [Function navigate], 
+//       "pop": [Function pop], 
+//       "popToTop": [Function popToTop], 
+//       "push": [Function push], 
+//       "replace": [Function replace], 
+//       "reset": [Function reset], 
+//       "setParams": [Function setParams]
+//     }, 
+//     "addListener": [Function addListener], 
+//     "dangerouslyGetParent": [Function anonymous], 
+//     "dismiss": [Function anonymous], 
+//     "dispatch": [Function anonymous], 
+//     "emit": [Function emit], 
+//     "getChildNavigation": [Function getChildNavigation], 
+//     "getParam": [Function anonymous], 
+//     "getScreenProps": [Function anonymous], 
+//     "goBack": [Function anonymous], 
+//     "isFirstRouteInParent": [Function isFirstRouteInParent], 
+//     "isFocused": [Function isFocused], 
+//     "navigate": [Function anonymous], 
+//     "pop": [Function anonymous], 
+//     "popToTop": [Function anonymous], 
+//     "push": [Function anonymous], 
+//     "replace": [Function anonymous], 
+//     "reset": [Function anonymous], 
+//     "router": undefined, 
+//     "setParams": [Function anonymous], 
+//     "state": {
+//       "key": "id-1606124128349-4", 
+//       "params": [Object], "routeName": "History"
+//     }
+//   }, 
+//   "screenProps": undefined
+// }

@@ -199,7 +199,7 @@ componentWillUnmount() {
           <CardItem 
            
             >
-              <Button  onPress={()=>this.props.navigation.navigate('History')}>
+              <Button  onPress={()=>this.props.navigation.navigate('History',{data:this.props.data})}>
               <Text>your pharmacy</Text>
 
               </Button>
