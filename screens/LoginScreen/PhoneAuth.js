@@ -22,24 +22,15 @@ import _ from 'lodash';
 
 const { height, width } = Dimensions.get('screen')
 
-
-
-
 const PhoneAuth = ({navigation}) => {
 
-    const [data, setData] = React.useState({
-        check_textInputChange: false,
-        secureTextEntry: true,
-        isValidPhone: true,
-        isValidPassword: true,
-    });
+   
    
     const [phone, setPhone] = useState('');
     const [confirm, setConfirm] = useState(null);
     const [code, setCode] = useState('')
     const [isValidPhoneText, setIsValidPhoneText] = useState('Null')
     const [check_textInputChange,setCheck_textInputChange] = useState(false)
-    const [user, setUser] = useState();
     const [useraccount, setUserAccount] = useState(false);
 
     const textInputChange = (val) => {
@@ -56,27 +47,23 @@ const PhoneAuth = ({navigation}) => {
     }
 
 
-    
-        
-
-
 
     const loginHandle = async(phone) => {
-       console.log(navigation.state.params.forget)
+    //    console.log(navigation.state.params.forget)
 
-        database().ref('UsersList/').once('value', async(snapshot) => {
-            console.log(snapshot.val())
+        await database().ref('UsersList/').once('value', async(snapshot) => {
+            // console.log(snapshot.val())
             await _.map(snapshot.val(), async(e) => {
                 if(e.phoneNo==='+91'+phone)
                 {
                     await setUserAccount(true)
-                    console.log('hi')
+                    // console.log('hi')
                 }
                 
             })
         })
         if(navigation.state.params.forget && !useraccount){
-            
+            console.log('useraccount',useraccount)
                 Alert.alert('User not found!', "Check phone no..", [
                     {text: 'Okay'}
                 ])
@@ -119,13 +106,24 @@ const PhoneAuth = ({navigation}) => {
 
      // Handle confirm code button press
   async function confirmCode(code) {
+      if(navigation.state.params.forget){
+        try {
+            await confirm.confirm(code);
+          } catch (error) {
+            Alert.alert('Error!', 'Invalid code.', [
+                {text: 'Okay'}
+              ])
+            console.log('Invalid code.');
+          }
+      }else{
+
+      
     try {
       const credential = auth.PhoneAuthProvider.credential(
         confirm.verificationId,
         code,
       );
-      if(!useraccount){
-          //first time user login link with email
+          console.log('new user login')
         auth().currentUser.linkWithCredential(credential)
         .then(async(data) => {
             console.log('data',data)
@@ -149,10 +147,10 @@ const PhoneAuth = ({navigation}) => {
         
               console.log(error)
           })
-      }else{
-          //did forget password
-        navigation.navigate("App")
-      }
+    //   }else{
+    //       //did forget password
+    //     navigation.navigate("App")
+    //   }
     
         
    //   
@@ -163,6 +161,9 @@ const PhoneAuth = ({navigation}) => {
         console.log('Account linking error');
       }
     }
+
+
+}
   }
     return (
       <View style={styles.container}>

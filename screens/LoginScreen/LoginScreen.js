@@ -40,7 +40,7 @@ const LoginScreen = ({navigation}) => {
     const [textInfo,setTextInfo] = useState('Loading...')
 
     useEffect(() => {   
-       
+       setLoading(true)
       auth().onAuthStateChanged(user => {
       //  console.log(user)
         if(user===null){
@@ -55,7 +55,7 @@ const LoginScreen = ({navigation}) => {
         }
         
       })
-      
+      setLoading(false)
     },[])
 
 

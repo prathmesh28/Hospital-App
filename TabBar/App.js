@@ -48,7 +48,6 @@ const TabScreen = () => {
 
     const { uid } = auth().currentUser
 
-
     const onValueChange = database().ref('/Users/'+uid).on('value', async(snapshot) => {
           await setData(snapshot.val())
         //  setLoading(false) 
