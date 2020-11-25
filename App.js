@@ -1,6 +1,6 @@
 import React from "react"
 import { createAppContainer, createSwitchNavigator } from "react-navigation"
-import { createStackNavigator } from "react-navigation-stack"
+import { createStackNavigator,  TransitionPresets  } from "react-navigation-stack"
 import { View, Text, ActivityIndicator,StatusBar,Dimensions, StyleSheet } from "react-native"
 import LoadingScreen from "./screens/LoadingScreen"
 import LoginScreen from "./screens/LoginScreen/LoginScreen"
@@ -19,8 +19,15 @@ const AuthStack = createStackNavigator({
   },
   {
     header: null,
-    headerMode: 'none'
-}); 
+    headerMode: 'none',
+    defaultNavigationOptions: {
+      ...TransitionPresets.RevealFromBottomAndroid,
+    },
+   
+    
+}
+
+)
 const TabStack = createStackNavigator({
   Apptab:TabScreen,
   Details:Details,

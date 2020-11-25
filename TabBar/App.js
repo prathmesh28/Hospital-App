@@ -47,7 +47,6 @@ const TabScreen = () => {
   useEffect(() => {
 
     const { uid } = auth().currentUser
-    
 
 
     const onValueChange = database().ref('/Users/'+uid).on('value', async(snapshot) => {

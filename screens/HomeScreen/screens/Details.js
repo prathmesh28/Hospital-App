@@ -6,7 +6,7 @@ import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
 import storage from '@react-native-firebase/storage';
 import { utils } from '@react-native-firebase/app';
-import Loader from './Loader'
+import Loader from '../../Loader'
 
 const { height, width } = Dimensions.get('screen')  
 

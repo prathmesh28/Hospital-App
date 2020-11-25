@@ -16,6 +16,9 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import { LoginSvgOne } from './assets/SubtlePrismSvg'
 import auth from '@react-native-firebase/auth';
+import database from '@react-native-firebase/database';
+import _ from 'lodash';
+
 
 const { height, width } = Dimensions.get('screen')
 
@@ -25,105 +28,95 @@ const { height, width } = Dimensions.get('screen')
 const PhoneAuth = ({navigation}) => {
 
     const [data, setData] = React.useState({
-        username: '',
-        password: '',
         check_textInputChange: false,
         secureTextEntry: true,
-        isValidUser: true,
+        isValidPhone: true,
         isValidPassword: true,
     });
    
-    
-   
     const [phone, setPhone] = useState('');
     const [confirm, setConfirm] = useState(null);
-    const [code, setCode] = useState('');
-
+    const [code, setCode] = useState('')
+    const [isValidPhoneText, setIsValidPhoneText] = useState('Null')
+    const [check_textInputChange,setCheck_textInputChange] = useState(false)
     const [user, setUser] = useState();
+    const [useraccount, setUserAccount] = useState(false);
 
     const textInputChange = (val) => {
         setPhone(val)
-      //  console.log(val)
-        // if( val.trim().length >= 4 ) {
+        if( val.trim().length > 10 || val.trim().length < 10) {
+            setCheck_textInputChange(false)
+            setIsValidPhoneText('Enter a valid phone no.')
             
-        // } else {
-            
-        // }
-    }
-
-    const handlePasswordChange = (val) => {
-        if( val.trim().length >= 6 ) {
-            setData({
-                ...data,
-                password: val,
-                isValidPassword: true
-            });
         } else {
-            setData({
-                ...data,
-                password: val,
-                isValidPassword: false
-            });
+            setCheck_textInputChange(true)
+            setIsValidPhoneText('Null')
         }
+        
     }
-
-    const updateSecureTextEntry = () => {
-        setData({
-            ...data,
-            secureTextEntry: !data.secureTextEntry
-        });
-    }
-
-    const handleValidUser = (val) => {
-        if( val.trim().length >= 4 ) {
-            setData({
-                ...data,
-                isValidUser: true
-            });
-        } else {
-            setData({
-                ...data,
-                isValidUser: false
-            });
-        }
-    }
-
 
 
     
-                   
         
 
 
 
     const loginHandle = async(phone) => {
-        //link with email
+       console.log(navigation.state.params.forget)
 
-
-
-
-
-
-
-
-
+        database().ref('UsersList/').once('value', async(snapshot) => {
+            console.log(snapshot.val())
+            await _.map(snapshot.val(), async(e) => {
+                if(e.phoneNo==='+91'+phone)
+                {
+                    await setUserAccount(true)
+                    console.log('hi')
+                }
+                
+            })
+        })
+        if(navigation.state.params.forget && !useraccount){
+            
+                Alert.alert('User not found!', "Check phone no..", [
+                    {text: 'Okay'}
+                ])
+              
         
-        //  console.log(phone)
-        const confirmation = await auth().signInWithPhoneNumber(phone);
-        setConfirm(confirmation);
-        // console.log(confirmation.verificationId)
-
-
-
-
-
-
-
-       
-       
+            
+        }else{
+            auth().signInWithPhoneNumber('+91'+phone)
+            .then(data => {
+                setConfirm(data);
+                // console.log(data)
+                // console.log(data.verificationId)
+            }).catch(error => {
+    
+                if (error.code === 'auth/invalid-phone-number') {
+                  Alert.alert('Error!', "Enter a valid phone no.!", [
+                    {text: 'Okay'}
+                  ])
+                  setLoading(false)
+                }else{
+                  Alert.alert('Error!', "This phone no. is already in use or not registered.", [
+                    {text: 'Okay'}
+                  ])
+                  setLoading(false)
+                }
+                console.log(error)
+              });
+        
+        }
+  
+        
+           
+      
+        
+        
+      
 
         
     }
+
      // Handle confirm code button press
   async function confirmCode(code) {
     try {
@@ -131,11 +124,38 @@ const PhoneAuth = ({navigation}) => {
         confirm.verificationId,
         code,
       );
-      console.log(credential)
-      let userData = await auth().currentUser.linkWithCredential(credential);
-      //setUser(userData.user);
-    //  console.log(userData.user)
-      navigation.navigate("App")
+      if(!useraccount){
+          //first time user login link with email
+        auth().currentUser.linkWithCredential(credential)
+        .then(async(data) => {
+            console.log('data',data)
+            let email = data.user.email
+            let phoneNo = data.user.phoneNumber
+            await database().ref('UsersList/' + data.user.uid).set({
+              email, phoneNo
+          })
+            navigation.navigate("App")
+          }).catch(error => {
+  
+              if (error.code == 'auth/invalid-verification-code') {
+                  Alert.alert('Error!', "Check verification code.", [
+                      {text: 'Okay'}
+                    ])
+                } else {
+                  Alert.alert('Error!', "error.", [
+                      {text: 'Okay'}
+                    ])
+                }
+        
+              console.log(error)
+          })
+      }else{
+          //did forget password
+        navigation.navigate("App")
+      }
+    
+        
+   //   
     } catch (error) {
       if (error.code == 'auth/invalid-verification-code') {
         console.log('Invalid code.');
@@ -146,7 +166,7 @@ const PhoneAuth = ({navigation}) => {
   }
     return (
       <View style={styles.container}>
-          <StatusBar backgroundColor='#2e86c1' barStyle="light-content"/>
+        <StatusBar backgroundColor='#2e86c1' barStyle="light-content"/>
         <View style={styles.header}>
             <Text style={styles.text_header}>Phone no. authentication!</Text>
         </View>
@@ -155,103 +175,99 @@ const PhoneAuth = ({navigation}) => {
             style={[styles.footer, {
                // backgroundColor: "#fff"
             }]}
-        >
-         
-
-<View style={{bottom:-20}}>
-          <LoginSvgOne width={width*1} height={height*0.15} color={'#fff'} ></LoginSvgOne>
-        </View>
-
-        <View style={styles.footernew}> 
-       <Text style={[styles.text_footer, {
-             //   color: colors.text
-            }]}>Phone no.</Text>
-            <View style={styles.action}>
-                <FontAwesome 
-                    name="user-o"
-                   // color={colors.text}
-                    size={20}
-                />
-                <TextInput 
-                    placeholder="Enter phone number"
-                    placeholderTextColor="#666666"
-                    style={[styles.textInput, {
-                      //  color: colors.text
-                    }]}
-                    autoCapitalize="none"
-                    onChangeText={(val) => textInputChange(val)}
-               //     onEndEditing={(e)=>handleValidUser(e.nativeEvent.text)}
-                />
-                {data.check_textInputChange ? 
-                <Animatable.View
-                    animation="bounceIn"
-                >
-                    <Feather 
-                        name="check-circle"
-                        color="green"
-                        size={20}
-                    />
-                </Animatable.View>
-                : null}
+            >
+            <View style={{bottom:-20}}>
+                <LoginSvgOne width={width*1} height={height*0.15} color={'#fff'} ></LoginSvgOne>
             </View>
-            { data.isValidUser ? null : 
-            <Animatable.View animation="fadeInLeft" duration={500}>
-            <Text style={styles.errorMsg}>Incorrect No.</Text>
-            </Animatable.View>
-            }
-            
 
-          { confirm ?<View>
-            <Text style={[styles.text_footer, {
-              //  color: colors.text,
-                    marginTop: 35
-                }]}>Code</Text>
-                <View style={styles.action}>
-                    <Feather 
-                        name="lock"
-                //     color={colors.text}
-                        size={20}
+            <View style={styles.footernew}> 
+{console.log('confirm',confirm)}
+            {confirm?
+                <View>
+                    <Text style={[styles.text_footer, {
+                        marginTop: 35
+                    }]}>Code</Text>
+                    <View style={styles.action}>
+                        <Feather 
+                            name="lock"
+                    //     color={colors.text}
+                            size={20}
+                        />
+                    <TextInput 
+                        placeholder="Enter Code"
+                        placeholderTextColor="#666666"
+                        //secureTextEntry={data.secureTextEntry ? true : false}
+                        style={[styles.textInput, {
+                    //       color: colors.text
+                        }]}
+                        autoCapitalize="none"
+                        onChangeText={(val) => {setCode(val)}}
                     />
-                <TextInput 
-                    placeholder="Enter Code"
-                    placeholderTextColor="#666666"
-                    //secureTextEntry={data.secureTextEntry ? true : false}
-                    style={[styles.textInput, {
-                 //       color: colors.text
-                    }]}
-                    autoCapitalize="none"
-                    onChangeText={(val) => {setCode(val)}}
-                />
                  </View>
-          </View>: null}
-         
-             
-
-
-                {/* <TouchableOpacity
-                    onPress={updateSecureTextEntry}
-                > */}
-                    {/* {data.secureTextEntry ? 
-                    <Feather 
-                        name="eye-off"
-                        color="grey"
+                </View>:<>
+                <Text style={styles.text_footer}>Phone no.</Text>
+                <View style={styles.action}>
+                    <FontAwesome 
+                        name="user-o"
+                        // color={colors.text}
                         size={20}
                     />
-                    :
-                    <Feather 
-                        name="eye"
-                        color="grey"
-                        size={20}
+                    <TextInput 
+                        placeholder="Enter phone number"
+                        placeholderTextColor="#666666"
+                        style={[styles.textInput, {
+                          //  color: colors.text
+                        }]}
+                        autoCapitalize="none"
+                        onChangeText={(val) => textInputChange(val)}
+                       // onEndEditing={(e)=>handleValidUser(e.nativeEvent.text)}
                     />
-                    } */}
-                {/* </TouchableOpacity> */}
+                    {check_textInputChange ? 
+                        <Animatable.View
+                            animation="bounceIn"
+                        >
+                            <Feather 
+                                name="check-circle"
+                                color="green"
+                                size={20}
+                            />
+                        </Animatable.View>
+                        : null
+                    }
+                </View>
+
+                </>}
+                
+
+
+
+
+               {isValidPhoneText==='Null'?null:
+                    <Animatable.View animation="fadeInLeft" duration={500}>
+                        <Text style={styles.errorMsg}>{isValidPhoneText}</Text>
+                    </Animatable.View>}
+                
+            
+       
+               
           
-            { data.isValidPassword ? null : 
+            {/* { data.isValidPassword ? null : 
             <Animatable.View animation="fadeInLeft" duration={500}>
-            <Text style={styles.errorMsg}>Password must be 8 characters long.</Text>
+            <Text style={styles.errorMsg}>Enter code.</Text>
             </Animatable.View>
             }
-            
+             */}
+
+
+
+
+
+
+
+
+
+
+
 
             <View style={styles.button}>
                 {confirm?
@@ -371,3 +387,5 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     }
   });
+
+

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Modal, ActivityIndicator } from "react-native";
+import { StyleSheet, View, Modal, ActivityIndicator, Text } from "react-native";
 
 const Loader = (props) => {
-  const { loading, ...attributes } = props;
+  const { loading, textInfo,...attributes } = props;
 
   return (
     <Modal
@@ -10,11 +10,15 @@ const Loader = (props) => {
       animationType={"none"}
       visible={loading}
       onRequestClose={() => {
+        console.log("close modal");
       }}
     >
       <View style={styles.modalBackground}>
+       
         <View style={styles.activityIndicatorWrapper}>
+      
           <ActivityIndicator size="large" color="#1699e0" animating={loading} />
+          <Text style={{padding:10}}>{textInfo}</Text>
         </View>
       </View>
     </Modal>
@@ -32,7 +36,7 @@ const styles = StyleSheet.create({
   activityIndicatorWrapper: {
     backgroundColor: "#FFFFFF",
     height: 100,
-    width: 100,
+   // width: 100,
     borderRadius: 10,
     display: "flex",
     alignItems: "center",
