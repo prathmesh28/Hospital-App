@@ -130,8 +130,11 @@ const LoginScreen = ({navigation}) => {
         await auth()
           .signInWithEmailAndPassword(email, password)
           .then(async(emailDone) => {
+
             setLoading(false)
-           // navigation.navigate('Phone')
+            setTimeout(() => {
+                setLoading(false)
+              }, 3000) 
             
           })
           .catch(error => {
@@ -162,6 +165,7 @@ const LoginScreen = ({navigation}) => {
     return (
       <View style={styles.container}>
           <StatusBar backgroundColor='#2e86c1' barStyle="light-content"/>
+          <Loader loading={loading} textInfo={textInfo}/>
         <View style={styles.header}>
             <Text style={styles.text_header}>Welcome!</Text>
         </View>

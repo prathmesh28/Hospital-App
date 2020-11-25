@@ -18,6 +18,7 @@ import { LoginSvgOne } from './assets/SubtlePrismSvg'
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
 import _ from 'lodash';
+import Loader from '../Loader'
 
 
 const { height, width } = Dimensions.get('screen')
@@ -31,7 +32,26 @@ const PhoneAuth = ({navigation}) => {
     const [code, setCode] = useState('')
     const [isValidPhoneText, setIsValidPhoneText] = useState('Null')
     const [check_textInputChange,setCheck_textInputChange] = useState(false)
-    const [useraccount, setUserAccount] = useState(false);
+    const [useraccount, setUserAccount] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [textInfo,setTextInfo] = useState('Loading...')
+    const [forget,setForget] = useState(false)
+
+    useEffect(() => {   
+        setLoading(true)
+      
+         if(navigation.state.params){
+            if(navigation.state.params.forget===true){
+                setForget(true)
+             }else{
+                setForget(false)
+             }
+           
+         }
+     
+       setLoading(false)
+     },[])
+
 
     const textInputChange = (val) => {
         setPhone(val)
@@ -49,7 +69,9 @@ const PhoneAuth = ({navigation}) => {
 
 
     const loginHandle = async(phone) => {
-    //    console.log(navigation.state.params.forget)
+
+        setLoading(true)
+    setTextInfo('checking phone no...')
 
         await database().ref('UsersList/').once('value', async(snapshot) => {
             // console.log(snapshot.val())
@@ -62,12 +84,12 @@ const PhoneAuth = ({navigation}) => {
                 
             })
         })
-        if(navigation.state.params.forget && !useraccount){
+        if(forget && !useraccount){
             console.log('useraccount',useraccount)
                 Alert.alert('User not found!', "Check phone no..", [
                     {text: 'Okay'}
                 ])
-              
+                setLoading(false)
         
             
         }else{
@@ -90,7 +112,11 @@ const PhoneAuth = ({navigation}) => {
                   setLoading(false)
                 }
                 console.log(error)
-              });
+              })
+
+              setTimeout(() => {
+                setLoading(false)
+              }, 10000) 
         
         }
   
@@ -106,15 +132,24 @@ const PhoneAuth = ({navigation}) => {
 
      // Handle confirm code button press
   async function confirmCode(code) {
-      if(navigation.state.params.forget){
+    setLoading(true)
+    setTextInfo('verifying code...')
+      if(forget){
         try {
             await confirm.confirm(code);
-          } catch (error) {
+          } 
+        catch (error) {
             Alert.alert('Error!', 'Invalid code.', [
                 {text: 'Okay'}
               ])
+              setLoading(false)
             console.log('Invalid code.');
           }
+
+          setTimeout(() => {
+            setLoading(false)
+          }, 10000) 
+
       }else{
 
       
@@ -132,6 +167,10 @@ const PhoneAuth = ({navigation}) => {
             await database().ref('UsersList/' + data.user.uid).set({
               email, phoneNo
           })
+          setTimeout(() => {
+            setLoading(false)
+          }, 10000) 
+
             navigation.navigate("App")
           }).catch(error => {
   
@@ -144,8 +183,8 @@ const PhoneAuth = ({navigation}) => {
                       {text: 'Okay'}
                     ])
                 }
-        
-              console.log(error)
+                setLoading(false)
+                console.log(error)
           })
     //   }else{
     //       //did forget password
@@ -157,6 +196,7 @@ const PhoneAuth = ({navigation}) => {
     } catch (error) {
       if (error.code == 'auth/invalid-verification-code') {
         console.log('Invalid code.');
+        setLoading(false)
       } else {
         console.log('Account linking error');
       }
@@ -168,6 +208,8 @@ const PhoneAuth = ({navigation}) => {
     return (
       <View style={styles.container}>
         <StatusBar backgroundColor='#2e86c1' barStyle="light-content"/>
+        <Loader loading={loading} textInfo={textInfo}/>
+
         <View style={styles.header}>
             <Text style={styles.text_header}>Phone no. authentication!</Text>
         </View>
