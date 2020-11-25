@@ -106,16 +106,17 @@ export default class Details extends React.Component {
     let s = newDate.getSeconds();
     let ms = newDate.getMilliseconds();
     let usernewdate = newDate.toLocaleString()
+    let newId = d+''+m+y+h+mt+s+ms+uid
 
     this.setState({textInfo:'Uploading Image...'})
 
-    const reference = storage().ref('photos/'+d+m+y+h+mt+s+ms+uid+this.state.resourcePath.fileName);
+    const reference = storage().ref('photos/'+newId+this.state.resourcePath.fileName);
     const pathToFile = this.state.resourcePath.uri
     await reference.putFile(pathToFile);
 
     this.setState({textInfo:'Checking...'})
 
-    const url = await storage().ref('photos/'+d+m+y+h+mt+s+ms+uid+this.state.resourcePath.fileName).getDownloadURL()
+    const url = await storage().ref('photos/'+newId+this.state.resourcePath.fileName).getDownloadURL()
 
     this.setState({textInfo:'Sending data to pharmacy...'})
 
@@ -125,11 +126,12 @@ export default class Details extends React.Component {
       url:url,
       code:uid,
       date:usernewdate,
-      status:false
+      status:false,
+      id:newId
     }
 
     await database()
-      .ref('Pharmacy/'+d+m+y+h+mt+s+ms+uid)
+      .ref('Pharmacy/'+newId)
       .set({
         data
       })
