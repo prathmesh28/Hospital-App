@@ -131,7 +131,7 @@ const LoginScreen = ({navigation}) => {
           .signInWithEmailAndPassword(email, password)
           .then(async(emailDone) => {
 
-            setLoading(false)
+           // setLoading(false)
             setTimeout(() => {
                 setLoading(false)
               }, 3000) 
@@ -170,6 +170,8 @@ const LoginScreen = ({navigation}) => {
             <Text style={styles.text_header}>Welcome!</Text>
         </View>
         <Animatable.View 
+            crollToOverflowEnabled={true}
+            scrollEventThrottle={1}
             animation="fadeInUpBig"
             style={[styles.footer, {
                // backgroundColor: "#fff"
@@ -396,7 +398,8 @@ const styles = StyleSheet.create({
         flex: 5,
         backgroundColor: 'transparent',
          padding: 0,
-         margin: 0
+         margin: 0,
+         //height:height
     },
     footernew: {
       flex: 1,
@@ -412,7 +415,8 @@ const styles = StyleSheet.create({
     },
     text_footer: {
         color: '#05375a',
-        fontSize: 18
+        fontSize: 18,
+        
     },
     action: {
         flexDirection: 'row',

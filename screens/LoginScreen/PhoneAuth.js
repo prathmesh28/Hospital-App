@@ -116,7 +116,7 @@ const PhoneAuth = ({navigation}) => {
 
               setTimeout(() => {
                 setLoading(false)
-              }, 10000) 
+              }, 3000) 
         
         }
   
@@ -148,7 +148,7 @@ const PhoneAuth = ({navigation}) => {
 
           setTimeout(() => {
             setLoading(false)
-          }, 10000) 
+          }, 3000) 
 
       }else{
 
@@ -169,7 +169,7 @@ const PhoneAuth = ({navigation}) => {
           })
           setTimeout(() => {
             setLoading(false)
-          }, 10000) 
+          }, 3000) 
 
             navigation.navigate("App")
           }).catch(error => {
