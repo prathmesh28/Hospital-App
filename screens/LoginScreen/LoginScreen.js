@@ -117,33 +117,41 @@ const LoginScreen = ({navigation}) => {
     const loginHandle = async(email, password) => {
         setLoading(true)
         setTextInfo('checking email and password...')
-        if ( data.username.length == 0 || data.password.length == 0 ) {
-            Alert.alert('Wrong Input!', 'Email or password field cannot be empty.', [
-                {text: 'Okay'}
-            ]);
-            setLoading(false)
-            return;
-        }
+        console.log('one')
+        // if ( data.username.length == 0 || data.password.length == 0 ) {
+        //     console.log('two')
+        //     Alert.alert('Wrong Input!', 'Email or password field cannot be empty.', [
+        //         {text: 'Okay'}
+        //     ]);
+        //     setLoading(false)
+        //     return;
+        // }
 
-       
+        console.log('three')
     
         await auth()
           .signInWithEmailAndPassword(email, password)
           .then(async(emailDone) => {
-
-           // setLoading(false)
+            console.log('four')
+            setLoading(false)
             setTimeout(() => {
                 setLoading(false)
               }, 3000) 
             
           })
           .catch(error => {
-           
+            console.log('five')
+            setLoading(false)
             if (error.code === 'auth/invalid-email') {
               Alert.alert('Error!', "That email address is invalid!", [
                 {text: 'Okay'}
               ])
               setLoading(false)
+            }else if (error.code === 'auth/network-request-failed') {
+                Alert.alert('Error!', "A network error (such as timeout, interrupted connection or unreachable host) has occurred.", [
+                  {text: 'Okay'}
+                ])
+                setLoading(false)
             }else{
               Alert.alert('Error!', "Check email/ Password!", [
                 {text: 'Okay'}
@@ -151,16 +159,12 @@ const LoginScreen = ({navigation}) => {
               setLoading(false)
             }
 
-            
-          return;
-            // if (this._isMounted) {
-            //   this.setState({ errorMessage: error.message, loading: false, 
-            //     userAcc:false
-            //   })
-            // }
+            console.log('six')
+          return ;
+        
           })
 
-        
+          console.log('seven')
     }
     return (
       <View style={styles.container}>

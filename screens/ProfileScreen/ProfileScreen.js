@@ -48,38 +48,33 @@ class ProfileScreen extends React.Component {
             <Card style={{width:width*0.9,alignSelf:"center",borderTopLeftRadius:20,borderTopRightRadius:20}}>
               <CardItem header bordered style={{borderTopStartRadius:20,borderTopEndRadius:20,backgroundColor:'#45b3e0'}}>
                 <Text style={{color:'#fff',fontWeight:'bold',fontSize:20}}>Edit Account</Text>
+                <Right style={{ right:-20 }}>
+                  <AntDesignIcon size={20} color={'white'} name="edit" />
+                </Right>
               </CardItem>
             
-              <CardItem bordered button onPress={() => alert("Edit profile here")}>
+              <CardItem bordered button onPress={() => { }}>
                 <AntDesignIcon size={20} name="user" />
                 <Text>&nbsp; {Name}</Text>
-                <Right>
-                  <AntDesignIcon size={20} color={'grey'} name="arrowright" />
-                </Right>
+               
               </CardItem>
 
-              <CardItem bordered button onPress={() => alert("Edit profile here")}>
+              <CardItem bordered button onPress={() => { }}>
                 <AntDesignIcon size={20} name="phone" />
                 <Text>&nbsp; {Phone}</Text>
-                <Right>
-                  <AntDesignIcon size={20} color={'grey'} name="arrowright" />
-                </Right>
+               
               </CardItem>
 
-              <CardItem bordered button onPress={() => alert("Edit profile here")}>
+              <CardItem bordered button onPress={() => { }}>
                 <AntDesignIcon size={20} name="mail" />
                 <Text>&nbsp; {Email}</Text>
-                <Right>
-                  <AntDesignIcon size={20} color={'grey'} name="arrowright" />
-                </Right>
+               
               </CardItem>
 
-              <CardItem bordered button onPress={() => alert("Edit profile here")}>
-                <EntypoIcon size={20} name="address" />
+              <CardItem bordered button onPress={() => { }}>
+                <EntypoIcon size={20} name="location" />
                 <Text>&nbsp; {Address}</Text>
-                <Right >
-                  <AntDesignIcon size={20} color={'grey'} name="arrowright" />
-                </Right>
+               
               </CardItem>
               
             </Card>
@@ -89,9 +84,7 @@ class ProfileScreen extends React.Component {
                 <CardItem header bordered style={{borderRadius:20}} onPress={() => this.props.navigation.navigate('Notification')}>
                   <MaterialIcons size={20} name="notifications-none" />
                   <Text style={{color:'#000',fontWeight:'bold',fontSize:15}}> &nbsp; Notifications</Text>
-                  <Right>
-                    <AntDesignIcon size={20} color={'grey'} name="arrowright" />
-                  </Right>
+                 
                 </CardItem>
               </TouchableOpacity>
             </Card>

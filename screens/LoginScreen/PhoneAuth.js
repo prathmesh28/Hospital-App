@@ -25,8 +25,6 @@ const { height, width } = Dimensions.get('screen')
 
 const PhoneAuth = ({navigation}) => {
 
-   
-   
     const [phone, setPhone] = useState('');
     const [confirm, setConfirm] = useState(null);
     const [code, setCode] = useState('')
@@ -40,13 +38,12 @@ const PhoneAuth = ({navigation}) => {
     useEffect(() => {   
         setLoading(true)
       
-         if(navigation.state.params){
+        if(navigation.state.params){
             if(navigation.state.params.forget===true){
                 setForget(true)
              }else{
                 setForget(false)
-             }
-           
+             }  
          }
      
        setLoading(false)
@@ -58,12 +55,11 @@ const PhoneAuth = ({navigation}) => {
         if( val.trim().length > 10 || val.trim().length < 10) {
             setCheck_textInputChange(false)
             setIsValidPhoneText('Enter a valid phone no.')
-            
-        } else {
+        } 
+        else {
             setCheck_textInputChange(true)
             setIsValidPhoneText('Null')
         }
-        
     }
 
 
@@ -71,140 +67,152 @@ const PhoneAuth = ({navigation}) => {
     const loginHandle = async(phone) => {
 
         setLoading(true)
-    setTextInfo('checking phone no...')
+        setTextInfo('checking phone no...')
 
-        await database().ref('UsersList/').once('value', async(snapshot) => {
+        await database().ref('UsersList/').once('value', (snapshot) => {
             // console.log(snapshot.val())
-            await _.map(snapshot.val(), async(e) => {
+            _.map(snapshot.val(), (e) => {
                 if(e.phoneNo==='+91'+phone)
                 {
-                    await setUserAccount(true)
+                   // setTextInfo('...')
+                    setUserAccount(true)
                     // console.log('hi')
                 }
                 
             })
         })
-        if(forget && !useraccount){
-            console.log('useraccount',useraccount)
-                Alert.alert('User not found!', "Check phone no..", [
+        // if(forget){
+        //     if(useraccount){
+        //         //forget password & user exist (login here)
+        //     }else{
+        //         //did forget password & user not exist
+        //     }    
+        // }else{
+        //     //first time user
+        //     if(useraccount){
+        //         //entered phone no. of other account
+        //     }else{
+        //         //new user (login here)
+        //     }
+        // }
+
+        if((forget && useraccount) ||(!forget && !useraccount)){
+
+            await auth().signInWithPhoneNumber('+91'+phone)
+                .then(data => {
+                    setConfirm(data);
+                    // console.log(data)
+                    // console.log(data.verificationId)
+                    setTimeout(() => {
+                        setLoading(false)
+                    }, 3000)
+                }).catch(error => {
+    
+                    if (error.code === 'auth/invalid-phone-number') {
+                        Alert.alert('Error!', "Enter a valid phone no.!", [
+                            {text: 'Okay'}
+                        ])
+                        setLoading(false)
+                    }else{
+                        Alert.alert('Error!', "Check phone no. or try again later", [
+                            {text: 'Okay'}
+                        ])
+                        setLoading(false)
+                    }
+                    console.log(error)
+                })
+
+        }else{
+            if(forget && !useraccount){
+                Alert.alert('User not found!', "Check phone no. again...", [
                     {text: 'Okay'}
                 ])
                 setLoading(false)
-        
-            
-        }else{
-            auth().signInWithPhoneNumber('+91'+phone)
-            .then(data => {
-                setConfirm(data);
-                // console.log(data)
-                // console.log(data.verificationId)
-            }).catch(error => {
-    
-                if (error.code === 'auth/invalid-phone-number') {
-                  Alert.alert('Error!', "Enter a valid phone no.!", [
+                //did forget password & user not exist
+            }else{
+                Alert.alert('Already Exist!', "this phone no. already exist...", [
                     {text: 'Okay'}
-                  ])
-                  setLoading(false)
-                }else{
-                  Alert.alert('Error!', "This phone no. is already in use or not registered.", [
-                    {text: 'Okay'}
-                  ])
-                  setLoading(false)
-                }
-                console.log(error)
-              })
-
-              setTimeout(() => {
+                ])
                 setLoading(false)
-              }, 3000) 
-        
+                //entered phone no. of other account
+            }
+             
         }
-  
-        
-           
-      
-        
-        
-      
-
         
     }
 
      // Handle confirm code button press
-  async function confirmCode(code) {
-    setLoading(true)
-    setTextInfo('verifying code...')
-      if(forget){
-        try {
-            await confirm.confirm(code);
-          } 
-        catch (error) {
-            Alert.alert('Error!', 'Invalid code.', [
-                {text: 'Okay'}
-              ])
-              setLoading(false)
-            console.log('Invalid code.');
-          }
-
-          setTimeout(() => {
-            setLoading(false)
-          }, 3000) 
-
-      }else{
-
-      
-    try {
-      const credential = auth.PhoneAuthProvider.credential(
-        confirm.verificationId,
-        code,
-      );
-          console.log('new user login')
-        auth().currentUser.linkWithCredential(credential)
-        .then(async(data) => {
-            console.log('data',data)
-            let email = data.user.email
-            let phoneNo = data.user.phoneNumber
-            await database().ref('UsersList/' + data.user.uid).set({
-              email, phoneNo
-          })
-          setTimeout(() => {
-            setLoading(false)
-          }, 3000) 
-
-            navigation.navigate("App")
-          }).catch(error => {
-  
-              if (error.code == 'auth/invalid-verification-code') {
-                  Alert.alert('Error!', "Check verification code.", [
-                      {text: 'Okay'}
-                    ])
-                } else {
-                  Alert.alert('Error!', "error.", [
-                      {text: 'Okay'}
-                    ])
-                }
-                setLoading(false)
-                console.log(error)
-          })
-    //   }else{
-    //       //did forget password
-    //     navigation.navigate("App")
-    //   }
-    
+    async function confirmCode(code) {
+        setLoading(true)
+        setTextInfo('verifying code...')
         
-   //   
-    } catch (error) {
-      if (error.code == 'auth/invalid-verification-code') {
-        console.log('Invalid code.');
-        setLoading(false)
-      } else {
-        console.log('Account linking error');
-      }
+        if(forget){
+            try {
+                await confirm.confirm(code);
+            }
+
+            catch (error) {
+                Alert.alert('Error!', 'Invalid code.', [
+                    {text: 'Okay'}
+                ])
+                setLoading(false)
+                console.log('Invalid code.');
+            }
+
+            setTimeout(() => {
+                setLoading(false)
+            }, 3000) 
+
+        }
+        else{
+            try {
+                const credential = auth.PhoneAuthProvider.credential(
+                    confirm.verificationId,
+                    code,
+                );
+                console.log('new user login')
+                await auth().currentUser.linkWithCredential(credential)
+                    .then(async(data) => {
+                        console.log('data',data)
+
+                        let email = data.user.email
+                        let phoneNo = data.user.phoneNumber
+
+                        await database().ref('UsersList/' + data.user.uid).set({
+                            email, phoneNo
+                        })
+                        setTimeout(() => {
+                            setLoading(false)
+                        }, 3000) 
+
+                        navigation.navigate("App")
+                }).catch(error => {
+  
+                    if (error.code == 'auth/invalid-verification-code') {
+                        Alert.alert('Error!', "Check verification code.", [
+                            {text: 'Okay'}
+                            ])
+                        } else {
+                        Alert.alert('Error!', "error.", [
+                            {text: 'Okay'}
+                            ])
+                        }
+                        setLoading(false)
+                        console.log(error)
+                })
+    
+            } 
+            catch (error) {
+                if (error.code == 'auth/invalid-verification-code') {
+                    console.log('Invalid code.');
+                    setLoading(false)
+                } else {
+                    console.log('Account linking error');
+                }
+            }
+        }
     }
 
-
-}
-  }
     return (
       <View style={styles.container}>
         <StatusBar backgroundColor='#2e86c1' barStyle="light-content"/>
@@ -239,6 +247,7 @@ const PhoneAuth = ({navigation}) => {
                     <TextInput 
                         placeholder="Enter Code"
                         placeholderTextColor="#666666"
+                        keyboardType="phone-pad"
                         //secureTextEntry={data.secureTextEntry ? true : false}
                         style={[styles.textInput, {
                     //       color: colors.text
@@ -258,6 +267,7 @@ const PhoneAuth = ({navigation}) => {
                     <TextInput 
                         placeholder="Enter phone number"
                         placeholderTextColor="#666666"
+                        keyboardType="phone-pad"
                         style={[styles.textInput, {
                           //  color: colors.text
                         }]}
@@ -294,12 +304,6 @@ const PhoneAuth = ({navigation}) => {
        
                
           
-            {/* { data.isValidPassword ? null : 
-            <Animatable.View animation="fadeInLeft" duration={500}>
-            <Text style={styles.errorMsg}>Enter code.</Text>
-            </Animatable.View>
-            }
-             */}
 
 
 

@@ -41,7 +41,8 @@ const TabScreen = () => {
 
   const [data, setData] = useState(null);
   const [doc, setDoc] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loadingUser, setLoadingUser] = useState(true);
+  const [loadingDoc, setLoadingDoc] = useState(true);
 
  
   useEffect(() => {
@@ -49,13 +50,16 @@ const TabScreen = () => {
     const { uid } = auth().currentUser
 
     const onValueChange = database().ref('/Users/'+uid).on('value', async(snapshot) => {
-          await setData(snapshot.val())
-        //  setLoading(false) 
-      });
+        await setData(snapshot.val())
+        setLoadingUser(false)
+       
+      })
     const onValueChangeDoc = database().ref('/Doctors/').on('value', async(snapshot) => {
-        await setDoc(snapshot.val())
-        setLoading(false) 
-    });
+        await setDoc(snapshot.val())  
+        setLoadingDoc(false)
+    })
+    
+
     
     return () => {
       database().ref('/Users/'+uid).off('value', onValueChange)
@@ -76,7 +80,7 @@ const TabScreen = () => {
       //  backgroundColor: "#fff",   
         width, height: "100%"}} >
       
-      {loading===true?<View style={styles.containerapp}>
+      {(loadingUser===true)&&(loadingDoc===true)?<View style={styles.containerapp}>
                         <Text>Loading App...{'\n'}
                         </Text>
                         <Text style={{textAlign:"center"}}>

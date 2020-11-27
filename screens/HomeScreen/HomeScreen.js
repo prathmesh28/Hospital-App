@@ -196,14 +196,14 @@ componentWillUnmount() {
           </Card>
         </View>
         
-        <Card style={{width:width*0.85,borderRadius:20,alignSelf:"center",marginTop:20}}>
-        <CardItem header bordered style={{borderRadius:15,backgroundColor:'#45b3e0',height:60}}>
-                <Text style={{color:'black',fontWeight:'bold',fontSize:15}}>PHARMACY</Text>
+        <Card style={{width:width*0.85,borderRadius:20,alignSelf:"center",marginTop:20,padding:10}}>
+        <CardItem header  style={{borderRadius:20,justifyContent:'center'}} >
+                <Text style={{color:'black',fontWeight:'bold',fontSize:18,}}>Your Pharmacy</Text>
               </CardItem>
               
-          <CardItem bordered button style={{borderRadius:20}}
+          <CardItem  button style={{borderRadius:15,backgroundColor:'#45b3e0',height:50,justifyContent:'center',width:width*0.7,alignSelf:'center'}}
                 onPress={()=>this.props.navigation.navigate('History',{data:this.props.data})}>
-              <Text>Upload Prescription</Text>
+              <Text style={{color:'#fff'}}>UPLOAD PRESCRIPTION</Text>
 
               
           </CardItem>
