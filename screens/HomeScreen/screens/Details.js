@@ -92,7 +92,7 @@ export default class Details extends React.Component {
 
 
   uploadImage=async()=>{
-    //this.setState({loading:true})
+    this.setState({loading:true})
    
     
     const { uid } = auth().currentUser
@@ -154,7 +154,8 @@ export default class Details extends React.Component {
         source={{ uri: this.state.resourcePath.uri }}
         style={{ width: 200, height: 200 }}
           />
-          </View>:
+          </View>
+          :
           <View style={{paddingVertical:50}}><Text>
         <Text style={{fontWeight:'bold',fontSize:15}}>*intru:</Text> {'\n'}
         1. Upload clear Photo of the report. {'\n'}

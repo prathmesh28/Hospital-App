@@ -62,11 +62,7 @@ class ReportScreen extends Component {
             {renderData}
         </View>  
 
-      {/* <TouchableOpacity style={styles.ViewReportStyles} 
-                  onPress={() =>this.props.navigation.navigate('Report')}
-                  >
-                  <Text style={{fontWeight:"bold",textAlign:"center",marginTop:6}}>View Reports</Text> 
-                </TouchableOpacity> */}
+      
    </View>
     )  
   }

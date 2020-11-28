@@ -7,7 +7,7 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   StyleSheet,
-  
+  ScrollView,
   View,
   ImageBackground,
   Linking
@@ -16,6 +16,15 @@ import {
 import { withNavigation } from 'react-navigation';
 import { Container, Header, Content, Card, CardItem, Text, Body,Title,Button,Right,Icon,Accordion } from 'native-base';
 import _ from 'lodash';
+import {
+  LineChart,
+  BarChart,
+  PieChart,
+  ProgressChart,
+  ContributionGraph,
+  StackedBarChart
+} from "react-native-chart-kit";
+
 
 const { height, width } = Dimensions.get('screen')  
 
@@ -36,83 +45,9 @@ class Peadiatric extends Component {
      // this.setState({historyData:checkData})
   }
 
-  openReport=async(url)=>{
-   
-        const supported = await Linking.canOpenURL(url);
-    
-        if (supported) {
-          // Opening the link with some app, if the URL scheme is "http" the web link should be opened
-          // by some browser in the mobile
-          await Linking.openURL(url);
-        } else {
-          Alert.alert(`Don't know how to open this URL: ${url}`);
-        }
-    
-    
   
-  }
 
 
-
-   _renderHeader(item, expanded) {
-    return (
-      <View style={{
-        flexDirection: "row",
-        padding: 10,
-        justifyContent: "space-between",
-        alignItems: "center" ,
-        backgroundColor: "#87CEEB" }}>
-      <Text style={{ fontWeight: "600" }}>
-          {" "}{item.Date.toLocaleString().substr(0, 9)}
-        </Text>
-        {expanded
-          ? <Icon style={{ fontSize: 18 }} name="remove-circle" />
-          : <Icon style={{ fontSize: 18 }} name="add-circle" />}
-      </View>
-    );
-  }
-  _renderContent(item) {
-    return (
-      <View style={{padding:10}}>
-
-      
-        <View>
-          <Text >
-            <Text style={{fontWeight:'bold'}}>
-            Remarks: &nbsp;
-            </Text>
-            {item.Remark}
-            </Text>
-
-        </View>
-
-        <View style={{
-          flex: 1,
-          flexDirection: 'row',
-          justifyContent: 'space-evenly',
-          backgroundColor:'#fff',height:'auto'
-        }}>
-
-          <View style={{ height: 50,justifyContent:"center",backgroundColor:'#fff'}}>
-            <Button small style={{backgroundColor:'#45b3e0'}}
-              onPress={()=>{this.openReport(item.reportAvatarURL)}}
-              >
-            <Text>Report</Text>
-
-            </Button>
-          </View>
-          <View style={{height: 50 ,justifyContent:"center", backgroundColor:'#fff'}} >
-          <Button small style={{backgroundColor:'#45b3e0'}}  onPress={()=>{this.openReport(item.PrescriptionAvatarURL)}}>
-            <Text>Prescription</Text>
-            </Button>
-          </View>
-        </View>
-      
-      </View>
-   
-
-    );
-  }
 
 
 
@@ -124,23 +59,65 @@ class Peadiatric extends Component {
     return (
     <View style={styles.container}>
 
-   {/* {console.log(this.state.historyData)} */}
 
-        <Card style={{width:width*0.85,alignSelf:"center",borderTopLeftRadius:20,borderTopRightRadius:20}}>
-            {/* <CardItem header style={{borderTopStartRadius:20,borderTopEndRadius:20,backgroundColor:'#45b3e0'}}>
-              <Title>Checkup Details</Title>
-            </CardItem>
-            <CardItem>
-              <Body>
-              <Text>
-                  NO data to display ;)
-              </Text>
-          </Body> </CardItem> */}
-          
-                {/* {this.props.data.data.history?console.log('hi'):console.log('bi')} */}
-           
-            
-         </Card>
+
+<ScrollView
+  horizontal={true}
+  style={{paddingHorizontal:10}}
+  >
+<LineChart
+    data={{
+      labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "Octomber", "November", "December"],
+      datasets: [
+        {
+          data: [
+            2,
+            3,
+            5,
+            7,
+            9,
+            10,
+            12,
+            14,
+            16,
+            17,
+            18,
+            20
+          ],
+          strokeWidth: 2
+        }
+      ]
+    }}
+    width={800} // from react-native
+    height={220}
+  //  yAxisLabel="$"
+    yAxisSuffix="kg"
+    yAxisInterval={1} // optional, defaults to 1
+    chartConfig={{
+      backgroundColor: "#45b3e0",
+      backgroundGradientFrom: "#45b3e0",
+      backgroundGradientTo: "#d3edf8",
+      decimalPlaces: 2, // optional, defaults to 2dp
+      color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+      labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+      style: {
+        borderRadius: 16,
+        padding:5
+      },
+      propsForDots: {
+        r: "6",
+        strokeWidth: "2",
+        stroke: "#ffa726"
+      }
+    }}
+    bezier
+    style={{
+      marginVertical: 8,
+      borderRadius: 16
+    }}
+  />
+
+</ScrollView>
    </View>
     )  
   }
