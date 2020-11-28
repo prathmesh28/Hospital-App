@@ -71,12 +71,13 @@ const PhoneAuth = ({navigation}) => {
 
         await database().ref('UsersList/').once('value', (snapshot) => {
             // console.log(snapshot.val())
-            _.map(snapshot.val(), (e) => {
+            _.map(snapshot.val(), async(e) => {
                 if(e.phoneNo==='+91'+phone)
                 {
                    // setTextInfo('...')
-                    setUserAccount(true)
-                    // console.log('hi')
+                    await setUserAccount(true)
+                    console.log('hi')
+                    console.log(forget)
                 }
                 
             })
@@ -232,7 +233,7 @@ const PhoneAuth = ({navigation}) => {
             </View>
 
             <View style={styles.footernew}> 
-{console.log('confirm',confirm)}
+{/* {console.log('confirm',confirm)} */}
             {confirm?
                 <View>
                     <Text style={[styles.text_footer, {
