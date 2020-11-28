@@ -49,7 +49,9 @@ class ProfileScreen extends React.Component {
               <CardItem header bordered style={{borderTopStartRadius:20,borderTopEndRadius:20,backgroundColor:'#45b3e0'}}>
                 <Text style={{color:'#fff',fontWeight:'bold',fontSize:20}}>Edit Account</Text>
                 <Right style={{ right:-20 }}>
+                  <TouchableOpacity  onPress={()=>{ alert('Edit account.');}}>
                   <AntDesignIcon size={20} color={'white'} name="edit" />
+                  </TouchableOpacity>
                 </Right>
               </CardItem>
             

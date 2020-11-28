@@ -73,12 +73,10 @@ export default class Details extends React.Component {
       // console.log('Response = ', res);
 
       if (res.didCancel) {
-        // console.log('User cancelled image picker');
+        console.log('User cancelled image picker');
       } else if (res.error) {
-        // console.log('ImagePicker Error: ', res.error);
-      } else if (res.customButton) {
-        // console.log('User tapped custom button: ', res.customButton);
-        alert(res.customButton);
+        alert(res.error);
+        console.log('ImagePicker Error: ', res.error);
       } else {
         let source = res;
         this.setState({
@@ -112,30 +110,54 @@ export default class Details extends React.Component {
 
     const reference = storage().ref('photos/'+newId+this.state.resourcePath.fileName);
     const pathToFile = this.state.resourcePath.uri
-    await reference.putFile(pathToFile);
+
+
+    await reference.putFile(pathToFile)
+    .on(
+      storage.TaskEvent.STATE_CHANGED,
+      async(snapshot) => {
+        console.log('hi')
+        this.setState({textInfo:'Uploading '+(snapshot.bytesTransferred / snapshot.totalBytes) * 100+'%...'})
+        console.log((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
+       
+        
+        if (snapshot.state === storage.TaskState.SUCCESS) {
+          console.log('hi')
+
+         const url = await storage().ref('photos/'+newId+this.state.resourcePath.fileName).getDownloadURL()
+          this.setState({textInfo:'Sending data to pharmacy...'})
+
+          const data = {
+            name:this.state.Name,
+            phone:this.state.Phone,
+            url:url,
+            code:uid,
+            date:usernewdate,
+            status:false,
+            id:newId
+          }
+
+          database()
+            .ref('Pharmacy/'+newId)
+            .set({
+              data
+            })
+            .then(() => console.log('Data set.'))
+            
+         }
+         
+      },
+      error => {
+        unsubscribe();
+        alert('Sorry, Try again.');
+        console.log(error)
+      }
+    );
+
 
     this.setState({textInfo:'Checking...'})
 
-    const url = await storage().ref('photos/'+newId+this.state.resourcePath.fileName).getDownloadURL()
-
-    this.setState({textInfo:'Sending data to pharmacy...'})
-
-    const data = {
-      name:this.state.Name,
-      phone:this.state.Phone,
-      url:url,
-      code:uid,
-      date:usernewdate,
-      status:false,
-      id:newId
-    }
-
-    await database()
-      .ref('Pharmacy/'+newId)
-      .set({
-        data
-      })
-      .then(() => console.log('Data set.'))
+    
 
     this.setState({loading:false})
 

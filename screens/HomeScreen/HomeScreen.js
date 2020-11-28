@@ -118,22 +118,26 @@ componentWillUnmount() {
                 borderRadius:20,
 
                 }}>
-            <CardItem style={{padding:0,borderRadius:20, 
-            backgroundColor:'#45b3e0', borderBottomWidth:1,borderRadius:20,
-            borderColor:'#7ec0ee66',
-             }}>
-              <Body>
+            
             {
               NextDate?
-              <>
+              <CardItem style={{
+                //padding:0,
+                //borderRadius:20, 
+                backgroundColor:'#45b3e0',
+                // borderBottomWidth:1,
+                borderRadius:20,
+                justifyContent:'center'
+               // borderColor:'#7ec0ee66',
+                 }}>
               {NextDate >= new Date().toISOString()?
               <>
-              <Text style={{fontSize:20,fontWeight:"900",alignSelf:'center'}}>
-                   Your next appointment is 
-                </Text>
-                <Text style={{fontSize:22,fontWeight:"bold",alignSelf:'center',color:'#fff'}}>
+              <Text style={{fontSize:20,fontWeight:"900",alignSelf:'center',textAlign:'center'}}>
+                   Your next appointment is {'\n'}
+            
+                <Text style={{fontSize:22,fontWeight:"bold",lineHeight:30,color:'#fff'}}> 
                 <TimeAgo time={NextDate} />
-                
+                </Text>
                 </Text></>:<><Text style={{fontSize:20,fontWeight:"900",alignSelf:'center'}}>
                    Your last appointment was 
                 </Text>
@@ -144,15 +148,25 @@ componentWillUnmount() {
                 
                 
                 
-              </>
-              :<Text style={{fontSize:20,fontWeight:"900",alignSelf:'center',color:'#fff'}}>
+                </CardItem>
+              :
+              <CardItem style={{
+                //padding:0,
+                //borderRadius:20, 
+                backgroundColor:'#fff',
+                // borderBottomWidth:1,
+                borderRadius:20,
+                justifyContent:'center'
+               // borderColor:'#7ec0ee66',
+                 }}>
+              <Text style={{fontSize:18,fontWeight:"900",textAlign:'center',color:'#000'}}>
                   No upcoming appointments.
               </Text>
+              </CardItem>
 
             }
                 
-              </Body>
-            </CardItem>
+            
             {NextDate&&
             <CardItem style={{padding:0,borderRadius:20,borderWidth:0 }}>
               <Body>

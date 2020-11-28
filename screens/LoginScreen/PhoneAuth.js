@@ -30,7 +30,7 @@ const PhoneAuth = ({navigation}) => {
     const [code, setCode] = useState('')
     const [isValidPhoneText, setIsValidPhoneText] = useState('Null')
     const [check_textInputChange,setCheck_textInputChange] = useState(false)
-    const [useraccount, setUserAccount] = useState(false)
+    const [userAccount, setUserAccount] = useState(false)
     const [loading, setLoading] = useState(false)
     const [textInfo,setTextInfo] = useState('Loading...')
     const [forget,setForget] = useState(false)
@@ -66,23 +66,56 @@ const PhoneAuth = ({navigation}) => {
 
     const loginHandle = async(phone) => {
 
-        setLoading(true)
+         setLoading(true)
         setTextInfo('checking phone no...')
 
-        await database().ref('UsersList/').once('value', (snapshot) => {
-            // console.log(snapshot.val())
-            _.map(snapshot.val(), async(e) => {
-                if(e.phoneNo==='+91'+phone)
+        await database().ref('UsersList/').once('value', async(snapshot) => {
+
+            let found =false 
+            await _.map(snapshot.val(), (e) => {
+                if(e.phoneNo==='+91'+phone){
+                    found=true
+                }
+            })
+            console.log(found) 
+           
+
+                if(found)
                 {
-                   // setTextInfo('...')
-                    await setUserAccount(true)
+                    if(forget){
+                        console.log('hione')
+                        phoneAuthUser(phone)
+                        
+                    }else{
+                        console.log('hitwo')
+                        Alert.alert('Already Exist!', "this phone no. already exist...", [
+                            {text: 'Okay'}
+                        ])
+                        setLoading(false)
+                        return
+                    }
                     console.log('hi')
                     console.log(forget)
+                }else{
+                    if(forget){
+                        console.log('hithree')
+                        Alert.alert('User not found!', "Check phone no. again...", [
+                            {text: 'Okay'}
+                        ])
+                        setLoading(false)
+                        return
+                    }else{
+                        console.log('hifour')
+                        phoneAuthUser(phone)
+                    }
                 }
                 
-            })
+           
         })
-        // if(forget){
+     
+        
+    }
+   // if(forget){
         //     if(useraccount){
         //         //forget password & user exist (login here)
         //     }else{
@@ -97,50 +130,37 @@ const PhoneAuth = ({navigation}) => {
         //     }
         // }
 
-        if((forget && useraccount) ||(!forget && !useraccount)){
+ 
+    const phoneAuthUser=async()=>{
+        console.log('phone auth function')
+        await auth().signInWithPhoneNumber('+91'+phone)
+        .then(data => {
+            setConfirm(data);
+            // console.log(data)
+            // console.log(data.verificationId)
+            setTimeout(() => {
+                setLoading(false)
+            }, 3000)
+        }).catch(error => {
 
-            await auth().signInWithPhoneNumber('+91'+phone)
-                .then(data => {
-                    setConfirm(data);
-                    // console.log(data)
-                    // console.log(data.verificationId)
-                    setTimeout(() => {
-                        setLoading(false)
-                    }, 3000)
-                }).catch(error => {
-    
-                    if (error.code === 'auth/invalid-phone-number') {
-                        Alert.alert('Error!', "Enter a valid phone no.!", [
-                            {text: 'Okay'}
-                        ])
-                        setLoading(false)
-                    }else{
-                        Alert.alert('Error!', "Check phone no. or try again later", [
-                            {text: 'Okay'}
-                        ])
-                        setLoading(false)
-                    }
-                    console.log(error)
-                })
-
-        }else{
-            if(forget && !useraccount){
-                Alert.alert('User not found!', "Check phone no. again...", [
+            if (error.code === 'auth/invalid-phone-number') {
+                Alert.alert('Error!', "Enter a valid phone no.!", [
                     {text: 'Okay'}
                 ])
                 setLoading(false)
-                //did forget password & user not exist
             }else{
-                Alert.alert('Already Exist!', "this phone no. already exist...", [
+                Alert.alert('Error!', "Check phone no. or try again later", [
                     {text: 'Okay'}
                 ])
                 setLoading(false)
-                //entered phone no. of other account
             }
-             
-        }
-        
+            console.log(error)
+        })
     }
+
+
+
+
 
      // Handle confirm code button press
     async function confirmCode(code) {
