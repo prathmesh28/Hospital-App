@@ -72,14 +72,14 @@ componentWillUnmount() {
 
     return (
    <View style={styles.container}>
-      <StatusBar backgroundColor={'#87CEEB'} />
+      <StatusBar backgroundColor={'#45b3e0'} />
       
       <View>
        
         
         <View style={{position:'absolute'}}>
-          <View style={{backgroundColor:'#87CEEB',height:height*0.14}} ></View>
-          <View style={{backgroundColor:'#87CEEB',height:20}}>
+          <View style={{backgroundColor:'#45b3e0',height:height*0.14}} ></View>
+          <View style={{backgroundColor:'#45b3e0',height:20}}>
             <MainSVG width={width} height={height*0.15}></MainSVG>
           </View>
         </View>
@@ -94,15 +94,16 @@ componentWillUnmount() {
           alignItems:"center"
           }}>
             <View style={{
-               left:20
+               left:20,justifyContent:'space-evenly'
                 }}>
-              <Text style={{fontSize:20,color:'#171717'}}>
+              <Text style={{fontSize:20,color:'#171717',height:30}}>
                       Hello, {'\n'}
-                <Text style={{fontSize:30,fontWeight:"bold",color:'#171717'}}>
+                      </Text>
+                <Text style={{fontSize:30,fontWeight:"bold",color:'#171717',height:40}}>
                   {name}
-                </Text>
+                
               </Text>
-              <Text style={{fontSize:17,bottom:0,alignContent:"space-between",color:'#000',color:'#171717'}}>
+              <Text style={{fontSize:17,bottom:0,alignContent:"space-between",color:'#000',color:'#171717',height:40}}>
                 How're you today?
               </Text>
               </View>
@@ -182,7 +183,7 @@ componentWillUnmount() {
                         Date:
                       </Text>
                      
-                      <Text style={{fontSize:18,fontWeight:"bold",width:width*0.5}}>
+                      <Text style={{fontSize:18,fontWeight:"900",width:width*0.5}}>
                        &nbsp;
                        
                           {NextDate.toString().substr(8, 2)}
@@ -197,7 +198,7 @@ componentWillUnmount() {
                       Remarks:
                       </Text>
                      
-                      <Text style={{fontSize:18,fontWeight:"bold",width:width*0.4}}>
+                      <Text style={{fontSize:18,fontWeight:"900",width:width*0.4}}>
                           &nbsp;{remark}
                           </Text>
                       </View>
@@ -210,16 +211,19 @@ componentWillUnmount() {
           </Card>
         </View>
         
-        <Card style={{width:width*0.85,borderRadius:20,alignSelf:"center",marginTop:20,padding:10}}>
-        <CardItem header  style={{borderRadius:20,justifyContent:'center'}} >
-                <Text style={{color:'black',fontWeight:'bold',fontSize:18,}}>Your Pharmacy</Text>
+        <Card style={{width:width*0.85,borderTopRightRadius:20,borderTopLeftRadius:20,alignSelf:"center"}}>
+        <CardItem header  style={{borderTopRightRadius:20,borderTopLeftRadius:20,justifyContent:'center',backgroundColor:'#45b3e0'}} >
+                <Text style={{color:'#fff',fontWeight:'900',fontSize:18}}>Your Pharmacy</Text>
+              </CardItem>
+              <CardItem >
+                <Text style={{textAlign:"center"}}>
+                  Upload your PRESCRIPTION here and collect the medicines from pharmacy.
+                </Text>
               </CardItem>
               
-          <CardItem  button style={{borderRadius:15,backgroundColor:'#45b3e0',height:50,justifyContent:'center',width:width*0.7,alignSelf:'center'}}
-                onPress={()=>this.props.navigation.navigate('History',{data:this.props.data})}>
-              <Text style={{color:'#fff'}}>UPLOAD PRESCRIPTION</Text>
-
-              
+          <CardItem  button style={{borderRadius:15,backgroundColor:'#45b3e0',height:45,justifyContent:'center',width:width*0.45,alignSelf:'center',marginBottom:20}}
+              onPress={()=>this.props.navigation.navigate('History',{data:this.props.data})}>
+            <Text style={{color:'#fff',fontWeight:'bold'}}>UPLOAD </Text>
           </CardItem>
         </Card>
        

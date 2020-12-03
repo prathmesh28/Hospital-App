@@ -75,8 +75,8 @@ class History extends Component {
             <View style={{padding:10,width:width*0.45,justifyContent:'space-evenly'}}>
              
               
-              <Text>
-                {item.status?'Your medicines are packed, collect it from pharmacy':'Your medicines are not yet packed'}
+              <Text style={{fontWeight:'bold'}}>
+                {item.status?'Your medicines are packed, collect it from pharmacy.':'Your medicines are not yet packed.'}
               </Text>
               <Text >
                 
@@ -111,9 +111,9 @@ class History extends Component {
     return (
       <View style={styles.container}>
         <StatusBar backgroundColor={'#87CEEB'} />
-        <View style={{backgroundColor:'#87CEEB',height:100,justifyContent:"center",alignItems:"center"}}>
+        <View style={{backgroundColor:'#87CEEB',height:80,justifyContent:"center",alignItems:"center"}}>
           <Text style={{fontWeight:"bold",fontSize:20,textAlign:"center",lineHeight:30}}>Your Pharmacy{'\n'}
-          <Text style={{fontSize:15}}>Collect your medicine from the store</Text></Text>
+         </Text>
 
         </View>
         <View style={{ flex: 1, paddingBottom: this.state.showButton ? 100 : 0 }}>
@@ -127,17 +127,21 @@ class History extends Component {
           />
 
         </View>
-        {this.state.showButton?<View style={{ backgroundColor: '#87CEEB', height: 100, width: width, 
-            position: 'absolute', bottom: 0,padding:20,display:'flex',flexDirection:"row",justifyContent:'space-between' }}>
-          <View>
-          <Text>• Collect yor medicines within time.</Text>
-          </View>
-          <View style={{alignSelf:'center'}}>
-          <Button rounded onPress={()=>this.props.navigation.navigate('Details',{data:this.props.navigation.state.params.data.data})}>
-            <Text>New</Text>
-          </Button>
-          </View>
-        </View>:null}
+        {this.state.showButton?
+          <View style={{ backgroundColor: '#87CEEB', height: 100, width: width, 
+              position: 'absolute', bottom: 0, }}>
+            <View style={{display:'flex',flexDirection:"row",justifyContent:'space-between'}}>
+
+              <View style={{width:width*0.8,padding:20}}>
+                <Text style={{textAlign:"justify"}}>Collect your medicine from the store within time.</Text>
+              </View>
+              <View style={{alignSelf:'center',width:width*0.2,marginRight:10}}>
+                <Button style={{backgroundColor:'#5A71E2',borderRadius:15}} onPress={()=>this.props.navigation.navigate('Details',{data:this.props.navigation.state.params.data.data})}>
+                  <Text>New</Text>
+                </Button>
+              </View>
+            </View>
+          </View>:null}
         
 
       </View>

@@ -39,17 +39,17 @@ class ProfileScreen extends React.Component {
 
     return (
       <View style={styles.container}>
-        <StatusBar backgroundColor={'#87CEEB'} />
+        <StatusBar backgroundColor={'#45b3e0'} />
         <View style={{flex:1,flexDirection:'column'}}>
           <ScrollView style={{ marginTop:50,marginBottom:60 }}>
-            <View style={{height:100}}>
+            <View style={{height:70}}>
               {/* empty space top */}
             </View>
             <Card style={{width:width*0.9,alignSelf:"center",borderTopLeftRadius:20,borderTopRightRadius:20}}>
               <CardItem header bordered style={{borderTopStartRadius:20,borderTopEndRadius:20,backgroundColor:'#45b3e0'}}>
                 <Text style={{color:'#fff',fontWeight:'bold',fontSize:20}}>Edit Account</Text>
                 <Right style={{ right:-20 }}>
-                  <TouchableOpacity  onPress={()=>{ alert('Edit account.');}}>
+                  <TouchableOpacity onPress={()=>{ alert('Edit account.');}}>
                   <AntDesignIcon size={20} color={'white'} name="edit" />
                   </TouchableOpacity>
                 </Right>
@@ -127,15 +127,15 @@ class ProfileScreen extends React.Component {
           </ScrollView>
         </View>
                    
-        <View style={{ backgroundColor: '#87CEEB', height: 50,position:"absolute" }}>
+        <View style={{ backgroundColor: '#45b3e0', height: 50,position:"absolute" }}>
           <MainSVG width={width} height={150}></MainSVG>
-          <Text style={{fontSize:25,position:"absolute",marginLeft:20,top:40,color:'#171717',fontWeight:'400'}}>
+          <Text style={{fontSize:25,position:"absolute",marginLeft:20,top:20,color:'#171717',fontWeight:'400'}}>
             Profile
           </Text>
         </View>
 
         <TouchableOpacity onPress={this.signOutUser}  
-          style={{ backgroundColor: '#45b3e0',height:50,width:50,position:"absolute",top:0,right:0, borderRadius:50,justifyContent:"center",alignItems:"center",margin:10 }}>
+          style={{ elevation:7, backgroundColor: '#87CEEB',height:40,width:40,position:"absolute",top:0,right:0, borderRadius:50,justifyContent:"center",alignItems:"center",margin:15 }}>
           <AntDesignIcon size={20} name="logout" />
         </TouchableOpacity>
       </View>

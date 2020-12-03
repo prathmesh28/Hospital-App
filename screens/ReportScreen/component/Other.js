@@ -67,7 +67,7 @@ class ReportScreen extends Component {
         alignItems: "center" ,
         backgroundColor: "#87CEEB" }}>
       <Text style={{ fontWeight: "bold" }}>
-          {" "}{item.Date.toLocaleString().substr(0, 10)}
+          {" "}{item.Date.toLocaleString().substr(0, 9)}
         </Text>
         {expanded
           ? <Icon style={{ fontSize: 18 }} name="remove-circle" />

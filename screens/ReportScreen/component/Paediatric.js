@@ -29,6 +29,54 @@ import {
 
 const { height, width } = Dimensions.get('screen')  
 
+const data = {
+  labels: ["January", "February", "March", "April", "May", 
+  // "June", "july", "august", "saptember", "oct", "Nov"
+],
+  datasets: [
+    {
+      data: [ 2,
+        3,
+        5,
+        7,
+        9,],
+      color: (opacity = 1) => `#5A71E2`, // optional
+      strokeWidth: 2 // optional
+    }
+  ],
+  legend: ["Weight"] // optional
+};
+const data1 = {
+  labels: ["January", "February", "March", "April", "May", 
+  // "June", "july", "august", "saptember", "oct", "Nov"
+],
+  datasets: [
+    {
+      data: [10,
+        15,
+        20,
+        25,
+        30,],
+      color: (opacity = 1) => `#5A71E2`, // optional
+      strokeWidth: 2 // optional
+    }
+  ],
+  
+  legend: ["Height"] // optional
+};
+
+const chartConfig = {
+  backgroundColor: "#45b3e0",
+  backgroundGradientFrom: "#45b3e0",
+
+  backgroundGradientTo: "#d3edf8",
+  color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+  strokeWidth: 2, // optional, default 3
+  barPercentage: 0.5,
+  useShadowColorFromDataset: false, // optional
+  
+};
+
 class Peadiatric extends Component {
 
   state = {
@@ -60,132 +108,55 @@ class Peadiatric extends Component {
     return (
     <View style={styles.container}>
 
-<View style={{alignItems:"center",margin:15,width:width}}>
-      <Text>weight</Text>
-    </View>
-
-<ScrollView
-  horizontal={true}
-  style={{paddingHorizontal:10}}
-  >
+<ScrollView >
     
-<LineChart
-    data={{
-      labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "Octomber", "November", "December"],
-      datasets: [
-        {
-          data: [
-            2,
-            3,
-            5,
-            7,
-            9,
-            10,
-            12,
-            14,
-            16,
-            17,
-            18,
-            20
-          ],
-          strokeWidth: 6
-        }
-      ]
-    }}
-    width={800} // from react-native
-    height={220}
-  //  yAxisLabel="$"
-    yAxisSuffix="Kg"
-    yAxisInterval={1} // optional, defaults to 1
-    chartConfig={{
-      backgroundColor: "#45b3e0",
-      backgroundGradientFrom: "#2e86c1",
-      backgroundGradientTo: "#87ceeb",
-      decimalPlaces: 2, // optional, defaults to 2dp
-      color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-      labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-      style: {
-        borderRadius: 16,
-        padding:5,
-        margin:10
-      },
-      propsForDots: {
-        r: "6",
-        strokeWidth: "2",
-        stroke: "#ffa726"
-      }
-    }}
-    bezier
-    style={{
-      marginVertical: 8,
-      borderRadius: 16,
-      padding:10
-    }}
-  />
-
-</ScrollView>
-<View style={{alignItems:"center",margin:15,width:width}}>
-      <Text>height</Text>
-    </View>
-<ScrollView
-  horizontal={true}
-  style={{paddingHorizontal:10}}
-  >
-<LineChart
-    data={{
-      labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "Octomber", "November", "December"],
-      datasets: [
-        {
-          data: [
-            2,
-            3,
-            5,
-            7,
-            9,
-            10,
-            12,
-            14,
-            16,
-            17,
-            18,
-            20
-          ],
-          strokeWidth: 2
-        }
-      ]
-    }}
-    width={800} // from react-native
-    height={220}
-  //  yAxisLabel="$"
-    yAxisSuffix="Cm"
-    yAxisInterval={1} // optional, defaults to 1
-    chartConfig={{
-      backgroundColor: "#45b3e0",
-      backgroundGradientFrom: "#2e86c1",
-      backgroundGradientTo: "#87ceeb",
-      decimalPlaces: 2, // optional, defaults to 2dp
-      color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-      labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-      style: {
-        margin:10,
-        borderRadius: 16,
-        padding:5
-      },
-      propsForDots: {
-        r: "6",
-        strokeWidth: "2",
-        stroke: "#ffa726"
-      }
-    }}
-    bezier
-    style={{
-      marginVertical: 8,
-      borderRadius: 16,
-      padding:10,
-    }}
-  />
-
-</ScrollView>
+    <ScrollView
+      horizontal={true}
+      style={{ paddingHorizontal: 10 }}
+      
+    >
+      <Card style={{borderRadius:15,backgroundColor:'#45b3e0'}}>
+        <CardItem style={{borderRadius:15,backgroundColor:'transparent'}}>
+        <Text style={{fontSize:18,fontWeight:'800',color:'#fff'}}>Weight</Text>
+        </CardItem>
+      <LineChart
+        data={data}
+        width={Dimensions.get("window").width-20}
+        height={180}
+        yAxisSuffix=" kg"
+        chartConfig={chartConfig}
+        style={{borderRadius:15}}
+        bezier
+      />
+      </Card>
+      
+    </ScrollView>
+    
+    <ScrollView
+      horizontal={true}
+      style={{ paddingHorizontal: 10 }}
+      
+    >
+        <Card style={{borderRadius:15,backgroundColor:'#45b3e0'}}>
+        <CardItem style={{borderRadius:15,backgroundColor:'transparent'}}>
+        <Text style={{fontSize:18,fontWeight:'800',color:'#fff'}}>height</Text>
+        </CardItem>
+      <LineChart
+      
+        data={data1}
+        width={Dimensions.get("window").width-20}
+        height={200}
+        yAxisSuffix=" in"
+      //  horizontalLabelRotation={30}
+        // verticalLabelRotation={30}
+        chartConfig={chartConfig}
+        bezier
+        style={{borderRadius:15}}
+      />
+     
+      </Card>
+    </ScrollView>
+  </ScrollView>
    </View>
     )  
   }

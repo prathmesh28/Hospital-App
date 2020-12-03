@@ -91,6 +91,7 @@ export default class Details extends React.Component {
 
   uploadImage=async()=>{
     this.setState({loading:true})
+    if(this.state.resourcePath.uri){
    
     
     const { uid } = auth().currentUser
@@ -103,9 +104,10 @@ export default class Details extends React.Component {
     let mt = newDate.getMinutes();
     let s = newDate.getSeconds();
     let ms = newDate.getMilliseconds();
-    let usernewdate = newDate.toLocaleString()
+    let usernewdate = newDate.toISOString()
     let newId = d+''+m+y+h+mt+s+ms+uid
 
+  //  console.log(usernewdate)
     this.setState({textInfo:'Uploading Image...'})
 
     const reference = storage().ref('photos/'+newId+this.state.resourcePath.fileName);
@@ -162,6 +164,9 @@ export default class Details extends React.Component {
     this.setState({loading:false})
 
     this.props.navigation.navigate("History")
+    }else{
+      this.setState({loading:false})
+    }
 
   }
 
@@ -178,11 +183,12 @@ export default class Details extends React.Component {
           />
           </View>
           :
-          <View style={{paddingVertical:50}}><Text>
-        <Text style={{fontWeight:'bold',fontSize:15}}>*intru:</Text> {'\n'}
+          <View style={{paddingVertical:50}}>
+            <Text style={{lineHeight:25,fontSize:15}}>
+        <Text style={{fontWeight:'bold',fontSize:18,textAlign:'center',lineHeight:50,}}>Instructions:</Text> {'\n'}
         1. Upload clear Photo of the report. {'\n'}
         2. Validity of report is 1hr.{'\n'}
-        3. ........
+           // Instructions here //
 
 
         </Text></View>}

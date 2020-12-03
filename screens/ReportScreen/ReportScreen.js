@@ -48,11 +48,11 @@ class ReportScreen extends Component {
    
     return (
       <View style={styles.container}>
-        <StatusBar backgroundColor={'#87CEEB'} />
+        <StatusBar backgroundColor={'#45b3e0'} />
 
-        <View style={{ backgroundColor: '#87CEEB', height: 50 }}>
+        <View style={{ backgroundColor: '#45b3e0', height: 50 }}>
             
-            <MainSVG width={width} height={150}></MainSVG>
+            <MainSVG width={width*1.01} height={150}></MainSVG>
           </View>
         <Text style={{fontSize:25,position:"absolute",marginLeft:20,top:20,color:'#171717',fontWeight:'400'}}>
               User Report
@@ -66,7 +66,7 @@ class ReportScreen extends Component {
    </View>
     )  
   }
-
+ 
   
 }
 export default withNavigation(ReportScreen);

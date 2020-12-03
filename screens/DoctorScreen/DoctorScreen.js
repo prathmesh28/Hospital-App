@@ -149,7 +149,7 @@ class DoctorScreen extends Component {
     const data = this.state.data
     return (
       <View style={styles.container}>
-        <StatusBar backgroundColor={'#87CEEB'} />
+        <StatusBar backgroundColor={'#45b3e0'} />
             <SafeAreaView style={{flex: 1,paddingBottom:60,marginTop:30}}>
               <FlatList
               
@@ -159,7 +159,7 @@ class DoctorScreen extends Component {
                 ListHeaderComponent={this.renderHeader}
               />
             </SafeAreaView>
-            <View style={{ backgroundColor: '#87CEEB', height: 50,position:"absolute" }}>
+            <View style={{ backgroundColor: '#45b3e0', height: 50,position:"absolute" }}>
               <MainSVG width={width} height={150}></MainSVG>
               <Text style={{fontSize:25,position:"absolute",marginLeft:20,top:20,color:'#171717',fontWeight:'400'}}>
                   Doctors
