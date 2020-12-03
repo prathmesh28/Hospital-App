@@ -21,36 +21,8 @@ import SuitcaseSvg from "./assets/SuitcaseSvg"
 import DoctordpSvg from "./assets/DoctordpSvg"
 import DoctorFemaleSvg from "./assets/DoctorFemaleSvg";
 
-const DATA = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'Dr Harsh Desai',
-    qualification: 'MBBS',
-    spicialist: 'Pedistrician',
-    place: 'Vision Hospital',
-    gender: 'male'
 
 
-
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'Dr Om Prakash',
-    qualification: 'BDS',
-    spicialist: 'Neurologist',
-    place: 'Vision Hospital',
-    gender: 'female'
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'Dr shaikh Ansari',
-    qualification: 'BYNS',
-    spicialist: 'Heart Surgeon',
-    place: 'Vision Hospital',
-    gender: 'male'
-  }
-
-];
 class DoctorScreen extends Component {
   _isMounted = false;
   state = {
@@ -122,8 +94,19 @@ class DoctorScreen extends Component {
                     {'\t'} {item.registered}{'\n'}
                   </Text>
                 </View>
+                
+                <View style={{height:30,marginHorizontal:-75,width:width*0.75}}>
+              <Button rounded block info
+               onPress={() => this.props.navigation.navigate('Appointment')}>
+            <Text>Appointment</Text>
+            
+          </Button>
+              </View>
+        
 
               </View>
+              
+              
             </View>
 
 

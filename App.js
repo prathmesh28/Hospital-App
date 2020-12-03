@@ -11,6 +11,7 @@ import Report from "./screens/ReportScreen/screens/Reports"
 import Notification from "./screens/ProfileScreen/screens/Notification"
 import Details from "./screens/HomeScreen/screens/Details"
 import History from "./screens/HomeScreen/screens/History"
+import Appointment from "./screens/DoctorScreen/screens/Appointment"
 
 const AuthStack = createStackNavigator({
     Intro:WelcomeScreen,
@@ -33,8 +34,8 @@ const TabStack = createStackNavigator({
   Details:Details,
   Report:Report,
   Notification:Notification,
-  History:History
-//  Appointment:Appointment
+  History:History,
+ Appointment:Appointment
 },
 {
   header: null,
