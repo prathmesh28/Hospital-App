@@ -19,6 +19,7 @@ export default class Details extends React.Component {
       photoUri:'',
       Name:'',
       Phone:'',
+      detailText:'',
       textInfo:'Loading...',
       loading:false
     };
@@ -135,6 +136,7 @@ export default class Details extends React.Component {
             phone:this.state.Phone,
             url:url,
             code:uid,
+            detailText:this.state.detailText,
             date:usernewdate,
             status:false,
             id:newId
@@ -146,6 +148,9 @@ export default class Details extends React.Component {
               data
             })
             .then(() => console.log('Data set.'))
+            .catch(()=>
+              alert('Error in sending data, please try again.')
+            )
             
          }
          
@@ -216,8 +221,8 @@ export default class Details extends React.Component {
            <TextInput
               style={{ height: 80, borderColor: 'gray', borderWidth: 1,width:width*0.7,backgroundColor:'white' }}
               multiline={true}
-            //  onChangeText={text => onChangeText(text)}
-            //   value={value}
+              onChangeText={text => this.setState({detailText:text})}
+              value={this.state.detailText}
             />
             </CardItem>
              <CardItem bordered style={{justifyContent:"center"}}>

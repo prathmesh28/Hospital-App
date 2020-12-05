@@ -13,7 +13,6 @@ import {
   Text,
 } from "react-native"
 const { height, width } = Dimensions.get('screen')
-import { Divider } from 'react-native-elements';
 
 export default class Appointment extends Component {
 

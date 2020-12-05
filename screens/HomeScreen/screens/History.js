@@ -8,10 +8,11 @@ import {
   TouchableOpacity,
   StyleSheet,
   FlatList,
-
   View,
   Image,
-  ImageBackground
+  Modal,
+  ImageBackground,
+  ToastAndroid
 } from "react-native"
 import { withNavigation } from 'react-navigation';
 import _ from 'lodash'
@@ -31,7 +32,9 @@ class History extends Component {
     data: null,
     showButton:false,
     textInfo:'Loading...',
-    loading:false
+    loading:false,
+    displayData:false,
+    displayItem:null
   }
   componentDidMount() {
     this._isMounted = true;
@@ -69,7 +72,8 @@ class History extends Component {
   }
   renderItem = ({ item }) => {
     return (
-      <Card style={styles.itemCard}>
+      <Card style={styles.itemCard} >
+        <TouchableOpacity onPress={()=> this.setState({displayData:true,displayItem:item})}>
         
             <View  style={styles.cardItemView} >
               <View style={{padding:10,width:width*0.35}}>
@@ -95,7 +99,7 @@ class History extends Component {
               
             </View>
         </View>
-       
+        </TouchableOpacity>
       </Card>
 
 
@@ -122,11 +126,69 @@ class History extends Component {
       <View style={styles.container}>
         <StatusBar backgroundColor={'#87CEEB'} />
         <View style={{backgroundColor:'#87CEEB',height:80,justifyContent:"center",alignItems:"center"}}>
-          <Text style={{fontWeight:"bold",fontSize:20,textAlign:"center",lineHeight:30}}>Your Pharmacy{'\n'}
+          <Text style={{fontWeight:"bold",fontSize:20,textAlign:"center",lineHeight:30,padding:20}}>Your Pharmacy{'\n'}
          </Text>
 
         </View>
         <Loader loading={this.state.loading} textInfo={this.state.textInfo}/>
+
+        <Modal
+        animationType="fade"
+        transparent={true}
+        visible={this.state.displayData}
+        onRequestClose={() => {
+           this.setState({displayData:false})
+        }}
+        onDismiss={() => {
+          this.setState({displayData:false})
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+          <View style={styles.action}>
+          <Image
+               
+                source={this.state.displayItem?{uri:this.state.displayItem.url}:require('../../../assets/hiclipart.com.png') }
+                style={{
+                  height: width*0.6,
+                  width: width*0.6,
+                  borderRadius:10
+                }}
+              />
+              <View style={{width:width*0.7,padding:20}}>
+                <Text style={{textAlign:"justify",fontWeight:'bold'}}>Collect your medicine from the store within time.</Text>
+              </View>
+              </View>
+
+
+          <View style={{display:"flex",flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+              <Text style={{alignSelf:'flex-end'}}>
+                
+                <TimeAgo time={this.state.displayItem?this.state.displayItem.date:new Date()} interval={60000}/>
+              </Text>
+           
+         
+               
+            <TouchableOpacity
+              style={{ ...styles.openButton, backgroundColor: "red" }}
+              onPress={() => {
+                this.state.displayItem?(
+                  this.state.displayItem.status?
+                  ToastAndroid.show("You can delete !", ToastAndroid.SHORT)
+                  :ToastAndroid.show("can't delete, Your medicines are not yet packed!", ToastAndroid.LONG)
+                ):null
+                //setPhoneCheck(!phoneCheck);
+              }}
+              
+            >
+              <Text style={styles.textStyle}>Delete</Text>
+            </TouchableOpacity>
+            </View>
+
+
+          </View>
+        </View>
+      </Modal>
 
         <View style={{ flex: 1, paddingBottom: this.state.showButton ? 100 : 0 }}>
           <FlatList
@@ -142,7 +204,7 @@ class History extends Component {
         {this.state.showButton?
           <View style={{ backgroundColor: '#87CEEB', height: 100, width: width, 
               position: 'absolute', bottom: 0, }}>
-            <View style={{display:'flex',flexDirection:"row",justifyContent:'space-between'}}>
+            <View style={{flexDirection:"row",justifyContent:'space-between'}}>
 
               <View style={{width:width*0.8,padding:20}}>
                 <Text style={{textAlign:"justify"}}>Collect your medicine from the store within time.</Text>
@@ -184,6 +246,53 @@ const styles = StyleSheet.create({
     justifyContent:'space-evenly',
     flexWrap: 'wrap',
     width: width *.8
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+    backgroundColor:'#2e86c180',
+
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5
+  },
+  action: {
+    alignItems: "center",
+
+  },
+  openButton: {
+    backgroundColor: "#F194FF",
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    marginTop:30,
+    width:100
+  },
+  textStyle: {
+    color: "white",
+    textAlign: "center",
+    fontWeight:'400',
+    fontSize:15,
+    paddingHorizontal:10
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+    fontWeight:'400',
+    fontSize:20
   }
 
 })  

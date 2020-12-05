@@ -338,49 +338,7 @@ const LoginScreen = ({navigation}) => {
             </View></>}
             </View>
         </Animatable.View>
-        <Modal
-        animationType="fade"
-        transparent={true}
-        visible={phoneCheck}
-        onRequestClose={() => {
-            setPhoneCheck(false)
-        }}
-        onDismiss={() => {
-            setPhoneCheck(false)
-        }}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-          <Text style={styles.modalText}>Enter phone no.</Text>
-          <View style={styles.action}>
-           
-            <FontAwesome 
-                    name="user-o"
-                   // color={colors.text}
-                    size={20}
-                />
-                <TextInput 
-                    placeholder="Enter phone number"
-                    placeholderTextColor="#666666"
-                    style={[styles.textInput, {
-                      //  color: colors.text
-                    }]}
-                    autoCapitalize="none"
-                    onChangeText={(val) => textInputChange(val)}
-               //     onEndEditing={(e)=>handleValidUser(e.nativeEvent.text)}
-                />
-                </View>
-            <TouchableOpacity
-              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
-              onPress={() => {
-                //setPhoneCheck(!phoneCheck);
-              }}
-            >
-              <Text style={styles.textStyle}>Submit</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
+       
 
       </View>
     );
