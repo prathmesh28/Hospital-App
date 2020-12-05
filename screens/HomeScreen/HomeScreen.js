@@ -6,7 +6,8 @@ import {
   FlatList,
   View,
   Image,
-  Alert
+  Alert,
+  ScrollView
 } from "react-native"  
 import { Card, CardItem, Body, Text, Button } from 'native-base';
 const { height, width } = Dimensions.get('screen')  
@@ -74,7 +75,7 @@ componentWillUnmount() {
    <View style={styles.container}>
       <StatusBar backgroundColor={'#45b3e0'} />
       
-      <View>
+      <ScrollView style={{marginBottom:60}}>
        
         
         <View style={{position:'absolute'}}>
@@ -211,7 +212,7 @@ componentWillUnmount() {
           </Card>
         </View>
         
-        <Card style={{width:width*0.85,borderTopRightRadius:20,borderTopLeftRadius:20,alignSelf:"center"}}>
+        <Card style={{width:width*0.85,borderTopRightRadius:20,borderTopLeftRadius:20,alignSelf:"center",marginBottom:10}}>
         <CardItem header  style={{borderTopRightRadius:20,borderTopLeftRadius:20,justifyContent:'center',backgroundColor:'#45b3e0'}} >
                 <Text style={{color:'#fff',fontWeight:'900',fontSize:18}}>Your Pharmacy</Text>
               </CardItem>
@@ -221,14 +222,14 @@ componentWillUnmount() {
                 </Text>
               </CardItem>
               
-          <CardItem  button style={{borderRadius:15,backgroundColor:'#45b3e0',height:45,justifyContent:'center',width:width*0.45,alignSelf:'center',marginBottom:20}}
+          <CardItem  button style={{borderRadius:15,backgroundColor:'#2e86c1',height:45,justifyContent:'center',width:width*0.45,alignSelf:'center',marginBottom:20}}
               onPress={()=>this.props.navigation.navigate('History',{data:this.props.data})}>
             <Text style={{color:'#fff',fontWeight:'bold'}}>UPLOAD </Text>
           </CardItem>
         </Card>
        
     
-    </View>
+    </ScrollView>
    </View>
     )  
   }

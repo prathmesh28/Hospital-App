@@ -101,15 +101,11 @@ const TabScreen = () => {
 
 
             })()}
-
-
-
-
        
        
         
         <View style={styles.container}>
-          <TabBar AnimationValue={AnimationValue} onPressTab={setCurrentIndex} activeIndex={activeIndex} tabs={tabs} />
+          <TabBar AnimationValue={AnimationValue} onPressTab={(i)=>{setActiveIndex(i)}} activeIndex={activeIndex} tabs={tabs} />
         </View>
         </View>
       </SafeAreaView>

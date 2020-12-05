@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, StyleSheet, Text, View, TouchableOpacity, Button, Image } from 'react-native';
+import { Dimensions, StyleSheet, Text, View, TouchableOpacity, Button, Image,TextInput } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import {PermissionsAndroid} from 'react-native';
 import auth from '@react-native-firebase/auth';
@@ -7,6 +7,7 @@ import database from '@react-native-firebase/database';
 import storage from '@react-native-firebase/storage';
 import { utils } from '@react-native-firebase/app';
 import Loader from '../../Loader'
+import { Container, Header, Content, Card, CardItem, Body, Left, Row, Right, Fab, Icon } from 'native-base';
 
 const { height, width } = Dimensions.get('screen')  
 
@@ -174,48 +175,83 @@ export default class Details extends React.Component {
     return (
       <View style={styles.container}>
         <Loader loading={this.state.loading} textInfo={this.state.textInfo}/>
-        
+        <View>
+        <Card style={{width:width*0.8,alignSelf:"center",borderTopLeftRadius:10,borderTopRightRadius:10,justifyContent:"center"}}>
         {this.state.resourcePath.uri?
-        <View style={{paddingVertical:50}}>
-        <Image
-        source={{ uri: this.state.resourcePath.uri }}
-        style={{ width: 200, height: 200 }}
-          />
-          </View>
-          :
-          <View style={{paddingVertical:50}}>
-            <Text style={{lineHeight:25,fontSize:15}}>
-        <Text style={{fontWeight:'bold',fontSize:18,textAlign:'center',lineHeight:50,}}>Instructions:</Text> {'\n'}
-        1. Upload clear Photo of the report. {'\n'}
-        2. Validity of report is 1hr.{'\n'}
-           // Instructions here //
-
-
-        </Text></View>}
-          {
-            this.state.resourcePath.uri?<TouchableOpacity onPress={this.cameraLaunch} style={styles.button}  >
-            <Text style={styles.buttonText}>Change photo</Text>
-        </TouchableOpacity>:
-            <TouchableOpacity onPress={this.cameraLaunch} style={styles.button}  >
-              <Text style={styles.buttonText}>Upload Prescription</Text>
-          </TouchableOpacity>
-
-          }
-
-          <TouchableOpacity onPress={this.uploadImage} style={{
-            width: 100,
-            height: 50,
-            backgroundColor: '#5A71E2',
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: 50, 
-            marginVertical:30
-          }}  >
-              <Text style={styles.buttonText}>Send </Text>
-          </TouchableOpacity>
+          <CardItem bordered style={{paddingVertical:50,justifyContent:"center"}}>
+            <Image
+              source={{ uri: this.state.resourcePath.uri }}
+              style={{ width: width*0.7, height: width*0.7 }}
+            />
+          </CardItem>
+        :
+        
+            <>
           
+              <CardItem header bordered style={{borderTopStartRadius:10,borderTopEndRadius:10,backgroundColor:'#458ce0',justifyContent:"center"}}>
+                <Text style={{color:'#fff',fontWeight:'bold',fontSize:18,lineHeight:20}}>Instructions:</Text>
+              </CardItem>
+            
+              <CardItem bordered >
+                <Text style={{fontSize:15,lineHeight:25}}>
+                1. Upload clear Photo of the report. {'\n'}
+              2. Validity of report is 1hr.{'\n'}
+                // Instructions here //
+                </Text>
+              </CardItem>
+             
+             
+      </>
+        }
+          
+        {this.state.resourcePath.uri?
+        <>
+       <CardItem bordered style={{justifyContent:"center"}}>
+          <TouchableOpacity onPress={this.cameraLaunch} style={{...styles.button,  borderColor: '#458ce0', borderWidth:1,backgroundColor:'#fff'}}  >
+            <Text style={{...styles.buttonText,color:'#000'}}>Change photo</Text>
+          </TouchableOpacity>
+          </CardItem>
+
+           <CardItem bordered style={{justifyContent:"center"}}>
+           <TextInput
+              style={{ height: 80, borderColor: 'gray', borderWidth: 1,width:width*0.7,backgroundColor:'white' }}
+              multiline={true}
+            //  onChangeText={text => onChangeText(text)}
+            //   value={value}
+            />
+            </CardItem>
+             <CardItem bordered style={{justifyContent:"center"}}>
+            <TouchableOpacity onPress={this.uploadImage} 
+              style={{
+                width: 100,
+                height: 50,
+                backgroundColor: '#458ce0',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: 10, 
+                elevation:3
+               // marginVertical:30
+              }}>
+              <Text style={styles.buttonText}>Send </Text>
+            </TouchableOpacity> 
+           </CardItem>
+          
+           </>
+        :
+        <CardItem bordered style={{justifyContent:"center"}}>
+          <TouchableOpacity onPress={this.cameraLaunch} style={styles.button}  >
+            <Text style={styles.buttonText}>Upload Prescription</Text>
+          </TouchableOpacity>
+          </CardItem>
+          
+        }
+        
+        </Card>
+      
+        </View>
+       
       </View>
-    );
+    )
   }
 }
 
@@ -229,17 +265,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#d3edf8'
   },
   button: {
-    width: 250,
-    height: 60,
-    backgroundColor: '#5A71E2',
+    width: width*0.5,
+    backgroundColor: '#458ce0',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10, 
-    paddingVertical:30
+    paddingVertical:15,
+    elevation:4,
   },
   buttonText: {
     textAlign: 'center',
-    fontSize: 15,
+    fontSize: 17,
     color: '#fff'
   }
 });

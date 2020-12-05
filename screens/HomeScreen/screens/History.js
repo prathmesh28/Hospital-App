@@ -19,6 +19,7 @@ import { Card, CardItem, Body, Text, Button } from 'native-base';
 import database from '@react-native-firebase/database';
 import auth from '@react-native-firebase/auth';
 import TimeAgo from 'react-native-timeago';
+import Loader from '../../Loader'
 
 
 const { height, width } = Dimensions.get('screen')
@@ -28,10 +29,15 @@ class History extends Component {
   _isMounted = false;
   state = {
     data: null,
-    showButton:false
+    showButton:false,
+    textInfo:'Loading...',
+    loading:false
   }
   componentDidMount() {
     this._isMounted = true;
+    this.setState({loading:true})
+    this.setState({textInfo:'Getting data...'})
+
     const { uid } = auth().currentUser
     database().ref('/Pharmacy/').on('value', async (snapshot) => {
 
@@ -53,6 +59,10 @@ class History extends Component {
       }
 
     })
+
+    setTimeout(() => {
+      this.setState({loading:false})
+    }, 2000)
   }
   componentWillUnmount() {
     this._isMounted = false;
@@ -116,6 +126,8 @@ class History extends Component {
          </Text>
 
         </View>
+        <Loader loading={this.state.loading} textInfo={this.state.textInfo}/>
+
         <View style={{ flex: 1, paddingBottom: this.state.showButton ? 100 : 0 }}>
           <FlatList
             keyExtractor={item => item.url}
