@@ -97,7 +97,7 @@ class DoctorScreen extends Component {
                 
                 <View style={{height:30,marginHorizontal:-75,width:width*0.75}}>
               <Button rounded block info
-               onPress={() => this.props.navigation.navigate('Appointment')}>
+               onPress={() => this.props.navigation.navigate('Appointment',{data:item})}>
             <Text>Appointment</Text>
             
           </Button>
