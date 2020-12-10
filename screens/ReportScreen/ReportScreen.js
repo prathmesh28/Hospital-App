@@ -55,7 +55,7 @@ class ReportScreen extends Component {
             <MainSVG width={width*1.01} height={150}></MainSVG>
           </View>
         <Text style={{fontSize:25,position:"absolute",marginLeft:20,top:20,color:'#171717',fontWeight:'400'}}>
-              User Report
+              Reports
         </Text>
 
         <View style={{top:100}}>

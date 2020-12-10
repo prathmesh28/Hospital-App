@@ -134,19 +134,23 @@ componentWillUnmount() {
                  }}>
               {NextDate >= new Date().toISOString()?
               <>
-              <Text style={{fontSize:20,fontWeight:"900",alignSelf:'center',textAlign:'center'}}>
-                   Your next appointment is {'\n'}
-            
-                <Text style={{fontSize:22,fontWeight:"bold",lineHeight:30,color:'#fff'}}> 
-                <TimeAgo time={NextDate} />
+                <Text style={{fontSize:20,fontWeight:"900",alignSelf:'center',textAlign:'center'}}>
+                  Your next appointment is {'\n'}
+                  <Text style={{fontSize:22,fontWeight:"bold",lineHeight:30,color:'#fff'}}> 
+                    <TimeAgo time={NextDate} />
+                  </Text>
                 </Text>
-                </Text></>:<><Text style={{fontSize:20,fontWeight:"900",alignSelf:'center'}}>
-                   Your last appointment was 
+              </>
+              :
+              <>
+                <Text style={{fontSize:20,fontWeight:"900",alignSelf:'center',textAlign:'center'}}>
+                  Your last appointment was {'\n'}
+                  <Text style={{fontSize:22,fontWeight:"bold",alignSelf:'center',color:'#fff'}}>
+                    <TimeAgo time={NextDate} />
+                  </Text>
                 </Text>
-                <Text style={{fontSize:22,fontWeight:"bold",alignSelf:'center',color:'#fff'}}>
-                <TimeAgo time={NextDate} />
-                
-                </Text></>}
+              </>
+              }
                 
                 
                 

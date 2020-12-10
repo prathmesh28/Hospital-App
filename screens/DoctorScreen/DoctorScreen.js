@@ -20,6 +20,7 @@ import SpecialistSvg from "./assets/MedicalSpecialistSvg"
 import SuitcaseSvg from "./assets/SuitcaseSvg"
 import DoctordpSvg from "./assets/DoctordpSvg"
 import DoctorFemaleSvg from "./assets/DoctorFemaleSvg";
+import IoniconsIcon from 'react-native-vector-icons/Ionicons';
 
 
 
@@ -53,63 +54,73 @@ class DoctorScreen extends Component {
         <Body>
 
           <CardItem>
+            <View>
+
+           
+
             <View style={{
-              display: 'flex', flexDirection: 'row'
+              display: 'flex', flexDirection: 'row',justifyContent:'space-between'
             }}>
               <View style={{
                 width: width * 0.2,
+                marginRight:10
               }}
               >
                 {item.gender === "male" ? <DoctordpSvg width={70} height={70} /> : <DoctorFemaleSvg width={70} height={70} />}
               </View>
 
               <View style={{
-                width: width * .55,
-                // display:'flex',flexDirection:'column'
+                width: width * .50,
+                display:'flex',flexDirection:'column',
+                justifyContent:'space-evenly'
               }}>
 
 
                 <Text style={{ fontWeight: "bold", fontSize: 18 }}>
 
-                  {item.name}{'\n'}
+                  {item.name}
                 </Text>
 
-                <View style={{ display: 'flex', flexDirection: 'row' }}>
+                <View style={{ display: 'flex', flexDirection: 'row',marginVertical:3 }}>
                   <GraduationSvg />
                   <Text style={{ fontSize: 13, color: "grey" }}>
-                    {'\t'} {item.qualification}{'\n'}
+                    {'\t'} {item.qualification}
                   </Text>
                 </View>
 
-                <View style={{ display: 'flex', flexDirection: 'row' }}>
+                <View style={{ display: 'flex', flexDirection: 'row',marginVertical:3 }}>
                   <SpecialistSvg />
                   <Text style={{ fontSize: 13, color: "grey" }} >
-                    {'\t'} {item.specialization}{'\n'}
+                    {'\t'} {item.specialization}
                   </Text>
                 </View>
 
-                <View style={{ display: 'flex', flexDirection: 'row' }}>
-                  <SuitcaseSvg />
+                <View style={{ display: 'flex', flexDirection: 'row',marginVertical:3 }}>
+                <IoniconsIcon style={{ fontSize: 23,color:'grey' }} name="time-outline" />
                   <Text style={{ fontSize: 13, color: "grey" }}>
-                    {'\t'} {item.registered}{'\n'}
+                    &nbsp; {item.MorworkFrom} - {item.MorworkTo} 
+                 {'\n'}
+                 &nbsp; {item.EvnworkFrom} - {item.EvnworkTo}
                   </Text>
                 </View>
                 
-                <View style={{height:30,marginHorizontal:-75,width:width*0.75}}>
-              <Button rounded block info
-               onPress={() => this.props.navigation.navigate('Appointment',{data:item})}>
-            <Text>Appointment</Text>
-            
-          </Button>
-              </View>
+                
         
 
               </View>
+             
               
               
             </View>
-
-
+            <View >
+                <Button rounded block info
+                  style={{width:width*0.5,alignSelf:'center',marginTop:10,height:33}}
+                  onPress={() => this.props.navigation.navigate('Appointment',{data:item,userData:this.props.userData})}>
+                  <Text>Book Appointment</Text>
+                
+                </Button>
+              </View>
+</View>
           </CardItem>
 
         </Body>

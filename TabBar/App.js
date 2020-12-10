@@ -91,7 +91,7 @@ const TabScreen = () => {
                   case 1:
                     return <ReportScreen data={data} />
                   case 2:
-                    return <DoctorScreen data={doc} />
+                    return <DoctorScreen data={doc} userData={data} />
                   case 3:
                     return <ProfileScreen data={data}/>
                   default:
