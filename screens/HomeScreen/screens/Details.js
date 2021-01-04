@@ -8,6 +8,7 @@ import storage from '@react-native-firebase/storage';
 import { utils } from '@react-native-firebase/app';
 import Loader from '../../Loader'
 import { Container, Header, Content, Card, CardItem, Body, Left, Row, Right, Fab, Icon } from 'native-base';
+import moment from "moment"
 
 const { height, width } = Dimensions.get('screen')  
 
@@ -122,7 +123,7 @@ export default class Details extends React.Component {
       async(snapshot) => {
         console.log('hi')
         this.setState({textInfo:'Uploading '+(snapshot.bytesTransferred / snapshot.totalBytes) * 100+'%...'})
-        console.log((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
+        // console.log((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
        
         
         if (snapshot.state === storage.TaskState.SUCCESS) {

@@ -16,6 +16,9 @@ import HomeScreen from '../screens/HomeScreen/HomeScreen'
 import ReportScreen from'../screens/ReportScreen/ReportScreen'
 import DoctorScreen from '../screens/DoctorScreen/DoctorScreen'
 import ProfileScreen from '../screens/ProfileScreen/ProfileScreen'
+import moment from "moment"
+import _ from 'lodash'
+
 const {width, height} = Dimensions.get("window");
 
 import {SafeAreaView, SafeAreaProvider, initialWindowMetrics} from "react-native-safe-area-context";
@@ -32,34 +35,80 @@ const TabScreen = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const AnimationValue = useRef(new Animated.Value(0));
 
-  function setCurrentIndex(i){
-    // console.log(i)
-    setActiveIndex(i);
-  }
+  // function setCurrentIndex(i){
+  //   // console.log(i)
+  //   setActiveIndex(i);
+  // }
   
 
 
   const [data, setData] = useState(null);
   const [doc, setDoc] = useState(null);
+  const [appt, setAppt] = useState(null)
+  const [tempappt, settempAppt] = useState(null)
+  const [apptNow, setApptNow] = useState(null)
+  const [today, setDate] = useState(new Date()); 
+  
   const [loading, setLoading] = useState(true);
-
+//   useEffect(() => {
+    
+//   return () => {
+//     clearInterval(timer); // Return a funtion to clear the timer so that it will stop being called on unmount
+//   }
+// }, []);
  
   useEffect(() => {
 
     const { uid } = auth().currentUser
 
+
     const onValueChange = database().ref('/Users/'+uid).on('value', async(snapshot) => {
           await setData(snapshot.val())
-          setLoading(false) 
-      });
+          
+      })
     const onValueChangeDoc = database().ref('/Doctors/').on('value', async(snapshot) => {
         await setDoc(snapshot.val())
       //  setLoading(false) 
-    });
+    })
+
+    const onAppt = database().ref('Appointments/').on('value', async (snapshot) => {
+      const newcheck = _.map(snapshot.val(), (e) => {
+        if(e.data.uid===uid)
+          return e.data   
+      })
+      const allApptTemp = _.filter(newcheck)
+     // _.filter(allApptTemp)
+      const allAppt = _.sortBy(allApptTemp, [function(o) { return o.timeValue }]);
+      setAppt(allAppt)
+
+    //  await filterArray(allAppt)
+     
+   //   newcheck.sort((a, b) => a.timeValue.tostring().localeCompare(b.timeValue.tostring()));
+      const liveAppt = await _.filter(allAppt, (e) => {
+        if(e.done===false && e.status===true){
+          return e
+        }
+         
+      })
+      setApptNow(liveAppt)
+      
+    //  setLoading(false) 
+    })
+
+
+    // const timer = setInterval((tempappt) => { 
+    //   filterArray(tempappt)
+    // }, 1000);
+   
+   
+   
+    
     
     return () => {
       database().ref('/Users/'+uid).off('value', onValueChange)
       database().ref('/Doctors/').off('value', onValueChangeDoc)
+      database().ref('Appointments/').off('value', onAppt)
+     // clearInterval(timer);
     }
 
   }, []);
@@ -69,33 +118,32 @@ const TabScreen = () => {
 
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-      <StatusBar backgroundColor={'#87CEEB'} />
+      <StatusBar backgroundColor={'#45b3e0'} />
      
       <SafeAreaView edges={["left", "bottom", "right"]} style={{position: "relative", width}}>
       <View  style={{  
       //  backgroundColor: "#fff",   
         width, height: "100%"}} >
       
-      {loading===true?<View style={styles.containerapp}>
+      {(data===null && doc===null && appt===null && apptNow===null) ?<View style={styles.containerapp}>
+      <ActivityIndicator size="large" color="#45b3e0" />
+
                         <Text>Loading App...{'\n'}
                         </Text>
                         <Text style={{textAlign:"center"}}>
                       If app is not loading please check your internet connection or restart the app.</Text>
-                    <ActivityIndicator size="large">
-                      
-                    </ActivityIndicator>
                 </View>:(() => {
                 switch (activeIndex) {
                   case 0:
-                    return <HomeScreen data={data} />
+                    return <HomeScreen data={data} appt={apptNow}/>
                   case 1:
                     return <ReportScreen data={data} />
                   case 2:
-                    return <DoctorScreen data={doc} userData={data} />
+                    return <DoctorScreen data={doc} userData={data} appt={appt}/>
                   case 3:
                     return <ProfileScreen data={data}/>
                   default:
-                    return <HomeScreen data={data} />
+                    return <HomeScreen data={data} appt={apptNow}/>
                   }
 
 

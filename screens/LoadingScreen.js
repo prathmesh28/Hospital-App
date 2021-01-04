@@ -1,6 +1,5 @@
 import React from "react";
 import { View, Text, ActivityIndicator,StatusBar,Dimensions, StyleSheet } from "react-native";
-// import Firebase from '../firebase';
 import auth from '@react-native-firebase/auth';
 const {width, height} = Dimensions.get("window");
 

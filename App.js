@@ -33,7 +33,7 @@ const TabStack = createStackNavigator({
   Apptab:TabScreen,
   Details:Details,
   Report:Report,
-  Notification:Notification,
+  // Notification:Notification,
   History:History,
  Appointment:Appointment
 },

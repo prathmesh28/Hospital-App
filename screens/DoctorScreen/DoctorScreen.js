@@ -22,15 +22,18 @@ import DoctordpSvg from "./assets/DoctordpSvg"
 import DoctorFemaleSvg from "./assets/DoctorFemaleSvg";
 import IoniconsIcon from 'react-native-vector-icons/Ionicons';
 
+import AllAppt from './screens/AllAppt'
 
 
 class DoctorScreen extends Component {
   _isMounted = false;
   state = {
-    data: null
+    data: null,
+    screen:false
   }
   componentDidMount() {
     // this.setState({ data:this.props.data })
+   // console.log(this.props.appt)
     this._isMounted = true;
     const doctors = _.map(this.props.data, (e) => {
       return e.data
@@ -99,8 +102,8 @@ class DoctorScreen extends Component {
                 <IoniconsIcon style={{ fontSize: 23,color:'grey' }} name="time-outline" />
                   <Text style={{ fontSize: 13, color: "grey" }}>
                     &nbsp; {item.MorworkFrom} - {item.MorworkTo} 
-                 {'\n'}
-                 &nbsp; {item.EvnworkFrom} - {item.EvnworkTo}
+                    {'\n'}
+                    &nbsp; {item.EvnworkFrom} - {item.EvnworkTo}
                   </Text>
                 </View>
                 
@@ -112,14 +115,21 @@ class DoctorScreen extends Component {
               
               
             </View>
-            <View >
-                <Button rounded block info
-                  style={{width:width*0.5,alignSelf:'center',marginTop:10,height:33}}
-                  onPress={() => this.props.navigation.navigate('Appointment',{data:item,userData:this.props.userData})}>
-                  <Text>Book Appointment</Text>
+
+
+         {item.Available===true?
+         <Button rounded block info
+         style={{width:width*0.5,alignSelf:'center',marginTop:10,height:33}}
+    
+         onPress={() => this.props.navigation.navigate('Appointment',{data:item,userData:this.props.userData, onGoBack: () => {
+          this.setState({screen:true})
+      }}
+         )}>
+         <Text>Book Appointment</Text>
+       
+       </Button>:<Text style={{fontStyle:'italic',paddingHorizontal:30}}>Doctor not available for appointments.</Text>}
                 
-                </Button>
-              </View>
+            
 </View>
           </CardItem>
 
@@ -133,18 +143,9 @@ class DoctorScreen extends Component {
   }
 
 
-  renderHeader = () => {
-    return <View style={{height:100}}>
-
-    </View>
-  };
-
-  render() {
-    const data = this.state.data
-    return (
-      <View style={styles.container}>
-        <StatusBar backgroundColor={'#45b3e0'} />
-            <SafeAreaView style={{flex: 1,paddingBottom:60,marginTop:30}}>
+  displayScreen=(data)=>{
+    return(
+      <SafeAreaView style={{flex: 1,paddingBottom:60,marginTop:30}}>
               <FlatList
               
                 data={data}
@@ -153,11 +154,38 @@ class DoctorScreen extends Component {
                 ListHeaderComponent={this.renderHeader}
               />
             </SafeAreaView>
+    )
+  }
+
+  renderHeader = () => {
+    return <View style={{height:100}}>
+
+    </View>
+  };
+
+  render() {
+    const data = this.state.data
+    
+    return (
+      <View style={styles.container}>
+       
+        <StatusBar backgroundColor={'#45b3e0'} />
+             {
+              this.state.screen?<AllAppt appointments={this.props.appt}/>:this.displayScreen(data)
+            }
+
             <View style={{ backgroundColor: '#45b3e0', height: 50,position:"absolute" }}>
-              <MainSVG width={width} height={150}></MainSVG>
+              <MainSVG width={width*1.01} height={150}></MainSVG>
               <Text style={{fontSize:25,position:"absolute",marginLeft:20,top:20,color:'#171717',fontWeight:'400'}}>
-                  Doctors
+                    { this.state.screen?'Appointments':'Doctors'}
               </Text>
+              <TouchableOpacity onPress={()=>this.setState({screen:!this.state.screen})}
+                  style={{position:"absolute",top:10,right:5, elevation:7, backgroundColor: '#87CEEB',borderRadius:50,marginRight:5}}>
+              <Text style={{fontSize:16,color:'#000',fontWeight:'400',margin:8}}>
+              { this.state.screen?'Doctors':'Appointments'}
+              </Text>
+              </TouchableOpacity>
+            
             </View>
 
       </View>

@@ -21,7 +21,7 @@ import auth from '@react-native-firebase/auth';
 import Loader from '../Loader'
 const { height, width } = Dimensions.get('screen')
 
-
+ 
 const LoginScreen = ({navigation}) => {
 
     const [data, setData] = React.useState({

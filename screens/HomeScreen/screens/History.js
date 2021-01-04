@@ -21,6 +21,7 @@ import database from '@react-native-firebase/database';
 import auth from '@react-native-firebase/auth';
 import TimeAgo from 'react-native-timeago';
 import Loader from '../../Loader'
+import moment from "moment"
 
 
 const { height, width } = Dimensions.get('screen')
